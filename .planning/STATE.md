@@ -3,22 +3,22 @@ gsd_state_version: 1.0
 milestone: v1.18
 milestone_name: milestone
 current_phase: 01-foundation-auth
-current_plan: 01-05 (complete)
+current_plan: 01-06 (complete)
 status: in_progress
-last_updated: "2026-03-12T11:07:31.203Z"
+last_updated: "2026-03-12T11:14:00Z"
 progress:
   total_phases: 8
   completed_phases: 0
   total_plans: 6
-  completed_plans: 5
+  completed_plans: 6
 ---
 
 # Project State — CATCH
 
 **Initialized:** 2026-03-12
 **Current Phase:** 01-foundation-auth
-**Current Plan:** 01-05 (next)
-**Last session:** 2026-03-12T11:07:31.199Z
+**Current Plan:** 01-06 (complete — all Phase 1 plans done)
+**Last session:** 2026-03-12T11:14:00Z
 
 ---
 
@@ -28,7 +28,7 @@ See: `.planning/PROJECT.md` (updated 2026-03-12)
 
 **Core value:** Rybár zaznamená úlovok, dostane AI predikciu kedy ísť ďalší raz, a pochváli sa v komunite — celý loop na jednom mieste, v slovenčine.
 
-**Current focus:** Phase 1 COMPLETE — všetkých 5 plánov hotových (01-01 až 01-05)
+**Current focus:** Phase 1 COMPLETE — všetkých 6 plánov hotových (01-01 až 01-06)
 
 ---
 
@@ -51,7 +51,7 @@ See: `.planning/PROJECT.md` (updated 2026-03-12)
 
 | Phase | REQ-IDs | Count | Status |
 |-------|---------|-------|--------|
-| Phase 1 | INFRA-01–07, AUTH-01–06 | 13 | In Progress (6/13 done) |
+| Phase 1 | INFRA-01–07, AUTH-01–06 | 13 | Complete (13/13 done) |
 | Phase 2 | PHOTO-01–04, DIARY-01–07, PROF-01–05 | 16 | Pending |
 | Phase 3 | MAP-01–07 | 7 | Pending |
 | Phase 4 | AI-01–06, PREM-01–05 | 11 | Pending |
@@ -61,13 +61,13 @@ See: `.planning/PROJECT.md` (updated 2026-03-12)
 | Phase 8 | NOTIF-01–05, GAMIF-01–03 | 8 + INFRA-07 | Pending |
 | **Total** | | **70 / 70** ✓ | 3 done |
 
-**Completed requirements:** INFRA-01, INFRA-02, INFRA-03, INFRA-04, INFRA-05, INFRA-06, AUTH-01, AUTH-02, AUTH-03, AUTH-04, AUTH-05, AUTH-06, INFRA-01 (tab navigation)
+**Completed requirements:** INFRA-01, INFRA-02, INFRA-03, INFRA-04, INFRA-05, INFRA-06, INFRA-07, AUTH-01, AUTH-02, AUTH-03, AUTH-04, AUTH-05, AUTH-06
 
 ---
 
 ## Next Action
 
-Phase 01 kompletná. Run: `gsd:plan-phase 2` — naplánuj Phase 2: Core Value Catch Diary
+Phase 01 KOMPLETNÁ (6/6 plánov). Run: `gsd:plan-phase 2` — naplánuj Phase 2: Core Value Catch Diary
 
 ---
 
@@ -89,6 +89,8 @@ Phase 01 kompletná. Run: `gsd:plan-phase 2` — naplánuj Phase 2: Core Value C
 | 2026-03-12 | index.ts zmenený na expo-router/entry | Povinné pre file-based routing — registerRootComponent nie je kompatibilný s expo-router |
 | 2026-03-12 | auth/user-not-found treated as success v ForgotPassword | Security best practice — neodhaľovať existenciu accountu |
 | 2026-03-12 | useTabTrigger hook namiesto render prop pre isFocused | TabTrigger.children je ReactNode nie function — hook pattern je správna cesta |
+| 2026-03-12 | PostHog EU host (eu.posthog.com) pre GDPR | SK/CZ market — dáta musia zostať v EU |
+| 2026-03-12 | PostHog disabled: !POSTHOG_KEY | Graceful degradation — appka funguje bez API key v dev |
 
 ---
 
@@ -101,6 +103,7 @@ Phase 01 kompletná. Run: `gsd:plan-phase 2` — naplánuj Phase 2: Core Value C
 | 01-foundation-auth | 03 | 8 min | 2 | 11 |
 | 01-foundation-auth | 04 | 6 min | 2 | 12 |
 | 01-foundation-auth | 05 | 4 min | 2 | 8 |
+| 01-foundation-auth | 06 | 4 min | 1 | 6 |
 
 ---
 

@@ -11,7 +11,7 @@
 
 | # | Phase | Goal | REQ Count | Complexity |
 |---|-------|------|-----------|------------|
-| 1 | 5/6 | In Progress|  | Medium |
+| 1 | Foundation & Auth | 6/6 Complete | 13 | Medium |
 | 2 | Feed + Catch Post | Rybár odfotí úlovok, post sa objaví vo Feede a automaticky sa uloží do Denníka | 16 | High |
 | 3 | Revír Map + Podmienky | Rybár vidí live podmienky na svojej polohe a nájde revír na mape | 7 | Medium |
 | 4 | AI Odporúčania + Premium | Rybár dostane expertný tip na nástrahu v SK a vie si kúpiť Premium | 11 | High |
@@ -46,15 +46,15 @@ AUTH-01, AUTH-02, AUTH-03, AUTH-04, AUTH-05, AUTH-06
 **Complexity:** Medium
 **Critical path:** Áno — každá ďalšia fáza závisí od auth (uid) a design systemu
 
-**Plans:** 5/6 plans executed
+**Plans:** 6/6 plans executed (COMPLETE)
 
 Plans:
 - [x] 01-01-PLAN.md — Expo init + Firebase konfigurácia + EAS profily + Firestore skeleton rules
-- [ ] 01-02-PLAN.md — Test infraštruktúra Wave 0: Jest + Firebase mocks + stub testy
-- [ ] 01-03-PLAN.md — Design system: theme.ts + i18n SK/CZ + 6 UI primitives
-- [ ] 01-04-PLAN.md — Auth flow: Zustand store + root layout Stack.Protected + login/register/forgot-password
-- [ ] 01-05-PLAN.md — Tab navigácia: expo-router/ui custom FAB tabs + 5 placeholder screens
-- [ ] 01-06-PLAN.md — PostHog analytics + EAS dev build checkpoint
+- [x] 01-02-PLAN.md — Test infraštruktúra Wave 0: Jest + Firebase mocks + stub testy
+- [x] 01-03-PLAN.md — Design system: theme.ts + i18n SK/CZ + 6 UI primitives
+- [x] 01-04-PLAN.md — Auth flow: Zustand store + root layout Stack.Protected + login/register/forgot-password
+- [x] 01-05-PLAN.md — Tab navigácia: expo-router/ui custom FAB tabs + 5 placeholder screens
+- [x] 01-06-PLAN.md — PostHog analytics + EAS dev build checkpoint
 
 **Implementation notes:**
 - Vytvoriť EAS dev build v **deň 1** — Expo Go nestačí (Firebase native + FCM nefungujú)
