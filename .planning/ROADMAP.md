@@ -11,11 +11,11 @@
 
 | # | Phase | Goal | REQ Count | Complexity |
 |---|-------|------|-----------|------------|
-| 1 | Foundation & Auth | Prihlásený používateľ vidí app s fungujúcimi tabmi na reálnom zariadení | 13 | Medium |
-| 2 | Core Value: Catch Diary | Rybár zaloguje úlovok s fotkou a počasím za menej ako 90 sekúnd | 16 | High |
-| 3 | Revír Map | Rybár nájde revír na mape, otvorí detail a vidí regulácie | 7 | Medium |
-| 4 | AI Predictions + Premium | Rybár dostane AI predikciu v slovenčine a vie si kúpiť Premium | 11 | High |
-| 5 | Community Forum | Rybár zverejní post, ostatní hlasujú, Hot feed zobrazuje najlepší obsah | 8 | High |
+| 1 | Foundation & Auth | Prihlásený používateľ vidí 5-tabovú appku (Podmienky/Feed/⊕/Denník/Bazár) na reálnom zariadení | 13 | Medium |
+| 2 | Feed + Catch Post | Rybár odfotí úlovok, post sa objaví vo Feede a automaticky sa uloží do Denníka | 16 | High |
+| 3 | Revír Map + Podmienky | Rybár vidí live podmienky na svojej polohe a nájde revír na mape | 7 | Medium |
+| 4 | AI Odporúčania + Premium | Rybár dostane expertný tip na nástrahu v SK a vie si kúpiť Premium | 11 | High |
+| 5 | Komunita vo Feede | Rybár zverejní tip/montáž ako post vo Feede, ostatní lajkujú a komentujú | 8 | High |
 | 6 | Marketplace (Bazár) | Rybár pridá inzerát, iní ho nájdu v okolí a uložia do wishlistu | 10 | High |
 | 7 | In-App Chat | Kupujúci a predajca komunikujú v reálnom čase priamo v appke | 6 | High |
 | 8 | Notifications, Gamification & Polish | Appka posiela push notifikácie, odmeňuje aktivitu a je pripravená na produkciu | 9 | Medium |
@@ -30,7 +30,7 @@
 
 ### Phase 1: Foundation & Auth
 
-**Goal:** Prihlásený používateľ vidí appku s 5 tabmi, EAS dev build beží na reálnom Android/iOS zariadení a Firebase je plne nakonfigurované.
+**Goal:** Prihlásený používateľ vidí appku s 5 tabmi (Podmienky / Feed / ⊕ / Denník / Bazár), EAS dev build beží na reálnom Android/iOS zariadení a Firebase je plne nakonfigurované.
 
 **Requirements:**
 INFRA-01, INFRA-02, INFRA-03, INFRA-04, INFRA-05, INFRA-06, INFRA-07,
@@ -38,10 +38,10 @@ AUTH-01, AUTH-02, AUTH-03, AUTH-04, AUTH-05, AUTH-06
 
 **Success Criteria:**
 1. `eas build --profile development` prebehne bez chýb a inštaluje sa na reálnom zariadení (Android + iOS cez EAS)
-2. Nový používateľ sa zaregistruje, dostane verifikačný email a prihlási sa — session pretrváva po reštarte appky
-3. Neoverený používateľ vidí iba login/register obrazovky; po prihlásení sa automaticky presmeruje na tabnav
-4. Všetkých 5 tabov (Denník, Mapa, Feed, Komunita, Bazár) je viditeľných a navigovateľných — obsah je placeholder
-5. Design system tokeny (`theme.ts`) sú aplikované: farby, typografia, spacing sú konzistentné naprieč všetkými obrazovkami
+2. Nový používateľ sa zaregistruje (email + heslo + potvrdiť heslo), dostane verifikačný email a prihlási sa — session pretrváva po reštarte appky
+3. Neoverený používateľ vidí animated splash → login screen; po prihlásení automatický redirect na Podmienky tab
+4. Všetkých 5 tabov (Podmienky, Feed, ⊕ FAB, Denník, Bazár) je viditeľných a navigovateľných — obsah je branded placeholder s dummy dátami
+5. Design system tokeny (`theme.ts`) sú aplikované: farby (#0A1628, #40916C, #F4A261), Outfit/Inter fonty, spacing tokeny konzistentné naprieč všetkými obrazovkami
 
 **Complexity:** Medium
 **Critical path:** Áno — každá ďalšia fáza závisí od auth (uid) a design systemu
@@ -58,9 +58,9 @@ AUTH-01, AUTH-02, AUTH-03, AUTH-04, AUTH-05, AUTH-06
 
 ---
 
-### Phase 2: Core Value: Catch Diary
+### Phase 2: Feed + Catch Post
 
-**Goal:** Rybár zaloguje úlovok s fotkou a automatickým počasím za menej ako 90 sekúnd, vidí zoznam úlovkov a má profil so štatistikami.
+**Goal:** Rybár odfotí úlovok, post sa do 5 sekúnd objaví vo Feede komunite a automaticky sa uloží do súkromného Denníka. Scrollovateľný Feed zobrazuje úlovky iných používateľov.
 
 **Requirements:**
 PHOTO-01, PHOTO-02, PHOTO-03, PHOTO-04,
@@ -89,9 +89,9 @@ PROF-01, PROF-02, PROF-03, PROF-04, PROF-05
 
 ---
 
-### Phase 3: Revír Map
+### Phase 3: Revír Map + Podmienky tab
 
-**Goal:** Rybár otvorí mapu, vidí 330+ SK/CZ revírov ako klastrované markery, tapne na revír a vidí regulácie, povolené druhy a public úlovky v okolí.
+**Goal:** Podmienky tab zobrazuje live počasie (teplota vody+vzduchu, tlak, vietor, fáza mesiaca) na aktuálnej polohe. Mapa tab zobrazuje 330+ SK/CZ revírov, rybár tapne a vidí regulácie.
 
 **Requirements:**
 MAP-01, MAP-02, MAP-03, MAP-04, MAP-05, MAP-06, MAP-07
@@ -151,34 +151,33 @@ PREM-01, PREM-02, PREM-03, PREM-04, PREM-05
 
 ---
 
-### Phase 5: Community Forum
+### Phase 5: Komunita vo Feede
 
-**Goal:** Rybár zverejní post v kategórii, ostatní hlasujú, Hot feed zobrazuje najlepší obsah podľa Wilson score a komentáre sú threaded.
+**Goal:** Rybár zverejní tip alebo montáž ako post vo Feede, ostatní lajkujú a komentujú. Feed má kategórie (Úlovok / Tip / Montáž / Miesto / Humor) a Hot/Nové/Top radenie.
 
 **Requirements:**
 FORUM-01, FORUM-02, FORUM-03, FORUM-04, FORUM-05, FORUM-06, FORUM-07, FORUM-08
 
 **Success Criteria:**
-1. Feed Hot/Nové/Top prepína bez reloadu; Hot tab zoraďuje posty podľa Wilson score (nie raw count)
-2. Nový post (title, body, kategória, max 8 fotiek) sa publikuje a objaví vo feede do 5 sekúnd
-3. Upvote/downvote funguje atomicky (Firestore transakcia) — rýchle klikanie nespôsobí nekonzistentný stav
-4. Komentáre sú threaded (max 3 úrovne), zobrazujú sa pod postom bez samostatnej obrazovky
-5. Post môže odkazovať na konkrétny úlovok alebo revír — odkaz je klikateľný a otvára detail
+1. Feed prepína medzi Hot/Nové/Top bez reloadu; Hot zoraďuje podľa Wilson score (nie raw like count)
+2. Nový post (foto/video, caption, kategória, revír tag, ryba tag) sa publikuje a objaví vo Feede do 5 sekúnd
+3. Like funguje optimisticky (okamžitá UI reakcia) + atomicky (Firestore transakcia anti-spam)
+4. Komentáre sa zobrazujú pod postom (threaded max 2 úrovne) — tap na post = detail s komentármi
+5. Tap na meno/avatar kdekoľvek vo Feede → profil toho používateľa s gridом jeho postov
 
 **Complexity:** High
-**Critical path:** Nie — závisí od Phase 1 (auth/votes) a Phase 2 (image upload)
+**Critical path:** Nie — závisí od Phase 1 (auth) a Phase 2 (post/catch flow)
 
 **Implementation notes:**
-- `FlashList` pre feed — `estimatedItemSize={120}` — nikdy `FlatList`
-- `getDocs` + React Query pre feed (nie onSnapshot) — pull-to-refresh, stale-while-revalidate
+- Feed = Instagram-štýl, nie Reddit. Primárne vizuálne (fotky), nie text-heavy
+- `FlashList` pre feed — `estimatedItemSize={320}` (väčšie karty ako Reddit) — nikdy `FlatList`
+- `getDocs` + React Query + pull-to-refresh (nie onSnapshot pre feed — battery optimization)
 - Cursor-based pagination: `startAfter(lastDoc)` — nie offset
-- Hot score: Cloud Function (`onDocumentWritten`) — Wilson score z upvotes/downvotes + age decay
-- Upvote transakcia: Firestore `runTransaction` — číta aktuálny stav pred zápisom (anti-race-condition)
-- Threaded komentáre: `parentId` pole na každom komentári — rekurzívny `CommentThread` komponent (max 3 úrovne)
-- Kategórie: Úlovky / Techniky / Vybavenie / Miesta / Otázky / Humor — statický enum, filter cez `where('category', '==', ...)`
-- Firestore rule: `notBanned()` helper funkcia pri post/comment create
-- Markdown body: `react-native-markdown-display` — ľahká, bez heavy deps
-- `onSnapshot` NIE pre feed — iba `getDocs` + pull-to-refresh pre komunitu
+- Hot score: Cloud Function (`onDocumentWritten`) — Wilson score + age decay
+- Like transakcia: Firestore `runTransaction` — anti-race-condition
+- Post typy: `type: 'catch' | 'tip' | 'rig' | 'spot' | 'humor'` — filter cez `where('type', '==', ...)`
+- Komentáre: `parentId` pole — max 2 úrovne (Instagram štýl, nie Reddit 8 úrovní)
+- `onSnapshot` NIE pre feed — iba `getDocs` + pull-to-refresh
 
 ---
 
