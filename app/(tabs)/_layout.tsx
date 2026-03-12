@@ -1,18 +1,23 @@
-import { Tabs } from 'expo-router';
+import { Tabs, TabSlot } from 'expo-router/ui';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { CustomTabBar } from '@/components/tabs/CustomTabBar';
 import { theme } from '@/theme/theme';
+import { StyleSheet } from 'react-native';
 
-export default function TabsLayout() {
+export default function TabLayout() {
   return (
-    <Tabs
-      screenOptions={{
-        headerShown: false,
-        tabBarStyle: {
-          backgroundColor: theme.colors.tabBar,
-          borderTopColor: theme.colors.tabBorder,
-        },
-        tabBarActiveTintColor: theme.colors.tabActive,
-        tabBarInactiveTintColor: theme.colors.tabInactive,
-      }}
-    />
+    <SafeAreaProvider>
+      <Tabs style={styles.tabs}>
+        <TabSlot />
+        <CustomTabBar />
+      </Tabs>
+    </SafeAreaProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  tabs: {
+    flex: 1,
+    backgroundColor: theme.colors.bg,
+  },
+});
