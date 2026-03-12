@@ -25,6 +25,6 @@ type CoreEvent =
   | 'listing_created'
   | 'premium_purchased';
 
-export function captureEvent(event: CoreEvent, properties?: Record<string, unknown>): void {
+export function captureEvent(event: CoreEvent, properties?: Record<string, string | number | boolean | null>): void {
   posthog.capture(event, properties);
 }

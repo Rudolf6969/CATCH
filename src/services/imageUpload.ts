@@ -24,7 +24,7 @@ export async function uploadCatchPhoto(
 
   // 2. Generovanie blurhash z LOCAL uri PRED uploadom
   // DÔLEŽITÉ: nikdy nepoužívaj downloadURL pre blurhash — extra network request
-  const blurhash = await Image.generateBlurhashAsync(compressed.uri, [4, 3]);
+  const blurhash = (await Image.generateBlurhashAsync(compressed.uri, [4, 3])) ?? '';
 
   // 3. Firebase Storage upload s progress trackingom
   const storagePath = `catches/${userId}/${catchId}/${filename}.jpg`;
