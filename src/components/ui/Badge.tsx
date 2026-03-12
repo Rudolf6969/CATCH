@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { theme } from '@/theme/theme';
 
-type BadgeVariant = 'primary' | 'accent' | 'success' | 'error' | 'neutral';
+type BadgeVariant = 'primary' | 'accent' | 'success' | 'error' | 'neutral' | 'live';
 
 interface BadgeProps {
   label: string;
@@ -13,6 +13,7 @@ interface BadgeProps {
 export function Badge({ label, variant = 'neutral', size = 'md' }: BadgeProps) {
   return (
     <View style={[styles.base, styles[variant], size === 'sm' && styles.small]}>
+      {variant === 'live' && <View style={styles.liveDot} />}
       <Text style={[styles.label, styles[`label_${variant}` as keyof typeof styles], size === 'sm' && styles.labelSmall]}>
         {label}
       </Text>
@@ -22,22 +23,37 @@ export function Badge({ label, variant = 'neutral', size = 'md' }: BadgeProps) {
 
 const styles = StyleSheet.create({
   base: {
-    paddingHorizontal: theme.spacing.sm,
-    paddingVertical: 3,
+    paddingHorizontal: theme.spacing.sm + 2,
+    paddingVertical: 4,
     borderRadius: theme.radius.full,
     alignSelf: 'flex-start',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
   },
-  small: { paddingHorizontal: 6, paddingVertical: 2 },
-  primary: { backgroundColor: `${theme.colors.primaryMid}20` },
-  accent: { backgroundColor: `${theme.colors.accent}20` },
+  small: { paddingHorizontal: 8, paddingVertical: 2 },
+  primary: { backgroundColor: 'rgba(82,183,136,0.15)' },
+  accent: { backgroundColor: 'rgba(233,168,76,0.15)' },
   success: { backgroundColor: 'rgba(34,197,94,0.15)' },
   error: { backgroundColor: theme.colors.errorSurface },
   neutral: { backgroundColor: theme.colors.surfaceHigh },
-  label: { ...(theme.typography.caption as object) },
+  live: {
+    backgroundColor: 'rgba(82,183,136,0.15)',
+    borderWidth: 1,
+    borderColor: 'rgba(82,183,136,0.25)',
+  },
+  liveDot: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: theme.colors.primaryMid,
+  },
+  label: { ...(theme.typography.caption as object), fontWeight: '500' as const },
   label_primary: { color: theme.colors.primaryMid },
   label_accent: { color: theme.colors.accent },
   label_success: { color: theme.colors.success },
   label_error: { color: theme.colors.error },
   label_neutral: { color: theme.colors.textMuted },
+  label_live: { color: theme.colors.primaryMid },
   labelSmall: { fontSize: 10 },
 });

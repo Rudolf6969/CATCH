@@ -4,14 +4,20 @@ import { theme } from '@/theme/theme';
 
 interface CardProps extends ViewProps {
   elevated?: boolean;
+  glowing?: boolean;
   children: React.ReactNode;
 }
 
-export function Card({ elevated = false, style, children, ...props }: CardProps) {
+export function Card({ elevated = false, glowing = false, style, children, ...props }: CardProps) {
   return (
     <View
       {...props}
-      style={[styles.card, elevated && styles.elevated, style]}
+      style={[
+        styles.card,
+        elevated && styles.elevated,
+        glowing && styles.glowing,
+        style,
+      ]}
     >
       {children}
     </View>
@@ -24,7 +30,7 @@ const styles = StyleSheet.create({
     borderRadius: theme.radius.lg,
     padding: theme.spacing.md,
     borderWidth: 1,
-    borderColor: theme.colors.surfaceHigh,
+    borderColor: theme.colors.cardBorder,
   },
   elevated: {
     shadowColor: theme.shadow.md.shadowColor,
@@ -32,5 +38,13 @@ const styles = StyleSheet.create({
     shadowOpacity: theme.shadow.md.shadowOpacity,
     shadowRadius: theme.shadow.md.shadowRadius,
     elevation: theme.shadow.md.elevation,
+  },
+  glowing: {
+    borderColor: theme.colors.cardBorderActive,
+    shadowColor: theme.colors.primaryMid,
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.15,
+    shadowRadius: 16,
+    elevation: 4,
   },
 });

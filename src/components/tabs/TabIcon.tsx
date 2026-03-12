@@ -14,6 +14,7 @@ export function TabIcon({ name, label, focused }: TabIconProps) {
   return (
     <View style={styles.container}>
       <Ionicons name={name} size={24} color={color} />
+      {focused && <View style={styles.activeDot} />}
       <Text style={[styles.label, { color }]}>{label}</Text>
     </View>
   );
@@ -22,4 +23,11 @@ export function TabIcon({ name, label, focused }: TabIconProps) {
 const styles = StyleSheet.create({
   container: { alignItems: 'center', gap: 2 },
   label: { fontSize: 10, ...(theme.typography.caption as object) },
+  activeDot: {
+    width: 4,
+    height: 4,
+    borderRadius: 2,
+    backgroundColor: theme.colors.tabActive,
+    marginTop: 1,
+  },
 });

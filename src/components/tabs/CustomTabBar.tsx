@@ -1,83 +1,76 @@
 import React from 'react';
 import { View, Pressable, StyleSheet, type ViewStyle } from 'react-native';
-import { TabList, TabTrigger, useTabTrigger } from 'expo-router/ui';
+import type { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { TabIcon } from './TabIcon';
 import { theme } from '@/theme/theme';
 
-// Wrapper komponent pre TabTrigger s focused stavom cez useTabTrigger hook
-interface FocusableTabProps {
+const TAB_CONFIG: Array<{
   name: string;
   href: string;
   iconName: keyof typeof Ionicons.glyphMap;
   label: string;
-  style?: ViewStyle;
-}
+}> = [
+  { name: 'podmienky', href: '/(tabs)/podmienky', iconName: 'cloud-outline', label: 'Podmienky' },
+  { name: 'feed', href: '/(tabs)/feed', iconName: 'home-outline', label: 'Feed' },
+  { name: 'dennik', href: '/(tabs)/dennik', iconName: 'book-outline', label: 'Dennik' },
+  { name: 'bazar', href: '/(tabs)/bazar', iconName: 'storefront-outline', label: 'Bazar' },
+];
 
-function FocusableTab({ name, href, iconName, label, style }: FocusableTabProps) {
-  const { trigger } = useTabTrigger({ name, href });
-  const isFocused = trigger?.isFocused ?? false;
-
-  return (
-    <TabTrigger name={name} href={href as any} style={[styles.tab, style]}>
-      <TabIcon name={iconName} label={label} focused={isFocused} />
-    </TabTrigger>
-  );
-}
-
-export function CustomTabBar() {
+export function CustomTabBar({ state, navigation }: BottomTabBarProps) {
   const router = useRouter();
   const insets = useSafeAreaInsets();
 
+  const tabs = TAB_CONFIG;
+
   return (
-    <TabList
-      style={[
-        styles.tabList,
-        { paddingBottom: insets.bottom + 8 },
-      ]}
-    >
-      <FocusableTab
-        name="podmienky"
-        href="/(tabs)/podmienky"
-        iconName="cloud-outline"
-        label="Podmienky"
-      />
+    <View style={[styles.tabList, { paddingBottom: insets.bottom + 8 }]}>
+      {/* Feed + Podmienky (lava strana) */}
+      {tabs.slice(0, 2).map((tab) => {
+        const routeIndex = state.routes.findIndex((r) => r.name === tab.name);
+        const isFocused = state.index === routeIndex;
+        return (
+          <Pressable
+            key={tab.name}
+            style={styles.tab}
+            onPress={() => navigation.navigate(tab.name)}
+            accessibilityRole="button"
+          >
+            <TabIcon name={tab.iconName} label={tab.label} focused={isFocused} />
+          </Pressable>
+        );
+      })}
 
-      <FocusableTab
-        name="feed"
-        href="/(tabs)/feed"
-        iconName="home-outline"
-        label="Feed"
-      />
-
-      {/* Center FAB — NIE TabTrigger, len naviguje na pridat modal */}
+      {/* Center FAB — golden dawn gradient */}
       <View style={styles.fabContainer}>
         <Pressable
           style={({ pressed }) => [styles.fab, pressed && styles.fabPressed]}
           onPress={() => router.push('/(tabs)/pridat')}
-          accessibilityLabel="Pridať úlovok"
+          accessibilityLabel="Pridat ulovok"
           accessibilityRole="button"
         >
           <Ionicons name="add" size={32} color={theme.colors.bg} />
         </Pressable>
       </View>
 
-      <FocusableTab
-        name="dennik"
-        href="/(tabs)/dennik"
-        iconName="book-outline"
-        label="Denník"
-      />
-
-      <FocusableTab
-        name="bazar"
-        href="/(tabs)/bazar"
-        iconName="storefront-outline"
-        label="Bazár"
-      />
-    </TabList>
+      {/* Dennik + Bazar (prava strana) */}
+      {tabs.slice(2).map((tab) => {
+        const routeIndex = state.routes.findIndex((r) => r.name === tab.name);
+        const isFocused = state.index === routeIndex;
+        return (
+          <Pressable
+            key={tab.name}
+            style={styles.tab}
+            onPress={() => navigation.navigate(tab.name)}
+            accessibilityRole="button"
+          >
+            <TabIcon name={tab.iconName} label={tab.label} focused={isFocused} />
+          </Pressable>
+        );
+      })}
+    </View>
   );
 }
 
@@ -108,10 +101,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     shadowColor: theme.colors.accent,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.4,
-    shadowRadius: 12,
-    elevation: 8,
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.45,
+    shadowRadius: 16,
+    elevation: 10,
+    borderWidth: 2,
+    borderColor: theme.colors.accentWarm,
   },
   fabPressed: { opacity: 0.85, transform: [{ scale: 0.96 }] },
 });

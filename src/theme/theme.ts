@@ -1,22 +1,22 @@
 export const theme = {
   colors: {
-    // Backgrounds
-    bg: '#0A1628',
-    surface: '#112240',
-    surfaceHigh: '#1A2F52',
+    // Backgrounds — deep forest dark
+    bg: '#0A120D',
+    surface: '#111A14',
+    surfaceHigh: '#1A2A1F',
 
-    // Brand greens
-    primary: '#1B4332',
-    primaryMid: '#40916C',
+    // Brand greens — forest & water
+    primary: '#2D6A4F',
+    primaryMid: '#52B788',
 
-    // Accent
-    accent: '#F4A261',
-    accentBlue: '#1E6091',
+    // Accent — golden dawn
+    accent: '#E9A84C',
+    accentWarm: '#F4C97A',
 
-    // Text
-    textPrimary: '#F8F9FA',
-    textSecondary: '#9CA3AF',
-    textMuted: '#6B7280',
+    // Text — warm tones, nie studené
+    textPrimary: '#F0EDE8',
+    textSecondary: '#8A9E8F',
+    textMuted: '#5A6E5F',
 
     // Semantic
     error: '#EF4444',
@@ -25,29 +25,41 @@ export const theme = {
     warning: '#F59E0B',
 
     // Tab bar
-    tabActive: '#40916C',
-    tabInactive: '#6B7280',
-    tabBar: '#0A1628',
-    tabBorder: '#1A2F52',
+    tabActive: '#52B788',
+    tabInactive: '#5A6E5F',
+    tabBar: '#0D1610',
+    tabBorder: '#1A2A1F',
 
     // Dividers
-    divider: '#1A2F52',
+    divider: '#1A2A1F',
     overlay: 'rgba(0,0,0,0.6)',
+
+    // Borders — subtle forest glow
+    cardBorder: 'rgba(82,183,136,0.12)',
+    cardBorderActive: 'rgba(82,183,136,0.25)',
+    inputBorderFocus: 'rgba(82,183,136,0.4)',
+  },
+
+  gradients: {
+    card: ['rgba(82,183,136,0.05)', 'rgba(82,183,136,0)'],
+    fab: ['#E9A84C', '#F4C97A'],
+    primaryButton: ['#52B788', '#2D6A4F'],
+    heroCard: ['rgba(82,183,136,0.08)', 'rgba(233,168,76,0.04)', 'rgba(82,183,136,0)'],
   },
 
   typography: {
-    // Headings — Outfit
-    heading: { fontFamily: 'Outfit-Bold', fontSize: 24, lineHeight: 30 },
-    headingLg: { fontFamily: 'Outfit-Bold', fontSize: 28, lineHeight: 36 },
-    headingSemi: { fontFamily: 'Outfit-SemiBold', fontSize: 20, lineHeight: 26 },
-    headingSm: { fontFamily: 'Outfit-SemiBold', fontSize: 16, lineHeight: 22 },
+    // Headings — Syne (bold, charakterný)
+    heading: { fontFamily: 'Syne-Bold', fontSize: 24, lineHeight: 30 },
+    headingLg: { fontFamily: 'Syne-Bold', fontSize: 28, lineHeight: 36 },
+    headingSemi: { fontFamily: 'Syne-SemiBold', fontSize: 20, lineHeight: 26 },
+    headingSm: { fontFamily: 'Syne-SemiBold', fontSize: 16, lineHeight: 22 },
 
-    // Body — Inter
-    body: { fontFamily: 'Inter-Regular', fontSize: 15, lineHeight: 22 },
-    bodyMedium: { fontFamily: 'Inter-Medium', fontSize: 15, lineHeight: 22 },
-    bodySm: { fontFamily: 'Inter-Regular', fontSize: 13, lineHeight: 18 },
-    bodySmMedium: { fontFamily: 'Inter-Medium', fontSize: 13, lineHeight: 18 },
-    caption: { fontFamily: 'Inter-Regular', fontSize: 11, lineHeight: 16 },
+    // Body — DM Sans (čistý, čitateľný)
+    body: { fontFamily: 'DMSans-Regular', fontSize: 15, lineHeight: 22 },
+    bodyMedium: { fontFamily: 'DMSans-Medium', fontSize: 15, lineHeight: 22 },
+    bodySm: { fontFamily: 'DMSans-Regular', fontSize: 13, lineHeight: 18 },
+    bodySmMedium: { fontFamily: 'DMSans-Medium', fontSize: 13, lineHeight: 18 },
+    caption: { fontFamily: 'DMSans-Regular', fontSize: 11, lineHeight: 16 },
 
     // Mono — JetBrains Mono (čísla, štatistiky)
     mono: { fontFamily: 'JetBrainsMono-Regular', fontSize: 14, lineHeight: 20 },
@@ -76,25 +88,32 @@ export const theme = {
 
   shadow: {
     sm: {
-      shadowColor: '#000',
+      shadowColor: '#0A120D',
       shadowOffset: { width: 0, height: 1 },
-      shadowOpacity: 0.3,
-      shadowRadius: 3,
+      shadowOpacity: 0.4,
+      shadowRadius: 4,
       elevation: 2,
     },
     md: {
-      shadowColor: '#000',
+      shadowColor: '#0A120D',
       shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.4,
+      shadowOpacity: 0.5,
       shadowRadius: 12,
       elevation: 6,
     },
     accent: {
-      shadowColor: '#F4A261',
+      shadowColor: '#E9A84C',
       shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.4,
-      shadowRadius: 12,
+      shadowOpacity: 0.35,
+      shadowRadius: 16,
       elevation: 8,
+    },
+    glow: {
+      shadowColor: '#52B788',
+      shadowOffset: { width: 0, height: 0 },
+      shadowOpacity: 0.2,
+      shadowRadius: 12,
+      elevation: 4,
     },
   },
 } as const;

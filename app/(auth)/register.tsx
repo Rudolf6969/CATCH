@@ -11,6 +11,7 @@ import {
 import { useRouter } from 'expo-router';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
+import { Ionicons } from '@expo/vector-icons';
 import { theme } from '@/theme/theme';
 import { Button } from '@/components/ui/Button';
 import { AppTextInput } from '@/components/ui/TextInput';
@@ -48,13 +49,8 @@ export default function RegisterScreen() {
     setErrors({});
     setLoading(true);
     try {
-      // 1. Vytvoriť Firebase account
       const credential = await auth().createUserWithEmailAndPassword(email.trim(), password);
-
-      // 2. Email verifikácia
       await credential.user.sendEmailVerification();
-
-      // 3. Vytvoriť Firestore users dokument
       await firestore().collection('users').doc(credential.user.uid).set({
         uid: credential.user.uid,
         email: credential.user.email,
@@ -69,11 +65,7 @@ export default function RegisterScreen() {
         isPremium: false,
         badges: [],
       });
-
-      // Analytics: track úspešnú registráciu
       captureEvent('user_registered', { method: 'email' });
-
-      // Stack.Protected presmeruje automaticky po auth state zmene
     } catch (e: any) {
       const code: string = e.code ?? '';
       if (code === 'auth/email-already-in-use') {
@@ -99,17 +91,24 @@ export default function RegisterScreen() {
         contentContainerStyle={styles.container}
         keyboardShouldPersistTaps="handled"
       >
-        <View style={styles.header}>
+        {/* Header */}
+        <View style={styles.headerSection}>
+          <View style={styles.iconWrap}>
+            <Ionicons name="person-add-outline" size={28} color={theme.colors.primaryMid} />
+          </View>
           <Text style={styles.title}>Registrácia</Text>
-          <Text style={styles.subtitle}>Vytvor si bezplatný účet</Text>
+          <Text style={styles.subtitle}>Pridaj sa ku komunite rybárov</Text>
         </View>
 
+        {/* General error */}
         {errors.general && (
           <View style={styles.errorBox}>
+            <Ionicons name="alert-circle-outline" size={18} color={theme.colors.error} />
             <Text style={styles.errorBoxText}>{errors.general}</Text>
           </View>
         )}
 
+        {/* Form */}
         <View style={styles.form}>
           <AppTextInput
             label={i18n.t('auth.email')}
@@ -146,9 +145,30 @@ export default function RegisterScreen() {
             onPress={handleRegister}
             loading={loading}
             fullWidth
+            size="lg"
           />
         </View>
 
+        {/* Social divider */}
+        <View style={styles.dividerRow}>
+          <View style={styles.dividerLine} />
+          <Text style={styles.dividerText}>alebo</Text>
+          <View style={styles.dividerLine} />
+        </View>
+
+        {/* Social */}
+        <View style={styles.socialRow}>
+          <Pressable style={styles.socialBtn}>
+            <Ionicons name="logo-google" size={20} color={theme.colors.textPrimary} />
+            <Text style={styles.socialLabel}>Google</Text>
+          </Pressable>
+          <Pressable style={styles.socialBtn}>
+            <Ionicons name="logo-apple" size={20} color={theme.colors.textPrimary} />
+            <Text style={styles.socialLabel}>Apple</Text>
+          </Pressable>
+        </View>
+
+        {/* Login link */}
         <View style={styles.footer}>
           <Text style={styles.footerText}>{i18n.t('auth.hasAccount')} </Text>
           <Pressable onPress={() => router.back()}>
@@ -170,17 +190,59 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     gap: theme.spacing.xl,
   },
-  header: { alignItems: 'center', gap: theme.spacing.xs },
+
+  // Header
+  headerSection: { alignItems: 'center', gap: theme.spacing.sm },
+  iconWrap: {
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    backgroundColor: 'rgba(82,183,136,0.1)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: 'rgba(82,183,136,0.2)',
+  },
   title: { ...(theme.typography.heading as object), color: theme.colors.textPrimary },
   subtitle: { ...(theme.typography.body as object), color: theme.colors.textMuted },
+
+  // Error
   errorBox: {
     backgroundColor: theme.colors.errorSurface,
     borderRadius: theme.radius.sm,
     padding: theme.spacing.md,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: theme.spacing.sm,
   },
-  errorBoxText: { ...(theme.typography.body as object), color: theme.colors.error },
+  errorBoxText: { ...(theme.typography.body as object), color: theme.colors.error, flex: 1 },
+
+  // Form
   form: { gap: theme.spacing.md },
   linkText: { ...(theme.typography.bodySm as object), color: theme.colors.primaryMid },
+
+  // Divider
+  dividerRow: { flexDirection: 'row', alignItems: 'center', gap: theme.spacing.md },
+  dividerLine: { flex: 1, height: 1, backgroundColor: theme.colors.cardBorder },
+  dividerText: { ...(theme.typography.caption as object), color: theme.colors.textMuted },
+
+  // Social
+  socialRow: { flexDirection: 'row', gap: theme.spacing.sm },
+  socialBtn: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: theme.spacing.sm,
+    paddingVertical: theme.spacing.sm + 4,
+    borderRadius: theme.radius.md,
+    backgroundColor: theme.colors.surface,
+    borderWidth: 1,
+    borderColor: theme.colors.cardBorder,
+  },
+  socialLabel: { ...(theme.typography.bodyMedium as object), color: theme.colors.textPrimary },
+
+  // Footer
   footer: { flexDirection: 'row', justifyContent: 'center', alignItems: 'center' },
   footerText: { ...(theme.typography.bodySm as object), color: theme.colors.textMuted },
 });
