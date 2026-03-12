@@ -14,6 +14,7 @@ import { theme } from '@/theme/theme';
 import { Button } from '@/components/ui/Button';
 import { AppTextInput } from '@/components/ui/TextInput';
 import { i18n } from '@/lib/i18n';
+import { captureEvent } from '@/lib/posthog';
 
 type LoginErrors = {
   email?: string;
@@ -42,6 +43,8 @@ export default function LoginScreen() {
     setLoading(true);
     try {
       await auth().signInWithEmailAndPassword(email.trim(), password);
+      // Analytics: track úspešné prihlásenie
+      captureEvent('user_logged_in', { method: 'email' });
       // Stack.Protected automaticky presmeruje na (tabs)
     } catch (e: any) {
       const code: string = e.code ?? '';

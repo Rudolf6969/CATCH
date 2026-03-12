@@ -15,6 +15,7 @@ import { theme } from '@/theme/theme';
 import { Button } from '@/components/ui/Button';
 import { AppTextInput } from '@/components/ui/TextInput';
 import { i18n } from '@/lib/i18n';
+import { captureEvent } from '@/lib/posthog';
 
 type RegisterErrors = {
   email?: string;
@@ -68,6 +69,9 @@ export default function RegisterScreen() {
         isPremium: false,
         badges: [],
       });
+
+      // Analytics: track úspešnú registráciu
+      captureEvent('user_registered', { method: 'email' });
 
       // Stack.Protected presmeruje automaticky po auth state zmene
     } catch (e: any) {
