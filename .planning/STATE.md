@@ -2,23 +2,23 @@
 gsd_state_version: 1.0
 milestone: v1.18
 milestone_name: milestone
-current_phase: 01-foundation-auth
-current_plan: 01-06 (complete — all Phase 1 plans done)
-status: unknown
-last_updated: "2026-03-12T13:51:19.185Z"
+current_phase: 02-feed-catch-post
+current_plan: 02-03
+status: in_progress
+last_updated: "2026-03-12T13:52:11.484Z"
 progress:
   total_phases: 8
   completed_phases: 1
   total_plans: 15
-  completed_plans: 9
+  completed_plans: 10
 ---
 
 # Project State — CATCH
 
 **Initialized:** 2026-03-12
-**Current Phase:** 01-foundation-auth
-**Current Plan:** 01-06 (complete — all Phase 1 plans done)
-**Last session:** 2026-03-12T13:51:19.181Z
+**Current Phase:** 02-feed-catch-post
+**Current Plan:** 02-03 (complete)
+**Last session:** 2026-03-12T13:52:11.481Z
 
 ---
 
@@ -93,6 +93,8 @@ Phase 02 IN PROGRESS — 02-01 complete. Next: `gsd:execute-phase 2` plan 02-02 
 | 2026-03-12 | PostHog disabled: !POSTHOG_KEY | Graceful degradation — appka funguje bez API key v dev |
 | 2026-03-12 | @shopify/flash-list v2.0.2 (nie v1.x) | Expo SDK 55 = New Architecture — flash-list v2 je NA-only, žiadny estimatedItemSize |
 | 2026-03-12 | expo-location + expo-image-picker config plugins pridané do app.json | Povinné pre natívne permissions na iOS/Android |
+| 2026-03-12 | Import paths v testoch: ../../constants/X (nie ../../src/constants/X) | Testy sú vnorené v src/ — cesta nesmie obsahovať duplikát src/ |
+| 2026-03-12 | wind_speed_10m je správny Open-Meteo parameter | Nie windspeed_10m — potvrdené testom URL kontroly |
 
 ---
 
@@ -107,10 +109,12 @@ Phase 02 IN PROGRESS — 02-01 complete. Next: `gsd:execute-phase 2` plan 02-02 
 | 01-foundation-auth | 05 | 4 min | 2 | 8 |
 | 01-foundation-auth | 06 | 4 min | 1 | 6 |
 | 02-feed-catch-post | 01 | 3 min | 2 | 8 |
+| 02-feed-catch-post | 02 | 2 min | 2 | 5 |
+| 02-feed-catch-post | 03 | 5 min | 2 | 4 |
 
 ---
 
 *State updated: 2026-03-12*
-| Phase 02-feed-catch-post P02 | 2 min | 2 tasks | 5 files |
 | Phase 02-feed-catch-post P04 | 5 | 2 tasks | 5 files |
+| Phase 02-feed-catch-post P03 | 5 min | 2 tasks | 4 files |
 
