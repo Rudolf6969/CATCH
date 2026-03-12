@@ -1,120 +1,282 @@
-import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, ScrollView, Pressable, Image } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Ionicons } from '@expo/vector-icons';
 import { theme } from '@/theme/theme';
-import { Card } from '@/components/ui/Card';
-import { Badge } from '@/components/ui/Badge';
 
-const STATS = {
-  totalCatches: 23,
-  totalWeight: '142.5 kg',
-  biggest: '14.5 kg',
-  species: 8,
-};
+const STATS = [
+  { value: '23', label: 'Tento rok' },
+  { value: '12.5kg', label: 'Najväčší' },
+  { value: 'Kapor', label: 'Obľúbený' },
+];
+
+const FILTERS = ['Všetko', 'Kapor', 'Šťuka', 'Amur', 'Lieň', 'Pleskáč'];
 
 const CATCHES = [
-  { id: '1', fish: 'Kapor', weight: '8.2 kg', length: '72 cm', location: 'VN Orava', date: '12. mar', score: 'Osobný rekord' },
-  { id: '2', fish: 'Sumec', weight: '14.5 kg', length: '118 cm', location: 'Dunaj — Komárno', date: '10. mar', score: 'Top úlovok' },
-  { id: '3', fish: 'Amur', weight: '11.8 kg', length: '89 cm', location: 'Štrkovisko Senec', date: '8. mar', score: null },
-  { id: '4', fish: 'Šťuka', weight: '4.1 kg', length: '68 cm', location: 'Váh — Piešťany', date: '5. mar', score: null },
-  { id: '5', fish: 'Kapor', weight: '6.9 kg', length: '64 cm', location: 'VN Orava', date: '2. mar', score: null },
+  {
+    id: '1',
+    fish: 'Kapor',
+    weight: '8.2kg',
+    location: 'Jazero Senec',
+    date: '10.03.2026',
+    seed: 'catch1',
+    record: false,
+  },
+  {
+    id: '2',
+    fish: 'Šťuka',
+    weight: '4.1kg',
+    location: 'Rieka Dunaj',
+    date: '08.03.2026',
+    seed: 'catch2',
+    record: false,
+  },
+  {
+    id: '3',
+    fish: 'Amur',
+    weight: '12.5kg',
+    location: 'VN Gabčíkovo',
+    date: '05.03.2026',
+    seed: 'catch3',
+    record: true,
+  },
+  {
+    id: '4',
+    fish: 'Lieň',
+    weight: '1.8kg',
+    location: 'Malý Dunaj',
+    date: '01.03.2026',
+    seed: 'catch4',
+    record: false,
+  },
+  {
+    id: '5',
+    fish: 'Kapor',
+    weight: '6.3kg',
+    location: 'Oravská priehrada',
+    date: '25.02.2026',
+    seed: 'catch5',
+    record: false,
+  },
 ];
 
 export default function DennikScreen() {
   const insets = useSafeAreaInsets();
+  const [activeFilter, setActiveFilter] = useState('Všetko');
 
   return (
     <ScrollView
       style={styles.container}
-      contentContainerStyle={[styles.content, { paddingTop: insets.top + theme.spacing.lg }]}
+      contentContainerStyle={[styles.content, { paddingTop: insets.top + 16 }]}
+      showsVerticalScrollIndicator={false}
     >
-      <Text style={styles.title}>Denník</Text>
-
-      {/* Stats row */}
-      <View style={styles.statsRow}>
-        <StatBox label="Úlovky" value={String(STATS.totalCatches)} icon="fish-outline" />
-        <StatBox label="Hmotnosť" value={STATS.totalWeight} icon="scale-outline" />
-        <StatBox label="Najväčší" value={STATS.biggest} icon="trophy-outline" />
-        <StatBox label="Druhy" value={String(STATS.species)} icon="leaf-outline" />
+      {/* Header */}
+      <View style={styles.header}>
+        <Text style={styles.title}>Môj denník</Text>
+        <Text style={styles.subtitle}>47 úlovkov celkom</Text>
       </View>
 
+      {/* Stats */}
+      <View style={styles.statsRow}>
+        {STATS.map((stat) => (
+          <View key={stat.label} style={styles.statCard}>
+            <Text style={styles.statValue}>{stat.value}</Text>
+            <Text style={styles.statLabel}>{stat.label}</Text>
+          </View>
+        ))}
+      </View>
+
+      {/* Filter chips */}
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.filtersRow}
+        style={styles.filtersScroll}
+      >
+        {FILTERS.map((filter) => {
+          const isActive = filter === activeFilter;
+          return (
+            <Pressable
+              key={filter}
+              onPress={() => setActiveFilter(filter)}
+              style={[
+                styles.chip,
+                isActive ? styles.chipActive : styles.chipInactive,
+              ]}
+            >
+              <Text style={[
+                styles.chipText,
+                isActive ? styles.chipTextActive : styles.chipTextInactive,
+              ]}>
+                {filter}
+              </Text>
+            </Pressable>
+          );
+        })}
+      </ScrollView>
+
       {/* Catches list */}
-      <View style={styles.catchesSection}>
-        <Text style={styles.sectionTitle}>Posledné úlovky</Text>
+      <View style={styles.catchesList}>
         {CATCHES.map((c) => (
-          <Card key={c.id} style={styles.catchCard}>
-            <View style={styles.catchRow}>
-              <View style={styles.catchIconWrap}>
-                <Ionicons name="fish-outline" size={20} color={theme.colors.primaryMid} />
+          <View key={c.id} style={styles.catchRow}>
+            <Image
+              source={{ uri: `https://picsum.photos/seed/${c.seed}/100/100` }}
+              style={styles.catchThumb}
+            />
+            <View style={styles.catchInfo}>
+              <View style={styles.catchTopRow}>
+                <Text style={styles.catchFish}>{c.fish}</Text>
+                {c.record && (
+                  <View style={styles.recordBadge}>
+                    <Text style={styles.recordText}>🏆 Osobný rekord</Text>
+                  </View>
+                )}
               </View>
-              <View style={styles.catchInfo}>
-                <View style={styles.catchTopRow}>
-                  <Text style={styles.catchFish}>{c.fish}</Text>
-                  {c.score && <Badge label={c.score} variant="accent" size="sm" />}
-                </View>
-                <View style={styles.catchDetailRow}>
-                  <Text style={styles.catchStat}>{c.weight}</Text>
-                  <Text style={styles.catchDivider}>·</Text>
-                  <Text style={styles.catchStat}>{c.length}</Text>
-                  <Text style={styles.catchDivider}>·</Text>
-                  <Text style={styles.catchLocation}>{c.location}</Text>
-                </View>
-              </View>
-              <Text style={styles.catchDate}>{c.date}</Text>
+              <Text style={styles.catchMeta}>📍 {c.location} • {c.date}</Text>
             </View>
-          </Card>
+            <View style={styles.catchRight}>
+              <Text style={styles.catchWeight}>{c.weight}</Text>
+            </View>
+          </View>
         ))}
       </View>
     </ScrollView>
   );
 }
 
-function StatBox({ label, value, icon }: { label: string; value: string; icon: keyof typeof Ionicons.glyphMap }) {
-  return (
-    <Card style={styles.statBox}>
-      <Ionicons name={icon} size={18} color={theme.colors.accent} />
-      <Text style={styles.statValue}>{value}</Text>
-      <Text style={styles.statLabel}>{label}</Text>
-    </Card>
-  );
-}
-
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: theme.colors.bg },
-  content: { padding: theme.spacing.lg, gap: theme.spacing.lg },
-  title: { ...(theme.typography.headingLg as object), color: theme.colors.textPrimary },
+  container: {
+    flex: 1,
+    backgroundColor: theme.colors.bg,
+  },
+  content: {
+    paddingBottom: 100,
+  },
+
+  // Header
+  header: {
+    paddingHorizontal: 16,
+    marginBottom: 16,
+  },
+  title: {
+    ...(theme.typography.headingLg as object),
+    color: theme.colors.textPrimary,
+  },
+  subtitle: {
+    fontFamily: 'DMSans-Regular',
+    fontSize: 14,
+    color: theme.colors.textMuted,
+    marginTop: 2,
+  },
 
   // Stats
-  statsRow: { flexDirection: 'row', gap: theme.spacing.sm },
-  statBox: {
+  statsRow: {
+    flexDirection: 'row',
+    marginHorizontal: 16,
+    gap: 8,
+    marginBottom: 16,
+  },
+  statCard: {
     flex: 1,
+    backgroundColor: theme.colors.surface,
+    borderRadius: 16,
+    padding: 14,
     alignItems: 'center',
     gap: 4,
-    padding: theme.spacing.sm + 2,
   },
-  statValue: { ...(theme.typography.mono as object), color: theme.colors.textPrimary, fontSize: 15 },
-  statLabel: { ...(theme.typography.caption as object), color: theme.colors.textMuted, fontSize: 10 },
+  statValue: {
+    fontFamily: 'JetBrainsMono-Regular',
+    fontSize: 22,
+    color: theme.colors.accent,
+  },
+  statLabel: {
+    fontFamily: 'DMSans-Regular',
+    fontSize: 11,
+    color: theme.colors.textMuted,
+  },
+
+  // Filters
+  filtersScroll: {
+    marginBottom: 16,
+  },
+  filtersRow: {
+    paddingHorizontal: 16,
+    gap: 8,
+  },
+  chip: {
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 20,
+  },
+  chipActive: {
+    backgroundColor: theme.colors.accent,
+  },
+  chipInactive: {
+    backgroundColor: theme.colors.surface,
+  },
+  chipText: {
+    fontFamily: 'DMSans-Medium',
+    fontSize: 13,
+  },
+  chipTextActive: {
+    color: theme.colors.bg,
+  },
+  chipTextInactive: {
+    color: theme.colors.textMuted,
+  },
 
   // Catches
-  catchesSection: { gap: theme.spacing.sm },
-  sectionTitle: { ...(theme.typography.headingSm as object), color: theme.colors.textSecondary },
-  catchCard: { padding: theme.spacing.sm + 4 },
-  catchRow: { flexDirection: 'row', alignItems: 'center', gap: theme.spacing.sm },
-  catchIconWrap: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
-    backgroundColor: 'rgba(82,183,136,0.1)',
-    alignItems: 'center',
-    justifyContent: 'center',
+  catchesList: {
+    paddingHorizontal: 16,
   },
-  catchInfo: { flex: 1, gap: 4 },
-  catchTopRow: { flexDirection: 'row', alignItems: 'center', gap: theme.spacing.sm },
-  catchFish: { ...(theme.typography.bodyMedium as object), color: theme.colors.textPrimary },
-  catchDetailRow: { flexDirection: 'row', alignItems: 'center', gap: 4 },
-  catchStat: { ...(theme.typography.monoSm as object), color: theme.colors.textSecondary },
-  catchDivider: { color: theme.colors.textMuted, fontSize: 10 },
-  catchLocation: { ...(theme.typography.caption as object), color: theme.colors.textMuted },
-  catchDate: { ...(theme.typography.caption as object), color: theme.colors.textMuted },
+  catchRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: theme.colors.divider,
+  },
+  catchThumb: {
+    width: 56,
+    height: 56,
+    borderRadius: 10,
+  },
+  catchInfo: {
+    flex: 1,
+    marginLeft: 12,
+    gap: 4,
+  },
+  catchTopRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  catchFish: {
+    fontFamily: 'DMSans-Medium',
+    fontSize: 15,
+    color: theme.colors.textPrimary,
+  },
+  recordBadge: {
+    backgroundColor: 'rgba(233,168,76,0.15)',
+    paddingHorizontal: 8,
+    paddingVertical: 2,
+    borderRadius: 10,
+  },
+  recordText: {
+    fontFamily: 'DMSans-Medium',
+    fontSize: 11,
+    color: theme.colors.accent,
+  },
+  catchMeta: {
+    fontFamily: 'DMSans-Regular',
+    fontSize: 12,
+    color: theme.colors.textMuted,
+  },
+  catchRight: {
+    alignItems: 'flex-end',
+  },
+  catchWeight: {
+    fontFamily: 'JetBrainsMono-Regular',
+    fontSize: 16,
+    color: theme.colors.accent,
+  },
 });

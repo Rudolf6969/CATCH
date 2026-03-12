@@ -13,8 +13,8 @@ const TAB_CONFIG: Array<{
   iconName: keyof typeof Ionicons.glyphMap;
   label: string;
 }> = [
-  { name: 'podmienky', href: '/(tabs)/podmienky', iconName: 'cloud-outline', label: 'Podmienky' },
   { name: 'feed', href: '/(tabs)/feed', iconName: 'home-outline', label: 'Feed' },
+  { name: 'podmienky', href: '/(tabs)/podmienky', iconName: 'cloud-outline', label: 'Podmienky' },
   { name: 'dennik', href: '/(tabs)/dennik', iconName: 'book-outline', label: 'Dennik' },
   { name: 'bazar', href: '/(tabs)/bazar', iconName: 'storefront-outline', label: 'Bazar' },
 ];

@@ -7,6 +7,8 @@ import {
   ScrollView,
   Platform,
   Pressable,
+  Image,
+  Dimensions,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import auth from '@react-native-firebase/auth';
@@ -16,6 +18,8 @@ import { Button } from '@/components/ui/Button';
 import { AppTextInput } from '@/components/ui/TextInput';
 import { i18n } from '@/lib/i18n';
 import { captureEvent } from '@/lib/posthog';
+
+const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 type LoginErrors = {
   email?: string;
@@ -45,8 +49,8 @@ export default function LoginScreen() {
     try {
       await auth().signInWithEmailAndPassword(email.trim(), password);
       captureEvent('user_logged_in', { method: 'email' });
-    } catch (e: any) {
-      const code: string = e.code ?? '';
+    } catch (e: unknown) {
+      const code: string = (e as { code?: string }).code ?? '';
       if (
         code === 'auth/invalid-credential' ||
         code === 'auth/user-not-found' ||
@@ -66,169 +70,262 @@ export default function LoginScreen() {
   }
 
   return (
-    <KeyboardAvoidingView
-      style={styles.flex}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-    >
-      <ScrollView
-        contentContainerStyle={styles.container}
-        keyboardShouldPersistTaps="handled"
+    <View style={styles.root}>
+      {/* Fullscreen background photo */}
+      <Image
+        source={{ uri: 'https://picsum.photos/seed/fishing-dawn/400/800' }}
+        style={styles.bgImage}
+        resizeMode="cover"
+      />
+
+      {/* Dark overlay */}
+      <View style={styles.bgOverlay} />
+
+      {/* Top branding */}
+      <View style={styles.branding}>
+        <Text style={styles.brandEmoji}>🎣</Text>
+        <Text style={styles.brandName}>CATCH</Text>
+        <Text style={styles.brandTagline}>Sociálna sieť pre rybárov</Text>
+      </View>
+
+      {/* Bottom card */}
+      <KeyboardAvoidingView
+        style={styles.bottomWrap}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       >
-        {/* Branding */}
-        <View style={styles.branding}>
-          <View style={styles.logoCircle}>
-            <Ionicons name="fish" size={36} color={theme.colors.primaryMid} />
+        <ScrollView
+          contentContainerStyle={styles.cardContent}
+          keyboardShouldPersistTaps="handled"
+          bounces={false}
+        >
+          <View style={styles.card}>
+            <Text style={styles.cardTitle}>Vitaj späť</Text>
+            <Text style={styles.cardSubtitle}>Prihlás sa do svojho účtu</Text>
+
+            {/* General error */}
+            {errors.general && (
+              <View style={styles.errorBox}>
+                <Ionicons name="alert-circle-outline" size={18} color={theme.colors.error} />
+                <Text style={styles.errorText}>{errors.general}</Text>
+              </View>
+            )}
+
+            {/* Form */}
+            <View style={styles.form}>
+              <AppTextInput
+                label={i18n.t('auth.email')}
+                value={email}
+                onChangeText={setEmail}
+                keyboardType="email-address"
+                autoCapitalize="none"
+                autoComplete="email"
+                error={errors.email}
+                placeholder="jan@example.sk"
+              />
+              <AppTextInput
+                label={i18n.t('auth.password')}
+                value={password}
+                onChangeText={setPassword}
+                secureTextEntry
+                autoComplete="current-password"
+                error={errors.password}
+                placeholder="••••••••"
+              />
+
+              <Pressable
+                onPress={() => router.push('/(auth)/forgot-password')}
+                style={styles.forgotLink}
+              >
+                <Text style={styles.forgotText}>Zabudol si heslo?</Text>
+              </Pressable>
+
+              <Button
+                label={i18n.t('auth.login')}
+                onPress={handleLogin}
+                loading={loading}
+                fullWidth
+                size="lg"
+              />
+            </View>
+
+            {/* Divider */}
+            <View style={styles.dividerRow}>
+              <View style={styles.dividerLine} />
+              <Text style={styles.dividerText}>alebo</Text>
+              <View style={styles.dividerLine} />
+            </View>
+
+            {/* Google button */}
+            <Pressable style={styles.googleBtn}>
+              <Ionicons name="logo-google" size={18} color={theme.colors.textPrimary} />
+              <Text style={styles.googleLabel}>Pokračovať s Google</Text>
+            </Pressable>
+
+            {/* Register link */}
+            <View style={styles.registerRow}>
+              <Text style={styles.registerMuted}>Nemáš účet? </Text>
+              <Pressable onPress={() => router.push('/(auth)/register')}>
+                <Text style={styles.registerLink}>Registruj sa</Text>
+              </Pressable>
+            </View>
           </View>
-          <Text style={styles.logoText}>CATCH</Text>
-          <Text style={styles.tagline}>Rybárska komunita</Text>
-        </View>
-
-        {/* General error */}
-        {errors.general && (
-          <View style={styles.errorBox}>
-            <Ionicons name="alert-circle-outline" size={18} color={theme.colors.error} />
-            <Text style={styles.errorBoxText}>{errors.general}</Text>
-          </View>
-        )}
-
-        {/* Form */}
-        <View style={styles.form}>
-          <AppTextInput
-            label={i18n.t('auth.email')}
-            value={email}
-            onChangeText={setEmail}
-            keyboardType="email-address"
-            autoCapitalize="none"
-            autoComplete="email"
-            error={errors.email}
-            placeholder="jan@example.sk"
-          />
-          <AppTextInput
-            label={i18n.t('auth.password')}
-            value={password}
-            onChangeText={setPassword}
-            secureTextEntry
-            autoComplete="current-password"
-            error={errors.password}
-            placeholder="••••••••"
-          />
-
-          <Pressable
-            onPress={() => router.push('/(auth)/forgot-password')}
-            style={styles.forgotLink}
-          >
-            <Text style={styles.linkText}>{i18n.t('auth.forgotPassword')}</Text>
-          </Pressable>
-
-          <Button
-            label={i18n.t('auth.login')}
-            onPress={handleLogin}
-            loading={loading}
-            fullWidth
-            size="lg"
-          />
-        </View>
-
-        {/* Social divider */}
-        <View style={styles.dividerRow}>
-          <View style={styles.dividerLine} />
-          <Text style={styles.dividerText}>alebo</Text>
-          <View style={styles.dividerLine} />
-        </View>
-
-        {/* Social buttons */}
-        <View style={styles.socialRow}>
-          <Pressable style={styles.socialBtn}>
-            <Ionicons name="logo-google" size={20} color={theme.colors.textPrimary} />
-            <Text style={styles.socialLabel}>Google</Text>
-          </Pressable>
-          <Pressable style={styles.socialBtn}>
-            <Ionicons name="logo-apple" size={20} color={theme.colors.textPrimary} />
-            <Text style={styles.socialLabel}>Apple</Text>
-          </Pressable>
-        </View>
-
-        {/* Register link */}
-        <View style={styles.footer}>
-          <Text style={styles.footerText}>{i18n.t('auth.noAccount')} </Text>
-          <Pressable onPress={() => router.push('/(auth)/register')}>
-            <Text style={[styles.footerText, styles.linkText]}>
-              {i18n.t('auth.registerHere')}
-            </Text>
-          </Pressable>
-        </View>
-      </ScrollView>
-    </KeyboardAvoidingView>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  flex: { flex: 1, backgroundColor: theme.colors.bg },
-  container: {
-    flexGrow: 1,
-    padding: theme.spacing.lg,
-    justifyContent: 'center',
-    gap: theme.spacing.xl,
+  root: {
+    flex: 1,
+    backgroundColor: theme.colors.bg,
+  },
+
+  // Background
+  bgImage: {
+    position: 'absolute',
+    width: SCREEN_WIDTH,
+    height: SCREEN_HEIGHT,
+  },
+  bgOverlay: {
+    position: 'absolute',
+    width: SCREEN_WIDTH,
+    height: SCREEN_HEIGHT,
+    backgroundColor: 'rgba(0,0,0,0.55)',
   },
 
   // Branding
-  branding: { alignItems: 'center', gap: theme.spacing.sm },
-  logoCircle: {
-    width: 72,
-    height: 72,
-    borderRadius: 36,
-    backgroundColor: 'rgba(82,183,136,0.1)',
+  branding: {
+    position: 'absolute',
+    top: 80,
+    alignSelf: 'center',
     alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 1.5,
-    borderColor: 'rgba(82,183,136,0.2)',
   },
-  logoText: {
-    ...(theme.typography.headingLg as object),
-    color: theme.colors.textPrimary,
+  brandEmoji: {
+    fontSize: 48,
+    marginBottom: 8,
+  },
+  brandName: {
+    fontFamily: 'Syne-Bold',
+    fontSize: 36,
+    color: '#FFFFFF',
     letterSpacing: 6,
-    fontSize: 32,
   },
-  tagline: { ...(theme.typography.body as object), color: theme.colors.textMuted },
+  brandTagline: {
+    fontFamily: 'DMSans-Regular',
+    fontSize: 14,
+    color: 'rgba(255,255,255,0.75)',
+    marginTop: 4,
+  },
+
+  // Bottom card
+  bottomWrap: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+  },
+  cardContent: {
+    flexGrow: 1,
+    justifyContent: 'flex-end',
+  },
+  card: {
+    backgroundColor: theme.colors.surface,
+    borderTopLeftRadius: 28,
+    borderTopRightRadius: 28,
+    padding: 28,
+    gap: 16,
+  },
+  cardTitle: {
+    fontFamily: 'Syne-Bold',
+    fontSize: 24,
+    color: theme.colors.textPrimary,
+  },
+  cardSubtitle: {
+    fontFamily: 'DMSans-Regular',
+    fontSize: 14,
+    color: theme.colors.textMuted,
+    marginBottom: 8,
+  },
 
   // Error
   errorBox: {
     backgroundColor: theme.colors.errorSurface,
     borderRadius: theme.radius.sm,
-    padding: theme.spacing.md,
+    padding: 12,
     flexDirection: 'row',
     alignItems: 'center',
-    gap: theme.spacing.sm,
+    gap: 8,
   },
-  errorBoxText: { ...(theme.typography.body as object), color: theme.colors.error, flex: 1 },
+  errorText: {
+    fontFamily: 'DMSans-Regular',
+    fontSize: 14,
+    color: theme.colors.error,
+    flex: 1,
+  },
 
   // Form
-  form: { gap: theme.spacing.md },
-  forgotLink: { alignSelf: 'flex-end' },
-  linkText: { ...(theme.typography.bodySm as object), color: theme.colors.primaryMid },
+  form: {
+    gap: 14,
+  },
+  forgotLink: {
+    alignSelf: 'flex-end',
+  },
+  forgotText: {
+    fontFamily: 'DMSans-Regular',
+    fontSize: 13,
+    color: theme.colors.accent,
+  },
 
   // Divider
-  dividerRow: { flexDirection: 'row', alignItems: 'center', gap: theme.spacing.md },
-  dividerLine: { flex: 1, height: 1, backgroundColor: theme.colors.cardBorder },
-  dividerText: { ...(theme.typography.caption as object), color: theme.colors.textMuted },
-
-  // Social
-  socialRow: { flexDirection: 'row', gap: theme.spacing.sm },
-  socialBtn: {
+  dividerRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+  },
+  dividerLine: {
     flex: 1,
+    height: 1,
+    backgroundColor: theme.colors.divider,
+  },
+  dividerText: {
+    fontFamily: 'DMSans-Regular',
+    fontSize: 12,
+    color: theme.colors.textMuted,
+  },
+
+  // Google
+  googleBtn: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: theme.spacing.sm,
-    paddingVertical: theme.spacing.sm + 4,
+    gap: 10,
+    paddingVertical: 14,
     borderRadius: theme.radius.md,
-    backgroundColor: theme.colors.surface,
     borderWidth: 1,
     borderColor: theme.colors.cardBorder,
+    backgroundColor: theme.colors.surfaceHigh,
   },
-  socialLabel: { ...(theme.typography.bodyMedium as object), color: theme.colors.textPrimary },
+  googleLabel: {
+    fontFamily: 'DMSans-Medium',
+    fontSize: 15,
+    color: theme.colors.textPrimary,
+  },
 
-  // Footer
-  footer: { flexDirection: 'row', justifyContent: 'center', alignItems: 'center' },
-  footerText: { ...(theme.typography.bodySm as object), color: theme.colors.textMuted },
+  // Register
+  registerRow: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  registerMuted: {
+    fontFamily: 'DMSans-Regular',
+    fontSize: 13,
+    color: theme.colors.textMuted,
+  },
+  registerLink: {
+    fontFamily: 'DMSans-Medium',
+    fontSize: 13,
+    color: theme.colors.accent,
+  },
 });

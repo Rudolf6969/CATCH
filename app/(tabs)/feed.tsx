@@ -1,53 +1,62 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, Pressable } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Pressable, Image, Dimensions } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { theme } from '@/theme/theme';
-import { Card } from '@/components/ui/Card';
-import { Badge } from '@/components/ui/Badge';
+
+const { width: SCREEN_WIDTH } = Dimensions.get('window');
+
+const STORIES = [
+  { name: 'Marek', seed: 'marek' },
+  { name: 'Juraj', seed: 'juraj' },
+  { name: 'Tomáš', seed: 'tomas' },
+  { name: 'Peter', seed: 'peter' },
+  { name: 'Lukáš', seed: 'lukas' },
+  { name: 'Ivan', seed: 'ivan' },
+];
 
 const POSTS = [
   {
     id: '1',
     name: 'Marek Kováč',
-    initials: 'MK',
+    avatar: 'marek',
+    location: 'Jazero Senec',
     time: 'pred 2h',
-    location: 'VN Orava',
     fish: 'Kapor',
-    weight: '8.2 kg',
-    length: '72 cm',
-    text: 'Ranný záťah na boilies, kapor bral od 5:30. Najlepší deň tejto sezóny!',
-    likes: 24,
-    comments: 7,
-    photoColor: '#1A2A1F',
+    weight: '8.2kg',
+    caption: 'Krásny ranný úlovok pri východe slnka 🌅',
+    tags: '#kapor #rybolov #slovensko',
+    photo: 'fish1',
+    likes: 124,
+    comments: 18,
   },
   {
     id: '2',
-    name: 'Jana Hrušková',
-    initials: 'JH',
+    name: 'Juraj Novák',
+    avatar: 'juraj',
+    location: 'Rieka Dunaj',
     time: 'pred 5h',
-    location: 'Dunaj — Komárno',
-    fish: 'Sumec',
-    weight: '14.5 kg',
-    length: '118 cm',
-    text: 'Nočný lov na mŕtvu rybku. Po 3h čakania konečne zabralo.',
-    likes: 41,
+    fish: 'Šťuka',
+    weight: '4.1kg',
+    caption: 'Dunajská šťuka — bojovala ako o život 💪',
+    tags: '#stuka #dunaj #catchandrelease',
+    photo: 'fish2',
+    likes: 89,
     comments: 12,
-    photoColor: '#1A2218',
   },
   {
     id: '3',
-    name: 'Peter Novotný',
-    initials: 'PN',
-    time: 'pred 1d',
-    location: 'Štrkovisko Senec',
+    name: 'Peter Horváth',
+    avatar: 'peter',
+    location: 'VN Gabčíkovo',
+    time: 'pred 8h',
     fish: 'Amur',
-    weight: '11.8 kg',
-    length: '89 cm',
-    text: 'Prvý amur sezóny! Kukurica na vlasový nadväzec, feeder 60g.',
-    likes: 56,
-    comments: 18,
-    photoColor: '#182015',
+    weight: '12.5kg',
+    caption: 'Môj nový osobný rekord! 🏆',
+    tags: '#amur #gabcikovo #rekord',
+    photo: 'fish3',
+    likes: 213,
+    comments: 34,
   },
 ];
 
@@ -57,125 +66,254 @@ export default function FeedScreen() {
   return (
     <ScrollView
       style={styles.container}
-      contentContainerStyle={[styles.content, { paddingTop: insets.top + theme.spacing.md }]}
+      contentContainerStyle={{ paddingBottom: 100 }}
+      showsVerticalScrollIndicator={false}
     >
-      <View style={styles.header}>
-        <Text style={styles.title}>Feed</Text>
-        <Badge label="Komunita" variant="live" />
+      {/* Header */}
+      <View style={[styles.header, { paddingTop: insets.top + 10 }]}>
+        <Text style={styles.logo}>CATCH</Text>
+        <View style={styles.headerRight}>
+          <Pressable style={styles.headerIcon}>
+            <Ionicons name="search-outline" size={22} color={theme.colors.textPrimary} />
+          </Pressable>
+          <Pressable style={styles.headerIcon}>
+            <Ionicons name="notifications-outline" size={22} color={theme.colors.textPrimary} />
+          </Pressable>
+        </View>
       </View>
 
+      {/* Stories */}
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.storiesContainer}
+        style={styles.storiesRow}
+      >
+        {STORIES.map((story) => (
+          <Pressable key={story.seed} style={styles.storyItem}>
+            <View style={styles.storyRing}>
+              <Image
+                source={{ uri: `https://picsum.photos/seed/${story.seed}/100/100` }}
+                style={styles.storyAvatar}
+              />
+            </View>
+            <Text style={styles.storyName} numberOfLines={1}>{story.name}</Text>
+          </Pressable>
+        ))}
+      </ScrollView>
+
+      {/* Posts */}
       {POSTS.map((post) => (
-        <Card key={post.id} style={styles.postCard}>
+        <View key={post.id} style={styles.postCard}>
           {/* Post header */}
           <View style={styles.postHeader}>
-            <View style={styles.avatar}>
-              <Text style={styles.avatarText}>{post.initials}</Text>
-            </View>
-            <View style={styles.postMeta}>
-              <Text style={styles.postName}>{post.name}</Text>
-              <View style={styles.postSubRow}>
-                <Text style={styles.postTime}>{post.time}</Text>
-                <Text style={styles.postDot}>·</Text>
-                <Ionicons name="location-outline" size={12} color={theme.colors.textMuted} />
+            <View style={styles.postHeaderLeft}>
+              <Image
+                source={{ uri: `https://picsum.photos/seed/${post.avatar}/100/100` }}
+                style={styles.postAvatar}
+              />
+              <View>
+                <Text style={styles.postName}>{post.name}</Text>
                 <Text style={styles.postLocation}>{post.location}</Text>
               </View>
             </View>
+            <View style={styles.postHeaderRight}>
+              <Text style={styles.postTime}>{post.time}</Text>
+              <Pressable>
+                <Ionicons name="ellipsis-horizontal" size={18} color={theme.colors.textMuted} />
+              </Pressable>
+            </View>
           </View>
 
-          {/* Photo placeholder */}
-          <View style={[styles.photoPlaceholder, { backgroundColor: post.photoColor }]}>
-            <Ionicons name="fish-outline" size={40} color={theme.colors.primaryMid} style={{ opacity: 0.3 }} />
-          </View>
+          {/* Photo — full width, no horizontal padding */}
+          <Image
+            source={{ uri: `https://picsum.photos/seed/${post.photo}/800/560` }}
+            style={styles.postPhoto}
+            resizeMode="cover"
+          />
 
-          {/* Catch info */}
-          <View style={styles.catchInfo}>
-            <Badge label={post.fish} variant="primary" size="sm" />
-            <Text style={styles.catchStat}>{post.weight}</Text>
-            <Text style={styles.catchDivider}>|</Text>
-            <Text style={styles.catchStat}>{post.length}</Text>
-          </View>
-
-          {/* Description */}
-          <Text style={styles.postText}>{post.text}</Text>
-
-          {/* Actions */}
-          <View style={styles.postActions}>
-            <Pressable style={styles.actionBtn}>
-              <Ionicons name="heart-outline" size={18} color={theme.colors.textMuted} />
+          {/* Action bar */}
+          <View style={styles.actionBar}>
+            <View style={styles.actionLeft}>
+              <Pressable style={styles.actionBtn}>
+                <Ionicons name="heart-outline" size={24} color={theme.colors.textPrimary} />
+              </Pressable>
               <Text style={styles.actionCount}>{post.likes}</Text>
-            </Pressable>
-            <Pressable style={styles.actionBtn}>
-              <Ionicons name="chatbubble-outline" size={16} color={theme.colors.textMuted} />
+              <View style={{ width: 16 }} />
+              <Pressable style={styles.actionBtn}>
+                <Ionicons name="chatbubble-outline" size={22} color={theme.colors.textPrimary} />
+              </Pressable>
               <Text style={styles.actionCount}>{post.comments}</Text>
-            </Pressable>
-            <Pressable style={styles.actionBtn}>
-              <Ionicons name="share-outline" size={16} color={theme.colors.textMuted} />
+            </View>
+            <Pressable>
+              <Ionicons name="bookmark-outline" size={24} color={theme.colors.textPrimary} />
             </Pressable>
           </View>
-        </Card>
+
+          {/* Caption */}
+          <View style={styles.captionWrap}>
+            <Text style={styles.captionText}>
+              <Text style={styles.captionName}>{post.name} </Text>
+              {post.caption}
+            </Text>
+            <Text style={styles.captionTags}>{post.tags}</Text>
+          </View>
+        </View>
       ))}
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: theme.colors.bg },
-  content: { padding: theme.spacing.md, gap: theme.spacing.md },
+  container: {
+    flex: 1,
+    backgroundColor: theme.colors.bg,
+  },
+
+  // Header
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: theme.spacing.xs,
+    paddingHorizontal: 16,
+    paddingBottom: 10,
   },
-  title: { ...(theme.typography.heading as object), color: theme.colors.textPrimary },
+  logo: {
+    fontFamily: 'Syne-Bold',
+    fontSize: 22,
+    color: theme.colors.textPrimary,
+    letterSpacing: 3,
+  },
+  headerRight: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 16,
+  },
+  headerIcon: {
+    padding: 4,
+  },
 
-  // Post card
-  postCard: { gap: theme.spacing.sm },
-  postHeader: { flexDirection: 'row', alignItems: 'center', gap: theme.spacing.sm },
-  avatar: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: theme.colors.surfaceHigh,
+  // Stories
+  storiesRow: {
+    marginBottom: 8,
+  },
+  storiesContainer: {
+    paddingHorizontal: 16,
+    gap: 12,
+  },
+  storyItem: {
+    width: 68,
+    alignItems: 'center',
+  },
+  storyRing: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    borderWidth: 2,
+    borderColor: theme.colors.accent,
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 1,
-    borderColor: theme.colors.cardBorder,
+    padding: 2,
   },
-  avatarText: { ...(theme.typography.bodySmMedium as object), color: theme.colors.primaryMid },
-  postMeta: { flex: 1, gap: 2 },
-  postName: { ...(theme.typography.bodyMedium as object), color: theme.colors.textPrimary },
-  postSubRow: { flexDirection: 'row', alignItems: 'center', gap: 4 },
-  postTime: { ...(theme.typography.caption as object), color: theme.colors.textMuted },
-  postDot: { color: theme.colors.textMuted, fontSize: 10 },
-  postLocation: { ...(theme.typography.caption as object), color: theme.colors.textMuted },
+  storyAvatar: {
+    width: 52,
+    height: 52,
+    borderRadius: 26,
+  },
+  storyName: {
+    fontFamily: 'DMSans-Regular',
+    fontSize: 10,
+    color: theme.colors.textMuted,
+    marginTop: 4,
+    textAlign: 'center',
+  },
 
-  // Photo
-  photoPlaceholder: {
-    height: 200,
-    borderRadius: theme.radius.md,
+  // Post
+  postCard: {
+    marginBottom: 24,
+  },
+  postHeader: {
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 1,
-    borderColor: theme.colors.cardBorder,
+    justifyContent: 'space-between',
+    paddingHorizontal: 16,
+    paddingVertical: 10,
   },
-
-  // Catch info
-  catchInfo: { flexDirection: 'row', alignItems: 'center', gap: theme.spacing.sm },
-  catchStat: { ...(theme.typography.monoSm as object), color: theme.colors.textPrimary },
-  catchDivider: { color: theme.colors.textMuted, fontSize: 12 },
-
-  // Text
-  postText: { ...(theme.typography.body as object), color: theme.colors.textSecondary, lineHeight: 22 },
+  postHeaderLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+  },
+  postAvatar: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+  },
+  postName: {
+    fontFamily: 'DMSans-Medium',
+    fontSize: 14,
+    color: theme.colors.textPrimary,
+  },
+  postLocation: {
+    fontFamily: 'DMSans-Regular',
+    fontSize: 12,
+    color: theme.colors.textMuted,
+  },
+  postHeaderRight: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+  },
+  postTime: {
+    fontFamily: 'DMSans-Regular',
+    fontSize: 12,
+    color: theme.colors.textMuted,
+  },
+  postPhoto: {
+    width: SCREEN_WIDTH,
+    height: 280,
+  },
 
   // Actions
-  postActions: {
+  actionBar: {
     flexDirection: 'row',
-    gap: theme.spacing.lg,
-    paddingTop: theme.spacing.xs,
-    borderTopWidth: 1,
-    borderTopColor: theme.colors.cardBorder,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 16,
+    paddingVertical: 10,
   },
-  actionBtn: { flexDirection: 'row', alignItems: 'center', gap: 4 },
-  actionCount: { ...(theme.typography.caption as object), color: theme.colors.textMuted },
+  actionLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  actionBtn: {
+    marginRight: 4,
+  },
+  actionCount: {
+    fontFamily: 'DMSans-Regular',
+    fontSize: 13,
+    color: theme.colors.textMuted,
+  },
+
+  // Caption
+  captionWrap: {
+    paddingHorizontal: 16,
+    paddingBottom: 16,
+  },
+  captionText: {
+    fontFamily: 'DMSans-Regular',
+    fontSize: 14,
+    color: theme.colors.textSecondary,
+    lineHeight: 20,
+  },
+  captionName: {
+    fontFamily: 'DMSans-Medium',
+    color: theme.colors.textPrimary,
+  },
+  captionTags: {
+    fontFamily: 'DMSans-Regular',
+    fontSize: 12,
+    color: theme.colors.accent,
+    marginTop: 4,
+  },
 });
