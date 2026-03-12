@@ -1,319 +1,129 @@
-import React from 'react';
-import { View, Text, StyleSheet, ScrollView, Pressable, Image, Dimensions } from 'react-native';
+import React, { useCallback } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  RefreshControl,
+  ActivityIndicator,
+} from 'react-native';
+import { FlashList } from '@shopify/flash-list';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Ionicons } from '@expo/vector-icons';
-import { theme } from '@/theme/theme';
-
-const { width: SCREEN_WIDTH } = Dimensions.get('window');
-
-const STORIES = [
-  { name: 'Marek', seed: 'marek' },
-  { name: 'Juraj', seed: 'juraj' },
-  { name: 'Tomáš', seed: 'tomas' },
-  { name: 'Peter', seed: 'peter' },
-  { name: 'Lukáš', seed: 'lukas' },
-  { name: 'Ivan', seed: 'ivan' },
-];
-
-const POSTS = [
-  {
-    id: '1',
-    name: 'Marek Kováč',
-    avatar: 'marek',
-    location: 'Jazero Senec',
-    time: 'pred 2h',
-    fish: 'Kapor',
-    weight: '8.2kg',
-    caption: 'Krásny ranný úlovok pri východe slnka 🌅',
-    tags: '#kapor #rybolov #slovensko',
-    photo: 'fish1',
-    likes: 124,
-    comments: 18,
-  },
-  {
-    id: '2',
-    name: 'Juraj Novák',
-    avatar: 'juraj',
-    location: 'Rieka Dunaj',
-    time: 'pred 5h',
-    fish: 'Šťuka',
-    weight: '4.1kg',
-    caption: 'Dunajská šťuka — bojovala ako o život 💪',
-    tags: '#stuka #dunaj #catchandrelease',
-    photo: 'fish2',
-    likes: 89,
-    comments: 12,
-  },
-  {
-    id: '3',
-    name: 'Peter Horváth',
-    avatar: 'peter',
-    location: 'VN Gabčíkovo',
-    time: 'pred 8h',
-    fish: 'Amur',
-    weight: '12.5kg',
-    caption: 'Môj nový osobný rekord! 🏆',
-    tags: '#amur #gabcikovo #rekord',
-    photo: 'fish3',
-    likes: 213,
-    comments: 34,
-  },
-];
+import { router } from 'expo-router';
+import { Image } from 'expo-image';
+import { useAuthStore } from '../../src/stores/auth.store';
+import { useFeed } from '../../src/hooks/useFeed';
+import { CatchCard } from '../../src/components/catch/CatchCard';
+import { StoriesRow } from '../../src/components/feed/StoriesRow';
+import type { CatchDocument } from '../../src/types/catch.types';
 
 export default function FeedScreen() {
   const insets = useSafeAreaInsets();
+  const user = useAuthStore(s => s.user);
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    isLoading,
+    refetch,
+    isRefetching,
+  } = useFeed();
+
+  const catches = data?.pages.flatMap(p => p.catches) ?? [];
+
+  const renderItem = useCallback(({ item }: { item: CatchDocument }) => (
+    <CatchCard catch={item} />
+  ), []);
+
+  const ListHeader = useCallback(() => (
+    <View>
+      <View style={[styles.header, { paddingTop: insets.top + 8 }]}>
+        <TouchableOpacity onPress={() => router.push(`/profile/${user?.uid}` as any)}>
+          <Image
+            source={user?.photoURL ? { uri: user.photoURL } : undefined}
+            placeholder={{ blurhash: 'LGF5]+Yk^6#M@-5c,1J5@[or[Q6.' }}
+            style={styles.headerAvatar}
+            contentFit="cover"
+          />
+        </TouchableOpacity>
+        <Text style={styles.headerTitle}>Catch</Text>
+        <View style={styles.headerRight} />
+      </View>
+      <StoriesRow />
+    </View>
+  ), [user, insets.top]);
+
+  const ListEmpty = useCallback(() => (
+    <View style={styles.emptyState}>
+      <Text style={styles.emptyEmoji}>🎣</Text>
+      <Text style={styles.emptyTitle}>Feed je prázdny</Text>
+      <Text style={styles.emptyText}>
+        Buď prvý — zdiel svojho úlovku komunite!
+      </Text>
+    </View>
+  ), []);
+
+  const ListFooter = useCallback(() => {
+    if (!isFetchingNextPage) return null;
+    return (
+      <View style={styles.loadingMore}>
+        <ActivityIndicator color="#40916C" />
+      </View>
+    );
+  }, [isFetchingNextPage]);
+
+  if (isLoading) {
+    return (
+      <View style={[styles.container, styles.centered]}>
+        <ActivityIndicator size="large" color="#40916C" />
+      </View>
+    );
+  }
 
   return (
-    <ScrollView
-      style={styles.container}
-      contentContainerStyle={{ paddingBottom: 100 }}
-      showsVerticalScrollIndicator={false}
-    >
-      {/* Header */}
-      <View style={[styles.header, { paddingTop: insets.top + 10 }]}>
-        <Text style={styles.logo}>CATCH</Text>
-        <View style={styles.headerRight}>
-          <Pressable style={styles.headerIcon}>
-            <Ionicons name="search-outline" size={22} color={theme.colors.textPrimary} />
-          </Pressable>
-          <Pressable style={styles.headerIcon}>
-            <Ionicons name="notifications-outline" size={22} color={theme.colors.textPrimary} />
-          </Pressable>
-        </View>
-      </View>
-
-      {/* Stories */}
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.storiesContainer}
-        style={styles.storiesRow}
-      >
-        {STORIES.map((story) => (
-          <Pressable key={story.seed} style={styles.storyItem}>
-            <View style={styles.storyRing}>
-              <Image
-                source={{ uri: `https://picsum.photos/seed/${story.seed}/100/100` }}
-                style={styles.storyAvatar}
-              />
-            </View>
-            <Text style={styles.storyName} numberOfLines={1}>{story.name}</Text>
-          </Pressable>
-        ))}
-      </ScrollView>
-
-      {/* Posts */}
-      {POSTS.map((post) => (
-        <View key={post.id} style={styles.postCard}>
-          {/* Post header */}
-          <View style={styles.postHeader}>
-            <View style={styles.postHeaderLeft}>
-              <Image
-                source={{ uri: `https://picsum.photos/seed/${post.avatar}/100/100` }}
-                style={styles.postAvatar}
-              />
-              <View>
-                <Text style={styles.postName}>{post.name}</Text>
-                <Text style={styles.postLocation}>{post.location}</Text>
-              </View>
-            </View>
-            <View style={styles.postHeaderRight}>
-              <Text style={styles.postTime}>{post.time}</Text>
-              <Pressable>
-                <Ionicons name="ellipsis-horizontal" size={18} color={theme.colors.textMuted} />
-              </Pressable>
-            </View>
-          </View>
-
-          {/* Photo — full width, no horizontal padding */}
-          <Image
-            source={{ uri: `https://picsum.photos/seed/${post.photo}/800/560` }}
-            style={styles.postPhoto}
-            resizeMode="cover"
+    <View style={styles.container}>
+      <FlashList
+        data={catches}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+        ListHeaderComponent={ListHeader}
+        ListEmptyComponent={ListEmpty}
+        ListFooterComponent={ListFooter}
+        onEndReached={() => {
+          if (hasNextPage && !isFetchingNextPage) fetchNextPage();
+        }}
+        onEndReachedThreshold={0.5}
+        refreshControl={
+          <RefreshControl
+            refreshing={isRefetching}
+            onRefresh={refetch}
+            tintColor="#40916C"
           />
-
-          {/* Action bar */}
-          <View style={styles.actionBar}>
-            <View style={styles.actionLeft}>
-              <Pressable style={styles.actionBtn}>
-                <Ionicons name="heart-outline" size={24} color={theme.colors.textPrimary} />
-              </Pressable>
-              <Text style={styles.actionCount}>{post.likes}</Text>
-              <View style={{ width: 16 }} />
-              <Pressable style={styles.actionBtn}>
-                <Ionicons name="chatbubble-outline" size={22} color={theme.colors.textPrimary} />
-              </Pressable>
-              <Text style={styles.actionCount}>{post.comments}</Text>
-            </View>
-            <Pressable>
-              <Ionicons name="bookmark-outline" size={24} color={theme.colors.textPrimary} />
-            </Pressable>
-          </View>
-
-          {/* Caption */}
-          <View style={styles.captionWrap}>
-            <Text style={styles.captionText}>
-              <Text style={styles.captionName}>{post.name} </Text>
-              {post.caption}
-            </Text>
-            <Text style={styles.captionTags}>{post.tags}</Text>
-          </View>
-        </View>
-      ))}
-    </ScrollView>
+        }
+      />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: theme.colors.bg,
-  },
-
-  // Header
+  container: { flex: 1, backgroundColor: '#0A1628' },
+  centered: { justifyContent: 'center', alignItems: 'center' },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 16,
+    paddingHorizontal: 14,
     paddingBottom: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(255,255,255,0.06)',
   },
-  logo: {
-    fontFamily: 'Syne-Bold',
-    fontSize: 22,
-    color: theme.colors.textPrimary,
-    letterSpacing: 3,
-  },
-  headerRight: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 16,
-  },
-  headerIcon: {
-    padding: 4,
-  },
-
-  // Stories
-  storiesRow: {
-    marginBottom: 8,
-  },
-  storiesContainer: {
-    paddingHorizontal: 16,
-    gap: 12,
-  },
-  storyItem: {
-    width: 68,
-    alignItems: 'center',
-  },
-  storyRing: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    borderWidth: 2,
-    borderColor: theme.colors.accent,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 2,
-  },
-  storyAvatar: {
-    width: 52,
-    height: 52,
-    borderRadius: 26,
-  },
-  storyName: {
-    fontFamily: 'DMSans-Regular',
-    fontSize: 10,
-    color: theme.colors.textMuted,
-    marginTop: 4,
-    textAlign: 'center',
-  },
-
-  // Post
-  postCard: {
-    marginBottom: 24,
-  },
-  postHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-  },
-  postHeaderLeft: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
-  },
-  postAvatar: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
-  },
-  postName: {
-    fontFamily: 'DMSans-Medium',
-    fontSize: 14,
-    color: theme.colors.textPrimary,
-  },
-  postLocation: {
-    fontFamily: 'DMSans-Regular',
-    fontSize: 12,
-    color: theme.colors.textMuted,
-  },
-  postHeaderRight: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
-  },
-  postTime: {
-    fontFamily: 'DMSans-Regular',
-    fontSize: 12,
-    color: theme.colors.textMuted,
-  },
-  postPhoto: {
-    width: SCREEN_WIDTH,
-    height: 280,
-  },
-
-  // Actions
-  actionBar: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-  },
-  actionLeft: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  actionBtn: {
-    marginRight: 4,
-  },
-  actionCount: {
-    fontFamily: 'DMSans-Regular',
-    fontSize: 13,
-    color: theme.colors.textMuted,
-  },
-
-  // Caption
-  captionWrap: {
-    paddingHorizontal: 16,
-    paddingBottom: 16,
-  },
-  captionText: {
-    fontFamily: 'DMSans-Regular',
-    fontSize: 14,
-    color: theme.colors.textSecondary,
-    lineHeight: 20,
-  },
-  captionName: {
-    fontFamily: 'DMSans-Medium',
-    color: theme.colors.textPrimary,
-  },
-  captionTags: {
-    fontFamily: 'DMSans-Regular',
-    fontSize: 12,
-    color: theme.colors.accent,
-    marginTop: 4,
-  },
+  headerAvatar: { width: 34, height: 34, borderRadius: 17 },
+  headerTitle: { fontFamily: 'Syne-Bold', fontSize: 22, color: '#FFFFFF' },
+  headerRight: { width: 34 },
+  emptyState: { flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 80, paddingHorizontal: 40 },
+  emptyEmoji: { fontSize: 64, marginBottom: 16 },
+  emptyTitle: { fontFamily: 'Syne-Bold', fontSize: 22, color: '#FFFFFF', marginBottom: 8 },
+  emptyText: { fontFamily: 'DMSans-Regular', fontSize: 15, color: 'rgba(255,255,255,0.5)', textAlign: 'center', lineHeight: 22 },
+  loadingMore: { paddingVertical: 20, alignItems: 'center' },
 });
