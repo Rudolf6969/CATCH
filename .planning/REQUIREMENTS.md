@@ -19,12 +19,12 @@
 
 ### Authentication
 
-- [ ] **AUTH-01**: Používateľ sa vie zaregistrovať cez email a heslo
-- [ ] **AUTH-02**: Používateľ dostane email verifikáciu po registrácii
-- [ ] **AUTH-03**: Používateľ vie resetovať heslo cez email link
-- [ ] **AUTH-04**: Session pretrváva po reštarte appky (AsyncStorage persistence)
-- [ ] **AUTH-05**: Auth guard presmeruje neprihláseného používateľa na login
-- [ ] **AUTH-06**: Používateľ vie sa odhlásiť z ľubovoľnej obrazovky
+- [x] **AUTH-01**: Používateľ sa vie zaregistrovať cez email a heslo
+- [x] **AUTH-02**: Používateľ dostane email verifikáciu po registrácii
+- [x] **AUTH-03**: Používateľ vie resetovať heslo cez email link
+- [x] **AUTH-04**: Session pretrváva po reštarte appky (AsyncStorage persistence)
+- [x] **AUTH-05**: Auth guard presmeruje neprihláseného používateľa na login
+- [x] **AUTH-06**: Používateľ vie sa odhlásiť z ľubovoľnej obrazovky
 
 ### User Profiles
 
