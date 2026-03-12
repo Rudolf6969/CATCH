@@ -1,0 +1,58 @@
+{
+  "auth": {
+    "login": "Přihlásit se",
+    "register": "Registrovat se",
+    "logout": "Odhlásit se",
+    "email": "Email",
+    "password": "Heslo",
+    "confirmPassword": "Potvrdit heslo",
+    "forgotPassword": "Zapomněl jsi heslo?",
+    "resetPassword": "Obnovit heslo",
+    "noAccount": "Nemáš účet?",
+    "hasAccount": "Máš účet?",
+    "registerHere": "Registruj se",
+    "loginHere": "Přihlas se",
+    "emailSent": "Email odeslán",
+    "checkInbox": "Zkontroluj svou schránku",
+    "verifyEmail": "Ověřit email",
+    "verifyEmailDesc": "Poslali jsme ti ověřovací email. Klikni na odkaz v emailu.",
+    "errors": {
+      "emailRequired": "Email je povinný",
+      "passwordRequired": "Heslo je povinné",
+      "passwordMismatch": "Hesla se neshodují",
+      "passwordTooShort": "Heslo musí mít alespoň 8 znaků",
+      "invalidEmail": "Neplatný email",
+      "invalidCredential": "Nesprávný email nebo heslo",
+      "tooManyRequests": "Příliš mnoho pokusů. Zkuste později.",
+      "networkError": "Chyba sítě. Zkontroluj připojení.",
+      "unknown": "Nastala chyba. Zkuste znova."
+    }
+  },
+  "tabs": {
+    "podmienky": "Podmínky",
+    "feed": "Feed",
+    "pridat": "Přidat",
+    "dennik": "Deník",
+    "bazar": "Bazar"
+  },
+  "common": {
+    "loading": "Načítávání…",
+    "save": "Uložit",
+    "cancel": "Zrušit",
+    "delete": "Smazat",
+    "edit": "Upravit",
+    "back": "Zpět",
+    "next": "Dále",
+    "done": "Hotovo",
+    "error": "Chyba",
+    "retry": "Zkusit znova",
+    "comingSoon": "Brzy",
+    "noData": "Žádná data"
+  },
+  "placeholders": {
+    "podmienky": { "title": "Podmínky", "subtitle": "Live počasí a AI tip na rybolov" },
+    "feed": { "title": "Feed", "subtitle": "Úlovky komunity" },
+    "dennik": { "title": "Deník", "subtitle": "Moje úlovky" },
+    "bazar": { "title": "Bazar", "subtitle": "Rybářské vybavení" }
+  }
+}
