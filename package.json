@@ -6,7 +6,10 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "test": "jest",
+    "test:watch": "jest --watchAll=false",
+    "test:unit": "jest --testPathPattern='__tests__/unit'"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.0.2",
@@ -27,6 +30,7 @@
     "expo-splash-screen": "~55.0.10",
     "expo-status-bar": "~55.0.4",
     "i18n-js": "^4.5.3",
+    "jest-expo": "~55.0.9",
     "posthog-react-native": "^4.37.2",
     "react": "19.2.0",
     "react-native": "0.83.2",
@@ -35,7 +39,9 @@
     "zustand": "^5.0.11"
   },
   "devDependencies": {
+    "@testing-library/react-native": "^13.3.3",
     "@types/i18n-js": "^3.8.9",
+    "@types/jest": "^30.0.0",
     "@types/react": "~19.2.2",
     "typescript": "~5.9.2"
   },
