@@ -28,28 +28,28 @@
 
 ### User Profiles
 
-- [ ] **PROF-01**: Používateľ má profil s display name, avatárom a bio (max 300 znakov)
-- [ ] **PROF-02**: Profil zobrazuje celkové štatistiky (počet úlovkov, celková hmotnosť, najväčšia ryba)
+- [x] **PROF-01**: Používateľ má profil s display name, avatárom a bio (max 300 znakov)
+- [x] **PROF-02**: Profil zobrazuje celkové štatistiky (počet úlovkov, celková hmotnosť, najväčšia ryba)
 - [ ] **PROF-03**: Profil zobrazuje posledných 12 úlovkov v gridu
-- [ ] **PROF-04**: Používateľ vie zobraziť profil iného používateľa
-- [ ] **PROF-05**: Profil zobrazuje karma body a odznaky (badges)
+- [x] **PROF-04**: Používateľ vie zobraziť profil iného používateľa
+- [x] **PROF-05**: Profil zobrazuje karma body a odznaky (badges)
 
 ### Photo Upload Pipeline
 
-- [ ] **PHOTO-01**: Používateľ vie vyfotiť priamo z appky alebo vybrať z galérie (max 5 fotiek)
-- [ ] **PHOTO-02**: Fotky sa skomprimujú na strane klienta na <500KB pred uploadom
-- [ ] **PHOTO-03**: Upload progress je viditeľný, retry pri zlyhaní
-- [ ] **PHOTO-04**: Blurhash placeholder sa zobrazí kým sa načíta fotka
+- [x] **PHOTO-01**: Používateľ vie vyfotiť priamo z appky alebo vybrať z galérie (max 5 fotiek)
+- [x] **PHOTO-02**: Fotky sa skomprimujú na strane klienta na <500KB pred uploadom
+- [x] **PHOTO-03**: Upload progress je viditeľný, retry pri zlyhaní
+- [x] **PHOTO-04**: Blurhash placeholder sa zobrazí kým sa načíta fotka
 
 ### Catch Diary (Denník)
 
-- [ ] **DIARY-01**: Používateľ vie zaznamenať úlovok (ryba, váha g, dĺžka cm, metóda, nástraha, hĺbka, revír, fotky, poznámka) za menej ako 90 sekúnd
-- [ ] **DIARY-02**: Počasie (teplota, tlak, vietor, vlhkosť, fáza mesiaca) sa automaticky doplní z Open-Meteo pri zaznamenaní
+- [x] **DIARY-01**: Používateľ vie zaznamenať úlovok (ryba, váha g, dĺžka cm, metóda, nástraha, hĺbka, revír, fotky, poznámka) za menej ako 90 sekúnd
+- [x] **DIARY-02**: Počasie (teplota, tlak, vietor, vlhkosť, fáza mesiaca) sa automaticky doplní z Open-Meteo pri zaznamenaní
 - [ ] **DIARY-03**: Zoznam úlovkov je filtrovaný podľa druhu ryby, revíru, dátumu, metódy
 - [ ] **DIARY-04**: Detail úlovku zobrazuje všetky parametre, fotogalériu, mapu lokácie, počasie
 - [ ] **DIARY-05**: Používateľ vie upraviť alebo zmazať vlastný úlovok
-- [ ] **DIARY-06**: Pridanie úlovku funguje aj offline (queue, sync po pripojení)
-- [ ] **DIARY-07**: Výber ryby z SK/CZ zoznamu (100+ druhov) s vyhľadávacím poľom
+- [x] **DIARY-06**: Pridanie úlovku funguje aj offline (queue, sync po pripojení)
+- [x] **DIARY-07**: Výber ryby z SK/CZ zoznamu (100+ druhov) s vyhľadávacím poľom
 
 ### Fishing Spot Map (Mapa revírov)
 

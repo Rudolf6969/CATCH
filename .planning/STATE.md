@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.18
 milestone_name: milestone
-current_phase: 01-foundation-auth
-current_plan: 01-06 (complete)
+current_phase: 02-feed-catch-post
+current_plan: 02-01
 status: in_progress
-last_updated: "2026-03-12T11:14:00Z"
+last_updated: "2026-03-12T13:42:36.220Z"
 progress:
   total_phases: 8
-  completed_phases: 0
-  total_plans: 6
-  completed_plans: 6
+  completed_phases: 1
+  total_plans: 15
+  completed_plans: 7
 ---
 
 # Project State — CATCH
@@ -67,7 +67,7 @@ See: `.planning/PROJECT.md` (updated 2026-03-12)
 
 ## Next Action
 
-Phase 01 KOMPLETNÁ (6/6 plánov). Run: `gsd:plan-phase 2` — naplánuj Phase 2: Core Value Catch Diary
+Phase 02 IN PROGRESS — 02-01 complete. Next: `gsd:execute-phase 2` plan 02-02 (image upload pipeline)
 
 ---
 
@@ -91,6 +91,8 @@ Phase 01 KOMPLETNÁ (6/6 plánov). Run: `gsd:plan-phase 2` — naplánuj Phase 2
 | 2026-03-12 | useTabTrigger hook namiesto render prop pre isFocused | TabTrigger.children je ReactNode nie function — hook pattern je správna cesta |
 | 2026-03-12 | PostHog EU host (eu.posthog.com) pre GDPR | SK/CZ market — dáta musia zostať v EU |
 | 2026-03-12 | PostHog disabled: !POSTHOG_KEY | Graceful degradation — appka funguje bez API key v dev |
+| 2026-03-12 | @shopify/flash-list v2.0.2 (nie v1.x) | Expo SDK 55 = New Architecture — flash-list v2 je NA-only, žiadny estimatedItemSize |
+| 2026-03-12 | expo-location + expo-image-picker config plugins pridané do app.json | Povinné pre natívne permissions na iOS/Android |
 
 ---
 
@@ -104,6 +106,7 @@ Phase 01 KOMPLETNÁ (6/6 plánov). Run: `gsd:plan-phase 2` — naplánuj Phase 2
 | 01-foundation-auth | 04 | 6 min | 2 | 12 |
 | 01-foundation-auth | 05 | 4 min | 2 | 8 |
 | 01-foundation-auth | 06 | 4 min | 1 | 6 |
+| 02-feed-catch-post | 01 | 3 min | 2 | 8 |
 
 ---
 
