@@ -14,7 +14,7 @@ import { Image } from 'expo-image';
 import { useAuthStore } from '../../src/stores/auth.store';
 import { useCatches } from '../../src/hooks/useCatches';
 import { useCatchesStore } from '../../src/stores/catches.store';
-import type { CatchDocument } from '../../src/types/catch.types';
+import type { CatchDocument, CatchFilter } from '../../src/types/catch.types';
 
 function DennikCard({ item }: { item: CatchDocument }) {
   const weightKg = (item.weightG / 1000).toFixed(1);
@@ -54,7 +54,7 @@ function FilterChips({
   onClear,
   onOpenFilter,
 }: {
-  filter: ReturnType<typeof useCatchesStore>['filter'];
+  filter: CatchFilter;
   onClear: () => void;
   onOpenFilter: () => void;
 }) {
