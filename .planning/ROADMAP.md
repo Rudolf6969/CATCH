@@ -96,6 +96,18 @@ PROF-01, PROF-02, PROF-03, PROF-04, PROF-05
 - Fish species zoznam: 100+ SK/CZ druhov v `constants/fishSpecies.ts` — statický JSON, žiadny Firestore fetch
 - Open-Meteo API (free, no key): `https://api.open-meteo.com/v1/forecast` — parametre: `hourly=pressure_msl,temperature_2m,windspeed_10m,precipitation`
 - Storage path: `catches/{userId}/{catchId}/{filename}.jpg` — security rules: write len vlastný uid
+**Plans:** 9 plans
+
+Plans:
+- [ ] 02-01-PLAN.md — Inštalácia závislostí + Wave 0 test scaffolding (5 test súborov)
+- [ ] 02-02-PLAN.md — TypeScript typy (CatchDocument, UserDocument) + image upload pipeline
+- [ ] 02-03-PLAN.md — Fish species zoznam (100+ SK/CZ) + weather service (Open-Meteo + suncalc)
+- [ ] 02-04-PLAN.md — Catches/Feed stores + useCatches/useFeed hooks (fire-and-forget CRUD)
+- [ ] 02-05-PLAN.md — 3-krokový catch wizard (app/catch/new/step-1,2,3)
+- [ ] 02-06-PLAN.md — Feed screen s FlashList v2 + CatchCard + CatchCarousel + FishBadge
+- [ ] 02-07-PLAN.md — Denník screen + Catch detail screen (edit/delete)
+- [ ] 02-08-PLAN.md — Profil screen (Twitter-style header + CatchGrid + karma/badges)
+- [ ] 02-09-PLAN.md — Human verify checkpoint (celý Phase 2 flow)
 
 ---
 
