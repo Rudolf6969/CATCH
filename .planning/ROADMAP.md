@@ -11,7 +11,7 @@
 
 | # | Phase | Goal | REQ Count | Complexity |
 |---|-------|------|-----------|------------|
-| 1 | 2/6 | In Progress|  | Medium |
+| 1 | 3/6 | In Progress|  | Medium |
 | 2 | Feed + Catch Post | Rybár odfotí úlovok, post sa objaví vo Feede a automaticky sa uloží do Denníka | 16 | High |
 | 3 | Revír Map + Podmienky | Rybár vidí live podmienky na svojej polohe a nájde revír na mape | 7 | Medium |
 | 4 | AI Odporúčania + Premium | Rybár dostane expertný tip na nástrahu v SK a vie si kúpiť Premium | 11 | High |
@@ -46,7 +46,7 @@ AUTH-01, AUTH-02, AUTH-03, AUTH-04, AUTH-05, AUTH-06
 **Complexity:** Medium
 **Critical path:** Áno — každá ďalšia fáza závisí od auth (uid) a design systemu
 
-**Plans:** 2/6 plans executed
+**Plans:** 3/6 plans executed
 
 Plans:
 - [x] 01-01-PLAN.md — Expo init + Firebase konfigurácia + EAS profily + Firestore skeleton rules

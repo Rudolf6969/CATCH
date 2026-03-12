@@ -11,9 +11,9 @@
 
 - [x] **INFRA-01**: Expo SDK 53 + Expo Router v5 projekt beží na Android a iOS (EAS dev build)
 - [ ] **INFRA-02**: react-native-firebase v21 (natívny SDK) konfigurovaný pre Firestore, Auth, Storage, FCM
-- [ ] **INFRA-03**: i18n systém (expo-localization + i18n-js) s SK ako default jazykom
-- [ ] **INFRA-04**: Design system: theme.ts s farbami, typografiou, spacing, shadow tokenmi
-- [ ] **INFRA-05**: Základné UI primitives: Button, Card, Badge, Avatar, BottomSheet, TextInput, skeleton loaders
+- [x] **INFRA-03**: i18n systém (expo-localization + i18n-js) s SK ako default jazykom
+- [x] **INFRA-04**: Design system: theme.ts s farbami, typografiou, spacing, shadow tokenmi
+- [x] **INFRA-05**: Základné UI primitives: Button, Card, Badge, Avatar, BottomSheet, TextInput, skeleton loaders
 - [ ] **INFRA-06**: EAS Build konfigurácia (development, preview, production profiles)
 - [ ] **INFRA-07**: PostHog analytics inicializovaný s event tracking pre core actions
 

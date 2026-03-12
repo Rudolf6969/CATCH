@@ -3,22 +3,22 @@ gsd_state_version: 1.0
 milestone: v1.18
 milestone_name: milestone
 current_phase: 01-foundation-auth
-current_plan: 01-03 (next)
+current_plan: 01-04 (next)
 status: in_progress
-last_updated: "2026-03-12T10:48:50.092Z"
+last_updated: "2026-03-12T11:10:00.000Z"
 progress:
   total_phases: 8
   completed_phases: 0
   total_plans: 6
-  completed_plans: 2
+  completed_plans: 3
 ---
 
 # Project State — CATCH
 
 **Initialized:** 2026-03-12
 **Current Phase:** 01-foundation-auth
-**Current Plan:** 01-03 (next)
-**Last session:** 2026-03-12 — Completed 01-02-PLAN.md
+**Current Plan:** 01-04 (next)
+**Last session:** 2026-03-12 — Completed 01-03-PLAN.md
 
 ---
 
@@ -28,7 +28,7 @@ See: `.planning/PROJECT.md` (updated 2026-03-12)
 
 **Core value:** Rybár zaznamená úlovok, dostane AI predikciu kedy ísť ďalší raz, a pochváli sa v komunite — celý loop na jednom mieste, v slovenčine.
 
-**Current focus:** Phase 1 in progress — 01-01, 01-02 complete, proceed to 01-03
+**Current focus:** Phase 1 in progress — 01-01, 01-02, 01-03 complete, proceed to 01-04
 
 ---
 
@@ -51,7 +51,7 @@ See: `.planning/PROJECT.md` (updated 2026-03-12)
 
 | Phase | REQ-IDs | Count | Status |
 |-------|---------|-------|--------|
-| Phase 1 | INFRA-01–07, AUTH-01–06 | 13 | In Progress (3/13 done) |
+| Phase 1 | INFRA-01–07, AUTH-01–06 | 13 | In Progress (6/13 done) |
 | Phase 2 | PHOTO-01–04, DIARY-01–07, PROF-01–05 | 16 | Pending |
 | Phase 3 | MAP-01–07 | 7 | Pending |
 | Phase 4 | AI-01–06, PREM-01–05 | 11 | Pending |
@@ -61,13 +61,13 @@ See: `.planning/PROJECT.md` (updated 2026-03-12)
 | Phase 8 | NOTIF-01–05, GAMIF-01–03 | 8 + INFRA-07 | Pending |
 | **Total** | | **70 / 70** ✓ | 3 done |
 
-**Completed requirements:** INFRA-01, INFRA-02, INFRA-06
+**Completed requirements:** INFRA-01, INFRA-02, INFRA-03, INFRA-04, INFRA-05, INFRA-06
 
 ---
 
 ## Next Action
 
-Run: `execute-phase 01` — plan 01-03
+Run: `execute-phase 01` — plan 01-04
 
 ---
 
@@ -83,6 +83,8 @@ Run: `execute-phase 01` — plan 01-03
 | 2026-03-12 | Expo SDK 55 namiesto plánovaného 53 | create-expo-app nainštaloval najnovší, výhodnejšie (RN 0.83.2, Reanimated 4.x) |
 | 2026-03-12 | react-native-firebase 23.x (nie 21.x z plánu) | Najnovšia verzia, kompatibilná s Expo 55 |
 | 2026-03-12 | jest-expo preset namiesto getDefaultConfig | jest-expo 55.x neexportuje getDefaultConfig funkciu, použiť `preset: 'jest-expo'` |
+| 2026-03-12 | expo-localization try/catch v i18n.ts | Jest testEnvironment: 'node' nemá Expo runtime — graceful fallback na SK default |
+| 2026-03-12 | StyleSheet.create spread cez (theme.X as object) cast | TypeScript strict const inference zabraňuje priamemu spreadu theme objektu v StyleSheet |
 
 ---
 
@@ -92,6 +94,7 @@ Run: `execute-phase 01` — plan 01-03
 |-------|------|----------|-------|-------|
 | 01-foundation-auth | 01 | 5 min | 2 | 13 |
 | 01-foundation-auth | 02 | 3 min | 2 | 8 |
+| 01-foundation-auth | 03 | 8 min | 2 | 11 |
 
 ---
 
