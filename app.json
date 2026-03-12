@@ -27,7 +27,9 @@
       [
         "expo-build-properties",
         {
-          "ios": { "useFrameworks": "static" }
+          "ios": {
+            "useFrameworks": "static"
+          }
         }
       ],
       [
@@ -42,7 +44,8 @@
             "./assets/fonts/JetBrainsMono-Regular.ttf"
           ]
         }
-      ]
+      ],
+      "expo-router"
     ]
   }
 }
