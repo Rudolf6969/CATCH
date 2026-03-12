@@ -1,9 +1,24 @@
+---
+gsd_state_version: 1.0
+milestone: v1.18
+milestone_name: milestone
+current_phase: 01-foundation-auth
+current_plan: 01-03 (next)
+status: in_progress
+last_updated: "2026-03-12T10:48:50.092Z"
+progress:
+  total_phases: 8
+  completed_phases: 0
+  total_plans: 6
+  completed_plans: 2
+---
+
 # Project State — CATCH
 
 **Initialized:** 2026-03-12
 **Current Phase:** 01-foundation-auth
-**Current Plan:** 01-02 (next)
-**Last session:** 2026-03-12 — Completed 01-01-PLAN.md
+**Current Plan:** 01-03 (next)
+**Last session:** 2026-03-12 — Completed 01-02-PLAN.md
 
 ---
 
@@ -13,7 +28,7 @@ See: `.planning/PROJECT.md` (updated 2026-03-12)
 
 **Core value:** Rybár zaznamená úlovok, dostane AI predikciu kedy ísť ďalší raz, a pochváli sa v komunite — celý loop na jednom mieste, v slovenčine.
 
-**Current focus:** Phase 1 in progress — 01-01 complete, proceed to 01-02
+**Current focus:** Phase 1 in progress — 01-01, 01-02 complete, proceed to 01-03
 
 ---
 
@@ -52,7 +67,7 @@ See: `.planning/PROJECT.md` (updated 2026-03-12)
 
 ## Next Action
 
-Run: `execute-phase 01` — plan 01-02 (Expo Router + Navigation)
+Run: `execute-phase 01` — plan 01-03
 
 ---
 
@@ -67,6 +82,7 @@ Run: `execute-phase 01` — plan 01-02 (Expo Router + Navigation)
 | 2026-03-12 | `react-native-purchases ^8.9.2` pinned | Starší verzie majú fontFamily crash bug |
 | 2026-03-12 | Expo SDK 55 namiesto plánovaného 53 | create-expo-app nainštaloval najnovší, výhodnejšie (RN 0.83.2, Reanimated 4.x) |
 | 2026-03-12 | react-native-firebase 23.x (nie 21.x z plánu) | Najnovšia verzia, kompatibilná s Expo 55 |
+| 2026-03-12 | jest-expo preset namiesto getDefaultConfig | jest-expo 55.x neexportuje getDefaultConfig funkciu, použiť `preset: 'jest-expo'` |
 
 ---
 
@@ -75,7 +91,9 @@ Run: `execute-phase 01` — plan 01-02 (Expo Router + Navigation)
 | Phase | Plan | Duration | Tasks | Files |
 |-------|------|----------|-------|-------|
 | 01-foundation-auth | 01 | 5 min | 2 | 13 |
+| 01-foundation-auth | 02 | 3 min | 2 | 8 |
 
 ---
 
 *State updated: 2026-03-12*
+

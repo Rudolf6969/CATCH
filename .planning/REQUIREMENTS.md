@@ -9,7 +9,7 @@
 
 ### Infrastructure & Setup
 
-- [ ] **INFRA-01**: Expo SDK 53 + Expo Router v5 projekt beží na Android a iOS (EAS dev build)
+- [x] **INFRA-01**: Expo SDK 53 + Expo Router v5 projekt beží na Android a iOS (EAS dev build)
 - [ ] **INFRA-02**: react-native-firebase v21 (natívny SDK) konfigurovaný pre Firestore, Auth, Storage, FCM
 - [ ] **INFRA-03**: i18n systém (expo-localization + i18n-js) s SK ako default jazykom
 - [ ] **INFRA-04**: Design system: theme.ts s farbami, typografiou, spacing, shadow tokenmi
