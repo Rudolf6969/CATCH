@@ -49,7 +49,7 @@ AUTH-01, AUTH-02, AUTH-03, AUTH-04, AUTH-05, AUTH-06
 **Plans:** 6 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — Expo init + Firebase konfigurácia + EAS profily + Firestore skeleton rules
+- [x] 01-01-PLAN.md — Expo init + Firebase konfigurácia + EAS profily + Firestore skeleton rules
 - [ ] 01-02-PLAN.md — Test infraštruktúra Wave 0: Jest + Firebase mocks + stub testy
 - [ ] 01-03-PLAN.md — Design system: theme.ts + i18n SK/CZ + 6 UI primitives
 - [ ] 01-04-PLAN.md — Auth flow: Zustand store + root layout Stack.Protected + login/register/forgot-password

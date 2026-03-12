@@ -1,7 +1,9 @@
 # Project State — CATCH
 
 **Initialized:** 2026-03-12
-**Current Phase:** Not started
+**Current Phase:** 01-foundation-auth
+**Current Plan:** 01-02 (next)
+**Last session:** 2026-03-12 — Completed 01-01-PLAN.md
 
 ---
 
@@ -11,7 +13,7 @@ See: `.planning/PROJECT.md` (updated 2026-03-12)
 
 **Core value:** Rybár zaznamená úlovok, dostane AI predikciu kedy ísť ďalší raz, a pochváli sa v komunite — celý loop na jednom mieste, v slovenčine.
 
-**Current focus:** Ready to start Phase 1
+**Current focus:** Phase 1 in progress — 01-01 complete, proceed to 01-02
 
 ---
 
@@ -19,7 +21,7 @@ See: `.planning/PROJECT.md` (updated 2026-03-12)
 
 | # | Phase | Status | Started | Completed |
 |---|-------|--------|---------|-----------|
-| 1 | Foundation & Auth | ○ Pending | — | — |
+| 1 | Foundation & Auth | ◑ In Progress | 2026-03-12 | — |
 | 2 | Core Value: Catch Diary | ○ Pending | — | — |
 | 3 | Revír Map | ○ Pending | — | — |
 | 4 | AI Predictions + Premium | ○ Pending | — | — |
@@ -34,7 +36,7 @@ See: `.planning/PROJECT.md` (updated 2026-03-12)
 
 | Phase | REQ-IDs | Count | Status |
 |-------|---------|-------|--------|
-| Phase 1 | INFRA-01–07, AUTH-01–06 | 13 | Pending |
+| Phase 1 | INFRA-01–07, AUTH-01–06 | 13 | In Progress (3/13 done) |
 | Phase 2 | PHOTO-01–04, DIARY-01–07, PROF-01–05 | 16 | Pending |
 | Phase 3 | MAP-01–07 | 7 | Pending |
 | Phase 4 | AI-01–06, PREM-01–05 | 11 | Pending |
@@ -42,13 +44,15 @@ See: `.planning/PROJECT.md` (updated 2026-03-12)
 | Phase 6 | MARKET-01–10 | 10 | Pending |
 | Phase 7 | CHAT-01–06 | 6 | Pending |
 | Phase 8 | NOTIF-01–05, GAMIF-01–03 | 8 + INFRA-07 | Pending |
-| **Total** | | **70 / 70** ✓ | |
+| **Total** | | **70 / 70** ✓ | 3 done |
+
+**Completed requirements:** INFRA-01, INFRA-02, INFRA-06
 
 ---
 
 ## Next Action
 
-Run: `/gsd:plan-phase 1`
+Run: `execute-phase 01` — plan 01-02 (Expo Router + Navigation)
 
 ---
 
@@ -61,7 +65,17 @@ Run: `/gsd:plan-phase 1`
 | 2026-03-12 | `geofire-common` namiesto `geofirestore` | geofirestore unmaintained, geofire-common je oficiálny Google package |
 | 2026-03-12 | EAS dev build od dňa 1 | Firebase native + RevenueCat nefungujú v Expo Go |
 | 2026-03-12 | `react-native-purchases ^8.9.2` pinned | Starší verzie majú fontFamily crash bug |
+| 2026-03-12 | Expo SDK 55 namiesto plánovaného 53 | create-expo-app nainštaloval najnovší, výhodnejšie (RN 0.83.2, Reanimated 4.x) |
+| 2026-03-12 | react-native-firebase 23.x (nie 21.x z plánu) | Najnovšia verzia, kompatibilná s Expo 55 |
 
 ---
 
-*State created: 2026-03-12*
+## Performance Metrics
+
+| Phase | Plan | Duration | Tasks | Files |
+|-------|------|----------|-------|-------|
+| 01-foundation-auth | 01 | 5 min | 2 | 13 |
+
+---
+
+*State updated: 2026-03-12*
