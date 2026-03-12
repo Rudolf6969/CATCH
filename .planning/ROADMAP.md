@@ -12,7 +12,7 @@
 | # | Phase | Goal | REQ Count | Complexity |
 |---|-------|------|-----------|------------|
 | 1 | Foundation & Auth | 6/6 Complete | 13 | Medium |
-| 2 | 2/9 | In Progress|  | High |
+| 2 | 3/9 | In Progress|  | High |
 | 3 | Revír Map + Podmienky | Rybár vidí live podmienky na svojej polohe a nájde revír na mape | 7 | Medium |
 | 4 | AI Odporúčania + Premium | Rybár dostane expertný tip na nástrahu v SK a vie si kúpiť Premium | 11 | High |
 | 5 | Komunita vo Feede | Rybár zverejní tip/montáž ako post vo Feede, ostatní lajkujú a komentujú | 8 | High |
@@ -96,7 +96,7 @@ PROF-01, PROF-02, PROF-03, PROF-04, PROF-05
 - Fish species zoznam: 100+ SK/CZ druhov v `constants/fishSpecies.ts` — statický JSON, žiadny Firestore fetch
 - Open-Meteo API (free, no key): `https://api.open-meteo.com/v1/forecast` — parametre: `hourly=pressure_msl,temperature_2m,windspeed_10m,precipitation`
 - Storage path: `catches/{userId}/{catchId}/{filename}.jpg` — security rules: write len vlastný uid
-**Plans:** 2/9 plans executed
+**Plans:** 3/9 plans executed
 
 Plans:
 - [ ] 02-01-PLAN.md — Inštalácia závislostí + Wave 0 test scaffolding (5 test súborov)
