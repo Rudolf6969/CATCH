@@ -45,9 +45,9 @@
 
 - [x] **DIARY-01**: Používateľ vie zaznamenať úlovok (ryba, váha g, dĺžka cm, metóda, nástraha, hĺbka, revír, fotky, poznámka) za menej ako 90 sekúnd
 - [x] **DIARY-02**: Počasie (teplota, tlak, vietor, vlhkosť, fáza mesiaca) sa automaticky doplní z Open-Meteo pri zaznamenaní
-- [ ] **DIARY-03**: Zoznam úlovkov je filtrovaný podľa druhu ryby, revíru, dátumu, metódy
-- [ ] **DIARY-04**: Detail úlovku zobrazuje všetky parametre, fotogalériu, mapu lokácie, počasie
-- [ ] **DIARY-05**: Používateľ vie upraviť alebo zmazať vlastný úlovok
+- [x] **DIARY-03**: Zoznam úlovkov je filtrovaný podľa druhu ryby, revíru, dátumu, metódy
+- [x] **DIARY-04**: Detail úlovku zobrazuje všetky parametre, fotogalériu, mapu lokácie, počasie
+- [x] **DIARY-05**: Používateľ vie upraviť alebo zmazať vlastný úlovok
 - [x] **DIARY-06**: Pridanie úlovku funguje aj offline (queue, sync po pripojení)
 - [x] **DIARY-07**: Výber ryby z SK/CZ zoznamu (100+ druhov) s vyhľadávacím poľom
 
