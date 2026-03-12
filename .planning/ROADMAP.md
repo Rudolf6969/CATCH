@@ -46,6 +46,16 @@ AUTH-01, AUTH-02, AUTH-03, AUTH-04, AUTH-05, AUTH-06
 **Complexity:** Medium
 **Critical path:** Áno — každá ďalšia fáza závisí od auth (uid) a design systemu
 
+**Plans:** 6 plans
+
+Plans:
+- [ ] 01-01-PLAN.md — Expo init + Firebase konfigurácia + EAS profily + Firestore skeleton rules
+- [ ] 01-02-PLAN.md — Test infraštruktúra Wave 0: Jest + Firebase mocks + stub testy
+- [ ] 01-03-PLAN.md — Design system: theme.ts + i18n SK/CZ + 6 UI primitives
+- [ ] 01-04-PLAN.md — Auth flow: Zustand store + root layout Stack.Protected + login/register/forgot-password
+- [ ] 01-05-PLAN.md — Tab navigácia: expo-router/ui custom FAB tabs + 5 placeholder screens
+- [ ] 01-06-PLAN.md — PostHog analytics + EAS dev build checkpoint
+
 **Implementation notes:**
 - Vytvoriť EAS dev build v **deň 1** — Expo Go nestačí (Firebase native + FCM nefungujú)
 - `@react-native-firebase v21` namiesto Firebase JS SDK — offline persistence out-of-the-box, natívny výkon
@@ -328,3 +338,4 @@ Phase 3: Revír Map    Phase 4: AI Predictions + Premium
 
 *Roadmap created: 2026-03-12*
 *Based on: PROJECT.md, REQUIREMENTS.md, research/SUMMARY.md, research/ARCHITECTURE.md*
+*Phase 1 plans created: 2026-03-12*
