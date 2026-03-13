@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
     color: theme.colors.textPrimary,
   },
   subtitle: {
-    fontFamily: 'PlusJakartaSans-Regular',
+    fontFamily: 'PlusJakartaSans-Medium',
     fontSize: 14,
     color: theme.colors.textMuted,
     marginTop: 2,
@@ -229,7 +229,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.accent,
   },
   heroTip: {
-    fontFamily: 'PlusJakartaSans-Regular',
+    fontFamily: 'PlusJakartaSans-Medium',
     fontSize: 12,
     color: theme.colors.textPrimary,
     lineHeight: 16,
@@ -259,12 +259,12 @@ const styles = StyleSheet.create({
     gap: 6,
   },
   weatherValue: {
-    fontFamily: 'PlusJakartaSans-Medium',
+    fontFamily: 'PlusJakartaSans-SemiBold',
     fontSize: 18,
     color: theme.colors.textPrimary,
   },
   weatherLabel: {
-    fontFamily: 'PlusJakartaSans-Regular',
+    fontFamily: 'PlusJakartaSans-Medium',
     fontSize: 11,
     color: theme.colors.textMuted,
   },
@@ -284,12 +284,12 @@ const styles = StyleSheet.create({
     gap: 6,
   },
   forecastDay: {
-    fontFamily: 'PlusJakartaSans-Regular',
+    fontFamily: 'PlusJakartaSans-Medium',
     fontSize: 11,
     color: theme.colors.textMuted,
   },
   forecastTemp: {
-    fontFamily: 'PlusJakartaSans-Medium',
+    fontFamily: 'PlusJakartaSans-SemiBold',
     fontSize: 14,
     color: theme.colors.textPrimary,
   },
@@ -330,12 +330,12 @@ const styles = StyleSheet.create({
     left: 12,
   },
   locationName: {
-    fontFamily: 'PlusJakartaSans-Medium',
+    fontFamily: 'PlusJakartaSans-SemiBold',
     fontSize: 14,
     color: theme.colors.textPrimary,
   },
   locationDistance: {
-    fontFamily: 'PlusJakartaSans-Regular',
+    fontFamily: 'PlusJakartaSans-Medium',
     fontSize: 12,
     color: theme.colors.textSecondary,
   },

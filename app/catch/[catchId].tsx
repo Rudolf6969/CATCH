@@ -168,8 +168,8 @@ export default function CatchDetailScreen() {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: theme.colors.bg },
   centered: { justifyContent: 'center', alignItems: 'center' },
-  notFoundText: { fontFamily: 'PlusJakartaSans-Regular', fontSize: 16, color: theme.colors.textMuted, marginBottom: 16 },
-  backLink: { fontFamily: 'PlusJakartaSans-Regular', fontSize: 15, color: theme.colors.primary },
+  notFoundText: { fontFamily: 'PlusJakartaSans-Medium', fontSize: 16, color: theme.colors.textMuted, marginBottom: 16 },
+  backLink: { fontFamily: 'PlusJakartaSans-Medium', fontSize: 15, color: theme.colors.primary },
   backBtn: {
     position: 'absolute',
     left: 14,
@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  backBtnText: { fontFamily: 'PlusJakartaSans-Regular', fontSize: 20, color: theme.colors.textPrimary },
+  backBtnText: { fontFamily: 'PlusJakartaSans-Medium', fontSize: 20, color: theme.colors.textPrimary },
   content: { padding: 20 },
   species: { fontFamily: 'Outfit-Bold', fontSize: 28, color: theme.colors.textPrimary, marginBottom: 12 },
   statsRow: {
@@ -194,9 +194,9 @@ const styles = StyleSheet.create({
   },
   statItem: { alignItems: 'center' },
   statValue: { fontFamily: 'JetBrainsMono-Regular', fontSize: 22, color: theme.colors.primary },
-  statLabel: { fontFamily: 'PlusJakartaSans-Regular', fontSize: 12, color: theme.colors.textMuted },
+  statLabel: { fontFamily: 'PlusJakartaSans-Medium', fontSize: 12, color: theme.colors.textMuted },
   statDivider: { width: 1, height: 32, backgroundColor: theme.colors.divider },
-  caption: { fontFamily: 'PlusJakartaSans-Regular', fontSize: 15, color: theme.colors.textSecondary, lineHeight: 22, marginBottom: 16 },
+  caption: { fontFamily: 'PlusJakartaSans-Medium', fontSize: 15, color: theme.colors.textSecondary, lineHeight: 22, marginBottom: 16 },
   metaSection: {
     backgroundColor: theme.colors.surfaceHigh,
     borderRadius: 12,
@@ -205,8 +205,8 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   metaRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
-  metaLabel: { fontFamily: 'PlusJakartaSans-Regular', fontSize: 13, color: theme.colors.textMuted },
-  metaValue: { fontFamily: 'PlusJakartaSans-Medium', fontSize: 13, color: theme.colors.textPrimary, maxWidth: '60%', textAlign: 'right' },
+  metaLabel: { fontFamily: 'PlusJakartaSans-Medium', fontSize: 13, color: theme.colors.textMuted },
+  metaValue: { fontFamily: 'PlusJakartaSans-SemiBold', fontSize: 13, color: theme.colors.textPrimary, maxWidth: '60%', textAlign: 'right' },
   ownActions: { marginTop: 32 },
   deleteBtn: {
     borderWidth: 1,
@@ -215,5 +215,5 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     alignItems: 'center',
   },
-  deleteBtnText: { fontFamily: 'PlusJakartaSans-Medium', fontSize: 15, color: theme.colors.error },
+  deleteBtnText: { fontFamily: 'PlusJakartaSans-SemiBold', fontSize: 15, color: theme.colors.error },
 });

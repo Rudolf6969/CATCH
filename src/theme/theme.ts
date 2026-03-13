@@ -62,11 +62,11 @@ export const theme = {
     headingSm: { fontFamily: 'Outfit-SemiBold', fontSize: 16, lineHeight: 22 },
 
     // Body — DM Sans
-    body: { fontFamily: 'PlusJakartaSans-Regular', fontSize: 15, lineHeight: 22 },
-    bodyMedium: { fontFamily: 'PlusJakartaSans-Medium', fontSize: 15, lineHeight: 22 },
-    bodySm: { fontFamily: 'PlusJakartaSans-Regular', fontSize: 13, lineHeight: 18 },
-    bodySmMedium: { fontFamily: 'PlusJakartaSans-Medium', fontSize: 13, lineHeight: 18 },
-    caption: { fontFamily: 'PlusJakartaSans-Regular', fontSize: 11, lineHeight: 16 },
+    body: { fontFamily: 'PlusJakartaSans-Medium', fontSize: 15, lineHeight: 22 },
+    bodyMedium: { fontFamily: 'PlusJakartaSans-SemiBold', fontSize: 15, lineHeight: 22 },
+    bodySm: { fontFamily: 'PlusJakartaSans-Medium', fontSize: 13, lineHeight: 18 },
+    bodySmMedium: { fontFamily: 'PlusJakartaSans-SemiBold', fontSize: 13, lineHeight: 18 },
+    caption: { fontFamily: 'PlusJakartaSans-Medium', fontSize: 11, lineHeight: 16 },
 
     // Mono — JetBrains Mono (stats)
     mono: { fontFamily: 'JetBrainsMono-Regular', fontSize: 14, lineHeight: 20 },

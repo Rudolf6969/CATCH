@@ -144,12 +144,12 @@ const styles = StyleSheet.create({
   },
   headerText: { flex: 1 },
   userName: {
-    fontFamily: 'PlusJakartaSans-SemiBold',
+    fontFamily: 'PlusJakartaSans-Bold',
     fontSize: 13,
     color: theme.colors.textPrimary,
   },
   location: {
-    fontFamily: 'PlusJakartaSans-Regular',
+    fontFamily: 'PlusJakartaSans-Medium',
     fontSize: 11,
     color: theme.colors.textSecondary,
     marginTop: 1,
@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
   leftActions: { flexDirection: 'row', alignItems: 'center', gap: 16 },
   actionBtn: { padding: 2 },
   likeCount: {
-    fontFamily: 'PlusJakartaSans-SemiBold',
+    fontFamily: 'PlusJakartaSans-Bold',
     fontSize: 13,
     color: theme.colors.textPrimary,
     paddingHorizontal: 14,
@@ -173,17 +173,17 @@ const styles = StyleSheet.create({
   },
   content: { paddingHorizontal: 14, paddingBottom: 12, gap: 4, marginTop: 4 },
   caption: {
-    fontFamily: 'PlusJakartaSans-Regular',
+    fontFamily: 'PlusJakartaSans-Medium',
     fontSize: 13,
     color: theme.colors.textSecondary,
     lineHeight: 18,
   },
   captionUser: {
-    fontFamily: 'PlusJakartaSans-SemiBold',
+    fontFamily: 'PlusJakartaSans-Bold',
     color: theme.colors.textPrimary,
   },
   timeAgo: {
-    fontFamily: 'PlusJakartaSans-Regular',
+    fontFamily: 'PlusJakartaSans-Medium',
     fontSize: 11,
     color: theme.colors.textMuted,
     marginTop: 4,

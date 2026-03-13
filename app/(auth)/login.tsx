@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
     letterSpacing: 6,
   },
   brandTagline: {
-    fontFamily: 'PlusJakartaSans-Regular',
+    fontFamily: 'PlusJakartaSans-Medium',
     fontSize: 14,
     color: theme.colors.textSecondary,
     marginTop: 4,
@@ -242,7 +242,7 @@ const styles = StyleSheet.create({
     color: theme.colors.textPrimary,
   },
   cardSubtitle: {
-    fontFamily: 'PlusJakartaSans-Regular',
+    fontFamily: 'PlusJakartaSans-Medium',
     fontSize: 14,
     color: theme.colors.textMuted,
     marginBottom: 8,
@@ -258,7 +258,7 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   errorText: {
-    fontFamily: 'PlusJakartaSans-Regular',
+    fontFamily: 'PlusJakartaSans-Medium',
     fontSize: 14,
     color: theme.colors.error,
     flex: 1,
@@ -272,7 +272,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
   },
   forgotText: {
-    fontFamily: 'PlusJakartaSans-Regular',
+    fontFamily: 'PlusJakartaSans-Medium',
     fontSize: 13,
     color: theme.colors.accent,
   },
@@ -289,7 +289,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.divider,
   },
   dividerText: {
-    fontFamily: 'PlusJakartaSans-Regular',
+    fontFamily: 'PlusJakartaSans-Medium',
     fontSize: 12,
     color: theme.colors.textMuted,
   },
@@ -307,7 +307,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.surfaceHigh,
   },
   googleLabel: {
-    fontFamily: 'PlusJakartaSans-Medium',
+    fontFamily: 'PlusJakartaSans-SemiBold',
     fontSize: 15,
     color: theme.colors.textPrimary,
   },
@@ -319,12 +319,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   registerMuted: {
-    fontFamily: 'PlusJakartaSans-Regular',
+    fontFamily: 'PlusJakartaSans-Medium',
     fontSize: 13,
     color: theme.colors.textMuted,
   },
   registerLink: {
-    fontFamily: 'PlusJakartaSans-Medium',
+    fontFamily: 'PlusJakartaSans-SemiBold',
     fontSize: 13,
     color: theme.colors.accent,
   },

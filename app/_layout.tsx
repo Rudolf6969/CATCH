@@ -1,14 +1,13 @@
 import { Stack } from 'expo-router';
 import { useEffect } from 'react';
 import { Platform } from 'react-native';
+import { useFonts } from 'expo-font';
 import { auth } from '@/lib/firebase';
 import * as SplashScreen from 'expo-splash-screen';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useAuthStore } from '@/stores/auth.store';
 import { posthog, captureEvent } from '@/lib/posthog';
 
-// Splash screen ostáva viditeľný kým neinicializujeme Firebase auth
-// Na webe preventAutoHideAsync nie je potrebný
 if (Platform.OS !== 'web') {
   SplashScreen.preventAutoHideAsync();
 }
@@ -17,7 +16,7 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       retry: 2,
-      staleTime: 1000 * 60 * 5, // 5 minút
+      staleTime: 1000 * 60 * 5,
     },
   },
 });
@@ -25,8 +24,20 @@ const queryClient = new QueryClient({
 export default function RootLayout() {
   const { user, setUser, setInitialized, initialized } = useAuthStore();
 
+  const [fontsLoaded] = useFonts({
+    'Outfit-Regular': require('../assets/fonts/Outfit-Regular.ttf'),
+    'Outfit-Medium': require('../assets/fonts/Outfit-Medium.ttf'),
+    'Outfit-SemiBold': require('../assets/fonts/Outfit-SemiBold.ttf'),
+    'Outfit-Bold': require('../assets/fonts/Outfit-Bold.ttf'),
+    'PlusJakartaSans-Regular': require('../assets/fonts/PlusJakartaSans-Regular.ttf'),
+    'PlusJakartaSans-Medium': require('../assets/fonts/PlusJakartaSans-Medium.ttf'),
+    'PlusJakartaSans-SemiBold': require('../assets/fonts/PlusJakartaSans-SemiBold.ttf'),
+    'PlusJakartaSans-Bold': require('../assets/fonts/PlusJakartaSans-Bold.ttf'),
+    'JetBrainsMono-Regular': require('../assets/fonts/JetBrainsMono-Regular.ttf'),
+    'JetBrainsMono-Medium': require('../assets/fonts/JetBrainsMono-Medium.ttf'),
+  });
+
   useEffect(() => {
-    // onAuthStateChanged je volaný okamžite s aktuálnym stavom
     const unsubscribe = auth().onAuthStateChanged((firebaseUser) => {
       setUser(firebaseUser);
       setInitialized(true);
@@ -35,23 +46,20 @@ export default function RootLayout() {
   }, [setUser, setInitialized]);
 
   useEffect(() => {
-    if (initialized) {
+    if (initialized && fontsLoaded) {
       if (Platform.OS !== 'web') SplashScreen.hideAsync();
       captureEvent('app_opened', { authenticated: !!user });
     }
-  }, [initialized, user]);
+  }, [initialized, fontsLoaded, user]);
 
-  // Kým Firebase auth neinicializuje → renderovať null (splash zostáva viditeľný)
-  if (!initialized) return null;
+  if (!initialized || !fontsLoaded) return null;
 
   return (
     <QueryClientProvider client={queryClient}>
       <Stack screenOptions={{ headerShown: false }}>
-        {/* Prihlásený user → tabs */}
         <Stack.Protected guard={!!user}>
           <Stack.Screen name="(tabs)" />
         </Stack.Protected>
-        {/* Neprihlásený user → auth screens */}
         <Stack.Protected guard={!user}>
           <Stack.Screen name="(auth)" />
         </Stack.Protected>
