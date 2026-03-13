@@ -1,3 +1,5 @@
+import { theme } from '../../src/theme/theme';
+import { Ionicons } from '@expo/vector-icons';
 import React, { useState } from 'react';
 import {
   View,

@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     elevation: theme.shadow.md.elevation,
   },
   glowing: {
-    borderColor: theme.colors.dividerActive,
+    borderColor: theme.colors.cardBorderActive,
     shadowColor: theme.colors.primary,
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.15,
