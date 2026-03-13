@@ -1,11 +1,13 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import { Image } from 'expo-image';
+import { Ionicons } from '@expo/vector-icons';
+import { theme } from '../../theme/theme';
 import type { UserDocument } from '../../types/user.types';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
-const BANNER_HEIGHT = 120;
-const AVATAR_SIZE = 72;
+const BANNER_HEIGHT = 150;
+const AVATAR_SIZE = 80;
 
 interface Props {
   user: UserDocument;
@@ -19,27 +21,38 @@ export function ProfileHeader({ user, isOwnProfile, onEditProfile }: Props) {
 
   return (
     <View>
-      {/* Banner — default forest gradient */}
+      {/* Banner */}
       <View style={styles.banner}>
-        <View style={styles.bannerGradient} />
+        <View style={styles.bannerBg} />
+        <View style={styles.bannerOverlay} />
       </View>
 
-      {/* Avatar overlaid na spodnom okraji bannera */}
-      <View style={styles.avatarContainer}>
-        <Image
-          source={user.avatarURL ? { uri: user.avatarURL } : undefined}
-          placeholder={{ blurhash: user.avatarBlurhash || 'LGF5]+Yk^6#M@-5c,1J5@[or[Q6.' }}
-          style={styles.avatar}
-          contentFit="cover"
-        />
-      </View>
+      {/* Avatar row */}
+      <View style={styles.avatarRow}>
+        <View style={styles.avatarRing}>
+          <Image
+            source={user.avatarURL ? { uri: user.avatarURL } : undefined}
+            placeholder={{ blurhash: user.avatarBlurhash || 'LGF5]+Yk^6#M@-5c,1J5@[or[Q6.' }}
+            style={styles.avatar}
+            contentFit="cover"
+          />
+        </View>
 
-      {/* Edit button — len vlastný profil */}
-      {isOwnProfile && (
-        <TouchableOpacity style={styles.editBtn} onPress={onEditProfile}>
-          <Text style={styles.editBtnText}>Upraviť profil</Text>
-        </TouchableOpacity>
-      )}
+        {isOwnProfile ? (
+          <TouchableOpacity style={styles.editBtn} onPress={onEditProfile}>
+            <Text style={styles.editBtnText}>Upraviť profil</Text>
+          </TouchableOpacity>
+        ) : (
+          <View style={styles.followActions}>
+            <TouchableOpacity style={styles.followBtn}>
+              <Text style={styles.followBtnText}>Sledovať</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.msgBtn}>
+              <Ionicons name="chatbubble-outline" size={18} color={theme.colors.textPrimary} />
+            </TouchableOpacity>
+          </View>
+        )}
+      </View>
 
       {/* Meno + username + bio */}
       <View style={styles.info}>
@@ -53,7 +66,8 @@ export function ProfileHeader({ user, isOwnProfile, onEditProfile }: Props) {
         <View style={styles.karmaRow}>
           {user.karma > 0 && (
             <View style={styles.karmaBadge}>
-              <Text style={styles.karmaText}>⚡ {user.karma} karma</Text>
+              <Ionicons name="flash" size={12} color={theme.colors.accent} />
+              <Text style={styles.karmaText}>{user.karma} karma</Text>
             </View>
           )}
           {user.badges.map((badge) => (
@@ -64,7 +78,7 @@ export function ProfileHeader({ user, isOwnProfile, onEditProfile }: Props) {
         </View>
       )}
 
-      {/* Stats riadok */}
+      {/* Stats */}
       <View style={styles.statsRow}>
         <View style={styles.statItem}>
           <Text style={styles.statValue}>{user.stats.catchCount}</Text>
@@ -90,55 +104,93 @@ const styles = StyleSheet.create({
     width: SCREEN_WIDTH,
     height: BANNER_HEIGHT,
     overflow: 'hidden',
+    position: 'relative',
   },
-  bannerGradient: {
-    flex: 1,
-    backgroundColor: '#1B4332',
+  bannerBg: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: '#0D2B1A',
   },
-  avatarContainer: {
-    marginTop: -(AVATAR_SIZE / 2),
-    marginLeft: 16,
-    width: AVATAR_SIZE + 4,
-    height: AVATAR_SIZE + 4,
-    borderRadius: (AVATAR_SIZE + 4) / 2,
-    borderWidth: 2,
-    borderColor: '#FFFFFF',
+  bannerOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(82,183,136,0.07)',
+  },
+  avatarRow: {
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    justifyContent: 'space-between',
+    paddingHorizontal: 16,
+    paddingBottom: 12,
+    marginTop: -(AVATAR_SIZE / 2 + 4),
+  },
+  avatarRing: {
+    width: AVATAR_SIZE + 6,
+    height: AVATAR_SIZE + 6,
+    borderRadius: (AVATAR_SIZE + 6) / 2,
+    borderWidth: 3,
+    borderColor: theme.colors.bg,
+    backgroundColor: theme.colors.bg,
     overflow: 'hidden',
-    backgroundColor: '#0A1628',
   },
   avatar: { width: AVATAR_SIZE, height: AVATAR_SIZE, borderRadius: AVATAR_SIZE / 2 },
   editBtn: {
-    position: 'absolute',
-    right: 16,
-    top: BANNER_HEIGHT + 10,
     borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.3)',
-    paddingHorizontal: 16,
-    paddingVertical: 7,
-    borderRadius: 20,
+    borderColor: theme.colors.cardBorderActive,
+    paddingHorizontal: 18,
+    paddingVertical: 8,
+    borderRadius: theme.radius.full,
+    marginBottom: 4,
   },
-  editBtnText: { fontFamily: 'DMSans-Medium', fontSize: 13, color: '#FFFFFF' },
-  info: { paddingHorizontal: 16, marginTop: 44, marginBottom: 12 },
-  displayName: { fontFamily: 'Syne-Bold', fontSize: 22, color: '#FFFFFF', marginBottom: 2 },
-  username: { fontFamily: 'DMSans-Regular', fontSize: 14, color: 'rgba(255,255,255,0.5)', marginBottom: 8 },
-  bio: { fontFamily: 'DMSans-Regular', fontSize: 14, color: 'rgba(255,255,255,0.7)', lineHeight: 20 },
+  editBtnText: { fontFamily: 'DMSans-Medium', fontSize: 13, color: theme.colors.textPrimary },
+  followActions: { flexDirection: 'row', gap: 10, marginBottom: 4, alignItems: 'center' },
+  followBtn: {
+    backgroundColor: theme.colors.primaryMid,
+    paddingHorizontal: 20,
+    paddingVertical: 8,
+    borderRadius: theme.radius.full,
+  },
+  followBtnText: { fontFamily: 'DMSans-SemiBold', fontSize: 14, color: theme.colors.bg },
+  msgBtn: {
+    borderWidth: 1,
+    borderColor: theme.colors.cardBorderActive,
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  info: { paddingHorizontal: 16, marginBottom: 12 },
+  displayName: { fontFamily: 'Syne-Bold', fontSize: 22, color: theme.colors.textPrimary, marginBottom: 2 },
+  username: { fontFamily: 'DMSans-Regular', fontSize: 14, color: theme.colors.textSecondary, marginBottom: 8 },
+  bio: { fontFamily: 'DMSans-Regular', fontSize: 14, color: theme.colors.textSecondary, lineHeight: 20 },
   karmaRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, paddingHorizontal: 16, marginBottom: 12 },
-  karmaBadge: { backgroundColor: 'rgba(233,168,76,0.15)', borderRadius: 20, paddingHorizontal: 10, paddingVertical: 4 },
-  karmaText: { fontFamily: 'DMSans-Medium', fontSize: 12, color: '#E9A84C' },
-  badge: { backgroundColor: 'rgba(64,145,108,0.15)', borderRadius: 20, paddingHorizontal: 10, paddingVertical: 4 },
-  badgeText: { fontFamily: 'DMSans-Medium', fontSize: 12, color: '#40916C' },
+  karmaBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    backgroundColor: 'rgba(233,168,76,0.12)',
+    borderRadius: theme.radius.full,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+  },
+  karmaText: { fontFamily: 'DMSans-Medium', fontSize: 12, color: theme.colors.accent },
+  badge: {
+    backgroundColor: 'rgba(82,183,136,0.12)',
+    borderRadius: theme.radius.full,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+  },
+  badgeText: { fontFamily: 'DMSans-Medium', fontSize: 12, color: theme.colors.primaryMid },
   statsRow: {
     flexDirection: 'row',
-    paddingHorizontal: 16,
     paddingVertical: 14,
     borderTopWidth: 1,
-    borderTopColor: 'rgba(255,255,255,0.06)',
+    borderTopColor: theme.colors.divider,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(255,255,255,0.06)',
+    borderBottomColor: theme.colors.divider,
     justifyContent: 'space-around',
   },
   statItem: { alignItems: 'center' },
-  statValue: { fontFamily: 'JetBrainsMono-Regular', fontSize: 18, color: '#FFFFFF' },
-  statLabel: { fontFamily: 'DMSans-Regular', fontSize: 11, color: 'rgba(255,255,255,0.5)' },
-  statDivider: { width: 1, backgroundColor: 'rgba(255,255,255,0.1)' },
+  statValue: { fontFamily: 'JetBrainsMono-Regular', fontSize: 20, color: theme.colors.textPrimary },
+  statLabel: { fontFamily: 'DMSans-Regular', fontSize: 11, color: theme.colors.textSecondary, marginTop: 2 },
+  statDivider: { width: 1, backgroundColor: theme.colors.divider },
 });

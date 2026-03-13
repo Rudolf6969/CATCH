@@ -1,10 +1,12 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Pressable } from 'react-native';
 import { Image } from 'expo-image';
+import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { CatchCarousel } from './CatchCarousel';
 import { FishBadge } from './FishBadge';
 import { useFeedStore } from '../../stores/feed.store';
+import { theme } from '../../theme/theme';
 import type { CatchDocument } from '../../types/catch.types';
 
 interface Props {
@@ -16,69 +18,80 @@ export function CatchCard({ catch: item }: Props) {
   const isLiked = likedCatchIds.has(item.id);
   const isBookmarked = bookmarkedCatchIds.has(item.id);
 
-  const goToProfile = () => {
-    router.push(`/profile/${item.userId}` as any);
-  };
-
-  const goToDetail = () => {
-    router.push(`/catch/${item.id}` as any);
-  };
+  const goToProfile = () => router.push(`/profile/${item.userId}` as any);
+  const goToDetail = () => router.push(`/catch/${item.id}` as any);
 
   return (
     <View style={styles.card}>
-      {/* Header: Avatar + meno + lokalita */}
+      {/* Header */}
       <TouchableOpacity style={styles.header} onPress={goToProfile} activeOpacity={0.8}>
-        <Image
-          source={{ uri: item.userAvatar || undefined }}
-          placeholder={{ blurhash: 'LGF5]+Yk^6#M@-5c,1J5@[or[Q6.' }}
-          style={styles.avatar}
-          contentFit="cover"
-        />
+        <View style={styles.avatarRing}>
+          <Image
+            source={{ uri: item.userAvatar || undefined }}
+            placeholder={{ blurhash: 'LGF5]+Yk^6#M@-5c,1J5@[or[Q6.' }}
+            style={styles.avatar}
+            contentFit="cover"
+          />
+        </View>
         <View style={styles.headerText}>
           <Text style={styles.userName}>{item.userDisplayName}</Text>
           {item.locationName && (
-            <Text style={styles.location}>{item.locationName}</Text>
+            <View style={styles.locationRow}>
+              <Ionicons name="location-outline" size={11} color={theme.colors.primaryMid} />
+              <Text style={styles.location}>{item.locationName}</Text>
+            </View>
           )}
         </View>
-        <Text style={styles.timeAgo}>
-          {formatTimeAgo(item.createdAt?.toDate?.())}
-        </Text>
+        <View style={styles.headerRight}>
+          <Text style={styles.timeAgo}>{formatTimeAgo(item.createdAt?.toDate?.())}</Text>
+          <Ionicons name="ellipsis-horizontal" size={18} color={theme.colors.textMuted} />
+        </View>
       </TouchableOpacity>
 
-      {/* Foto / Carousel */}
-      <TouchableOpacity onPress={goToDetail} activeOpacity={0.95}>
+      {/* Foto */}
+      <TouchableOpacity onPress={goToDetail} activeOpacity={0.97}>
         <CatchCarousel photos={item.photos} />
       </TouchableOpacity>
 
-      {/* Action bar: Like / Komentár / Bookmark */}
+      {/* Action bar */}
       <View style={styles.actionBar}>
         <View style={styles.leftActions}>
-          <TouchableOpacity style={styles.actionBtn} onPress={() => toggleLike(item.id)}>
-            <Text style={[styles.actionIcon, isLiked && styles.likedIcon]}>
-              {isLiked ? '❤️' : '🤍'}
-            </Text>
-            <Text style={styles.actionCount}>{item.likes + (isLiked ? 1 : 0)}</Text>
-          </TouchableOpacity>
+          <Pressable
+            style={styles.actionBtn}
+            onPress={() => toggleLike(item.id)}
+            hitSlop={8}
+          >
+            <Ionicons
+              name={isLiked ? 'heart' : 'heart-outline'}
+              size={26}
+              color={isLiked ? '#FF3B5C' : theme.colors.textPrimary}
+            />
+            {(item.likes + (isLiked ? 1 : 0)) > 0 && (
+              <Text style={styles.actionCount}>{item.likes + (isLiked ? 1 : 0)}</Text>
+            )}
+          </Pressable>
 
-          <TouchableOpacity style={styles.actionBtn} onPress={goToDetail}>
-            <Text style={styles.actionIcon}>💬</Text>
-          </TouchableOpacity>
+          <Pressable style={styles.actionBtn} onPress={goToDetail} hitSlop={8}>
+            <Ionicons name="chatbubble-outline" size={24} color={theme.colors.textPrimary} />
+          </Pressable>
+
+          <Pressable style={styles.actionBtn} hitSlop={8}>
+            <Ionicons name="paper-plane-outline" size={24} color={theme.colors.textPrimary} />
+          </Pressable>
         </View>
 
-        <TouchableOpacity style={styles.actionBtn} onPress={() => toggleBookmark(item.id)}>
-          <Text style={[styles.actionIcon, isBookmarked && styles.bookmarkedIcon]}>
-            {isBookmarked ? '🔖' : '🏷️'}
-          </Text>
-        </TouchableOpacity>
+        <Pressable onPress={() => toggleBookmark(item.id)} hitSlop={8}>
+          <Ionicons
+            name={isBookmarked ? 'bookmark' : 'bookmark-outline'}
+            size={24}
+            color={isBookmarked ? theme.colors.accent : theme.colors.textPrimary}
+          />
+        </Pressable>
       </View>
 
-      {/* Fish badge + caption POD fotkou */}
+      {/* Obsah */}
       <View style={styles.content}>
-        <FishBadge
-          species={item.species}
-          weightG={item.weightG}
-          lengthCm={item.lengthCm}
-        />
+        <FishBadge species={item.species} weightG={item.weightG} lengthCm={item.lengthCm} />
         {item.caption && (
           <Text style={styles.caption} numberOfLines={3}>
             <Text style={styles.captionUser}>{item.userDisplayName} </Text>
@@ -102,7 +115,12 @@ function formatTimeAgo(date?: Date): string {
 }
 
 const styles = StyleSheet.create({
-  card: { backgroundColor: '#0A1628', marginBottom: 8 },
+  card: {
+    backgroundColor: theme.colors.bg,
+    marginBottom: 2,
+    borderBottomWidth: 1,
+    borderBottomColor: theme.colors.divider,
+  },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -110,24 +128,42 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     gap: 10,
   },
-  avatar: { width: 36, height: 36, borderRadius: 18 },
+  avatarRing: {
+    width: 42,
+    height: 42,
+    borderRadius: 21,
+    borderWidth: 2,
+    borderColor: theme.colors.primaryMid,
+    padding: 2,
+  },
+  avatar: { width: 34, height: 34, borderRadius: 17 },
   headerText: { flex: 1 },
-  userName: { fontFamily: 'DMSans-Medium', fontSize: 14, color: '#FFFFFF' },
-  location: { fontFamily: 'DMSans-Regular', fontSize: 12, color: 'rgba(255,255,255,0.5)' },
-  timeAgo: { fontFamily: 'DMSans-Regular', fontSize: 12, color: 'rgba(255,255,255,0.4)' },
+  userName: { fontFamily: 'DMSans-SemiBold', fontSize: 14, color: theme.colors.textPrimary },
+  locationRow: { flexDirection: 'row', alignItems: 'center', gap: 3, marginTop: 1 },
+  location: { fontFamily: 'DMSans-Regular', fontSize: 11, color: theme.colors.primaryMid },
+  headerRight: { flexDirection: 'row', alignItems: 'center', gap: 10 },
+  timeAgo: { fontFamily: 'DMSans-Regular', fontSize: 11, color: theme.colors.textMuted },
   actionBar: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
     paddingHorizontal: 14,
-    paddingVertical: 8,
+    paddingTop: 10,
+    paddingBottom: 6,
   },
-  leftActions: { flexDirection: 'row', gap: 16 },
-  actionBtn: { flexDirection: 'row', alignItems: 'center', gap: 4 },
-  actionIcon: { fontSize: 22 },
-  likedIcon: {},
-  bookmarkedIcon: {},
-  actionCount: { fontFamily: 'DMSans-Regular', fontSize: 13, color: 'rgba(255,255,255,0.7)' },
-  content: { paddingHorizontal: 14, paddingBottom: 12, gap: 4 },
-  caption: { fontFamily: 'DMSans-Regular', fontSize: 14, color: 'rgba(255,255,255,0.75)', lineHeight: 20 },
-  captionUser: { fontFamily: 'DMSans-Medium', color: '#FFFFFF' },
+  leftActions: { flexDirection: 'row', alignItems: 'center', gap: 18 },
+  actionBtn: { flexDirection: 'row', alignItems: 'center', gap: 5 },
+  actionCount: {
+    fontFamily: 'DMSans-Medium',
+    fontSize: 13,
+    color: theme.colors.textPrimary,
+  },
+  content: { paddingHorizontal: 14, paddingBottom: 14, gap: 6 },
+  caption: {
+    fontFamily: 'DMSans-Regular',
+    fontSize: 14,
+    color: theme.colors.textSecondary,
+    lineHeight: 20,
+  },
+  captionUser: { fontFamily: 'DMSans-SemiBold', color: theme.colors.textPrimary },
 });
