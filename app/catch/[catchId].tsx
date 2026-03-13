@@ -1,3 +1,4 @@
+import { theme } from '../../src/theme/theme';
 import React from 'react';
 import {
   View,
@@ -47,7 +48,7 @@ export default function CatchDetailScreen() {
   if (isLoading) {
     return (
       <View style={[styles.container, styles.centered]}>
-        <ActivityIndicator size="large" color="#40916C" />
+        <ActivityIndicator size="large" color="theme.colors.primary" />
       </View>
     );
   }
@@ -165,26 +166,26 @@ export default function CatchDetailScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#0A1628' },
+  container: { flex: 1, backgroundColor: 'theme.colors.bg' },
   centered: { justifyContent: 'center', alignItems: 'center' },
-  notFoundText: { fontFamily: 'DMSans-Regular', fontSize: 16, color: 'rgba(255,255,255,0.5)', marginBottom: 16 },
-  backLink: { fontFamily: 'DMSans-Regular', fontSize: 15, color: '#40916C' },
+  notFoundText: { fontFamily: 'DMSans-Regular', fontSize: 16, color: 'theme.colors.textMuted', marginBottom: 16 },
+  backLink: { fontFamily: 'DMSans-Regular', fontSize: 15, color: 'theme.colors.primary' },
   backBtn: {
     position: 'absolute',
     left: 14,
     width: 38,
     height: 38,
     borderRadius: 19,
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: 'theme.colors.overlay',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  backBtnText: { fontFamily: 'DMSans-Regular', fontSize: 20, color: '#FFFFFF' },
+  backBtnText: { fontFamily: 'DMSans-Regular', fontSize: 20, color: theme.colors.textPrimary },
   content: { padding: 20 },
-  species: { fontFamily: 'Syne-Bold', fontSize: 28, color: '#FFFFFF', marginBottom: 12 },
+  species: { fontFamily: 'Syne-Bold', fontSize: 28, color: theme.colors.textPrimary, marginBottom: 12 },
   statsRow: {
     flexDirection: 'row',
-    backgroundColor: 'rgba(255,255,255,0.04)',
+    backgroundColor: 'theme.colors.surfaceHigh',
     borderRadius: 12,
     padding: 16,
     marginBottom: 16,
@@ -192,27 +193,27 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
   },
   statItem: { alignItems: 'center' },
-  statValue: { fontFamily: 'JetBrainsMono-Regular', fontSize: 22, color: '#40916C' },
-  statLabel: { fontFamily: 'DMSans-Regular', fontSize: 12, color: 'rgba(255,255,255,0.5)' },
-  statDivider: { width: 1, height: 32, backgroundColor: 'rgba(255,255,255,0.1)' },
-  caption: { fontFamily: 'DMSans-Regular', fontSize: 15, color: 'rgba(255,255,255,0.8)', lineHeight: 22, marginBottom: 16 },
+  statValue: { fontFamily: 'JetBrainsMono-Regular', fontSize: 22, color: 'theme.colors.primary' },
+  statLabel: { fontFamily: 'DMSans-Regular', fontSize: 12, color: 'theme.colors.textMuted' },
+  statDivider: { width: 1, height: 32, backgroundColor: 'theme.colors.divider' },
+  caption: { fontFamily: 'DMSans-Regular', fontSize: 15, color: 'theme.colors.textSecondary', lineHeight: 22, marginBottom: 16 },
   metaSection: {
-    backgroundColor: 'rgba(255,255,255,0.04)',
+    backgroundColor: 'theme.colors.surfaceHigh',
     borderRadius: 12,
     padding: 14,
     gap: 10,
     marginTop: 8,
   },
   metaRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
-  metaLabel: { fontFamily: 'DMSans-Regular', fontSize: 13, color: 'rgba(255,255,255,0.4)' },
-  metaValue: { fontFamily: 'DMSans-Medium', fontSize: 13, color: '#FFFFFF', maxWidth: '60%', textAlign: 'right' },
+  metaLabel: { fontFamily: 'DMSans-Regular', fontSize: 13, color: 'theme.colors.textMuted' },
+  metaValue: { fontFamily: 'DMSans-Medium', fontSize: 13, color: theme.colors.textPrimary, maxWidth: '60%', textAlign: 'right' },
   ownActions: { marginTop: 32 },
   deleteBtn: {
     borderWidth: 1,
-    borderColor: '#FF6B6B',
+    borderColor: 'theme.colors.error',
     paddingVertical: 14,
     borderRadius: 12,
     alignItems: 'center',
   },
-  deleteBtnText: { fontFamily: 'DMSans-Medium', fontSize: 15, color: '#FF6B6B' },
+  deleteBtnText: { fontFamily: 'DMSans-Medium', fontSize: 15, color: 'theme.colors.error' },
 });

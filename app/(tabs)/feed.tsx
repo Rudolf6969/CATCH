@@ -40,32 +40,28 @@ export default function FeedScreen() {
 
   const ListHeader = useCallback(() => (
     <View>
-      <View style={[styles.header, { paddingTop: insets.top + 6 }]}>
-        <Text style={styles.headerTitle}>OnlyFish</Text>
+      {/* IG-style header */}
+      <View style={[styles.header, { paddingTop: insets.top + 8 }]}>
+        <Text style={styles.logo}>OnlyFish</Text>
         <View style={styles.headerActions}>
           <TouchableOpacity style={styles.iconBtn} hitSlop={8}>
             <Ionicons name="heart-outline" size={26} color={theme.colors.textPrimary} />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.iconBtn} onPress={() => router.push(`/profile/${user?.uid}` as any)} hitSlop={8}>
-            <Image
-              source={user?.photoURL ? { uri: user.photoURL } : undefined}
-              placeholder={{ blurhash: 'LGF5]+Yk^6#M@-5c,1J5@[or[Q6.' }}
-              style={styles.headerAvatar}
-              contentFit="cover"
-            />
+          <TouchableOpacity style={styles.iconBtn} hitSlop={8}>
+            <Ionicons name="paper-plane-outline" size={24} color={theme.colors.textPrimary} />
           </TouchableOpacity>
         </View>
       </View>
       <StoriesRow />
     </View>
-  ), [user, insets.top]);
+  ), [insets.top]);
 
   const ListEmpty = useCallback(() => (
     <View style={styles.emptyState}>
-      <Ionicons name="fish-outline" size={64} color={theme.colors.textMuted} />
-      <Text style={styles.emptyTitle}>Feed je prázdny</Text>
+      <Ionicons name="fish-outline" size={56} color={theme.colors.textMuted} />
+      <Text style={styles.emptyTitle}>Zatiaľ žiadne úlovky</Text>
       <Text style={styles.emptyText}>
-        Buď prvý — zdiel svojho úlovku komunite!
+        Sleduj rybárov a uvidíš ich úlovky tu.
       </Text>
     </View>
   ), []);
@@ -74,7 +70,7 @@ export default function FeedScreen() {
     if (!isFetchingNextPage) return null;
     return (
       <View style={styles.loadingMore}>
-        <ActivityIndicator color="#40916C" />
+        <ActivityIndicator color={theme.colors.primary} />
       </View>
     );
   }, [isFetchingNextPage]);
@@ -82,7 +78,7 @@ export default function FeedScreen() {
   if (isLoading) {
     return (
       <View style={[styles.container, styles.centered]}>
-        <ActivityIndicator size="large" color="#40916C" />
+        <ActivityIndicator size="large" color={theme.colors.primary} />
       </View>
     );
   }
@@ -104,7 +100,7 @@ export default function FeedScreen() {
           <RefreshControl
             refreshing={isRefetching}
             onRefresh={refetch}
-            tintColor="#40916C"
+            tintColor={theme.colors.primary}
           />
         }
       />
@@ -120,25 +116,33 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: 16,
-    paddingBottom: 10,
+    paddingBottom: 8,
   },
-  headerTitle: {
+  logo: {
     fontFamily: 'Syne-Bold',
-    fontSize: 26,
+    fontSize: 28,
     color: theme.colors.textPrimary,
-    letterSpacing: 2,
+    letterSpacing: -0.5,
   },
-  headerActions: { flexDirection: 'row', alignItems: 'center', gap: 14 },
+  headerActions: { flexDirection: 'row', alignItems: 'center', gap: 20 },
   iconBtn: { width: 36, height: 36, alignItems: 'center', justifyContent: 'center' },
-  headerAvatar: {
-    width: 34,
-    height: 34,
-    borderRadius: 17,
-    borderWidth: 2,
-    borderColor: theme.colors.primaryMid,
+  emptyState: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: 100,
+    paddingHorizontal: 40,
+    gap: 10,
   },
-  emptyState: { flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 80, paddingHorizontal: 40, gap: 12 },
-  emptyTitle: { fontFamily: 'Syne-Bold', fontSize: 20, color: theme.colors.textPrimary },
-  emptyText: { fontFamily: 'DMSans-Regular', fontSize: 14, color: theme.colors.textSecondary, textAlign: 'center', lineHeight: 22 },
+  emptyTitle: {
+    fontFamily: 'Syne-Bold',
+    fontSize: 18,
+    color: theme.colors.textPrimary,
+  },
+  emptyText: {
+    fontFamily: 'DMSans-Regular',
+    fontSize: 14,
+    color: theme.colors.textSecondary,
+    textAlign: 'center',
+  },
   loadingMore: { paddingVertical: 20, alignItems: 'center' },
 });

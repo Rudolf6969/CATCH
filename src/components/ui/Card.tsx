@@ -26,11 +26,11 @@ export function Card({ elevated = false, glowing = false, style, children, ...pr
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: theme.colors.surface,
+    backgroundColor: '#0D0D0D',
     borderRadius: theme.radius.lg,
     padding: theme.spacing.md,
-    borderWidth: 1,
-    borderColor: theme.colors.cardBorder,
+    borderWidth: 0.5,
+    borderColor: theme.colors.divider,
   },
   elevated: {
     shadowColor: theme.shadow.md.shadowColor,
@@ -40,8 +40,8 @@ const styles = StyleSheet.create({
     elevation: theme.shadow.md.elevation,
   },
   glowing: {
-    borderColor: theme.colors.cardBorderActive,
-    shadowColor: theme.colors.primaryMid,
+    borderColor: theme.colors.dividerActive,
+    shadowColor: theme.colors.primary,
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.15,
     shadowRadius: 16,

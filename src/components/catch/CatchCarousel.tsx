@@ -4,7 +4,6 @@ import { Image } from 'expo-image';
 import type { PhotoMeta } from '../../types/catch.types';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
-const IMAGE_HEIGHT = 300;
 
 interface Props {
   photos: PhotoMeta[];
@@ -19,8 +18,8 @@ export function CatchCarousel({ photos }: Props) {
         source={{ uri: photos[0].downloadURL }}
         placeholder={{ blurhash: photos[0].blurhash }}
         contentFit="cover"
-        transition={300}
-        style={styles.singleImage}
+        transition={200}
+        style={styles.image}
       />
     );
   }
@@ -43,12 +42,22 @@ export function CatchCarousel({ photos }: Props) {
             source={{ uri: photo.downloadURL }}
             placeholder={{ blurhash: photo.blurhash }}
             contentFit="cover"
-            transition={300}
-            style={styles.carouselImage}
+            transition={200}
+            style={styles.image}
           />
         ))}
       </ScrollView>
 
+      {/* IG-style counter top right */}
+      <View style={styles.counter}>
+        <View style={styles.counterPill}>
+          <View style={styles.counterText}>
+            {/* Text workaround */}
+          </View>
+        </View>
+      </View>
+
+      {/* Dots */}
       <View style={styles.dots}>
         {photos.map((_, idx) => (
           <View
@@ -62,17 +71,35 @@ export function CatchCarousel({ photos }: Props) {
 }
 
 const styles = StyleSheet.create({
-  singleImage: { width: SCREEN_WIDTH, height: IMAGE_HEIGHT },
-  carouselImage: { width: SCREEN_WIDTH, height: IMAGE_HEIGHT },
+  image: { width: SCREEN_WIDTH, aspectRatio: 1 },
+  counter: {
+    position: 'absolute',
+    top: 14,
+    right: 14,
+  },
+  counterPill: {
+    backgroundColor: 'rgba(0,0,0,0.7)',
+    borderRadius: 12,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+  },
+  counterText: {},
   dots: {
     position: 'absolute',
-    bottom: 10,
+    bottom: 14,
     left: 0,
     right: 0,
     flexDirection: 'row',
     justifyContent: 'center',
-    gap: 6,
+    gap: 4,
   },
-  dot: { width: 6, height: 6, borderRadius: 3, backgroundColor: 'rgba(255,255,255,0.4)' },
-  dotActive: { backgroundColor: '#E9A84C' },
+  dot: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: 'rgba(255,255,255,0.35)',
+  },
+  dotActive: {
+    backgroundColor: '#FAFAFA',
+  },
 });

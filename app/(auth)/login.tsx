@@ -83,7 +83,7 @@ export default function LoginScreen() {
 
       {/* Top branding */}
       <View style={styles.branding}>
-        <Ionicons name="fish" size={48} color={theme.colors.primaryMid} />
+        <Ionicons name="fish" size={48} color={theme.colors.primary} />
         <Text style={styles.brandName}>OnlyFish</Text>
         <Text style={styles.brandTagline}>Sociálna sieť pre rybárov</Text>
       </View>
@@ -214,7 +214,7 @@ const styles = StyleSheet.create({
   brandTagline: {
     fontFamily: 'DMSans-Regular',
     fontSize: 14,
-    color: 'rgba(255,255,255,0.75)',
+    color: 'theme.colors.textSecondary',
     marginTop: 4,
   },
 

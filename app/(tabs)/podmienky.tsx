@@ -94,7 +94,7 @@ export default function PodmienkyScreen() {
         {FORECAST.map((day) => (
           <View key={day.day} style={styles.forecastCard}>
             <Text style={styles.forecastDay}>{day.day}</Text>
-            <Ionicons name={day.icon} size={20} color={theme.colors.primaryMid} />
+            <Ionicons name={day.icon} size={20} color={theme.colors.primary} />
             <Text style={styles.forecastTemp}>{day.temp}</Text>
             <View style={[
               styles.forecastDot,
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
   heroTitle: {
     fontFamily: 'Syne-Bold',
     fontSize: 18,
-    color: '#FFFFFF',
+    color: theme.colors.textPrimary,
     marginBottom: 8,
   },
   heroScoreRow: {
@@ -220,7 +220,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 4,
     borderRadius: 2,
-    backgroundColor: 'rgba(255,255,255,0.2)',
+    backgroundColor: 'theme.colors.divider',
   },
   heroBarFill: {
     width: '70%',
@@ -231,7 +231,7 @@ const styles = StyleSheet.create({
   heroTip: {
     fontFamily: 'DMSans-Regular',
     fontSize: 12,
-    color: 'rgba(255,255,255,0.85)',
+    color: 'theme.colors.textPrimary',
     lineHeight: 16,
   },
 
@@ -332,11 +332,11 @@ const styles = StyleSheet.create({
   locationName: {
     fontFamily: 'DMSans-Medium',
     fontSize: 14,
-    color: '#FFFFFF',
+    color: theme.colors.textPrimary,
   },
   locationDistance: {
     fontFamily: 'DMSans-Regular',
     fontSize: 12,
-    color: 'rgba(255,255,255,0.7)',
+    color: 'theme.colors.textSecondary',
   },
 });

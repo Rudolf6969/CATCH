@@ -59,8 +59,8 @@ const styles = StyleSheet.create({
   },
   // Varianty — primary: gradient-like solid, ghost: border glow
   primary: {
-    backgroundColor: theme.colors.primaryMid,
-    shadowColor: theme.colors.primaryMid,
+    backgroundColor: theme.colors.primary,
+    shadowColor: theme.colors.primary,
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 12,
@@ -69,13 +69,13 @@ const styles = StyleSheet.create({
   secondary: {
     backgroundColor: theme.colors.surface,
     borderWidth: 1,
-    borderColor: theme.colors.cardBorder,
+    borderColor: theme.colors.divider,
   },
   ghost: {
     backgroundColor: 'transparent',
     borderWidth: 1,
     borderColor: theme.colors.cardBorderActive,
-    shadowColor: theme.colors.primaryMid,
+    shadowColor: theme.colors.primary,
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.15,
     shadowRadius: 8,
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
   label: { ...(theme.typography.bodyMedium as object) },
   label_primary: { color: theme.colors.bg, fontWeight: '600' as const },
   label_secondary: { color: theme.colors.textPrimary },
-  label_ghost: { color: theme.colors.primaryMid },
+  label_ghost: { color: theme.colors.primary },
   label_danger: { color: theme.colors.error },
   labelSize_sm: { fontSize: 13 },
   labelSize_md: { fontSize: 15 },

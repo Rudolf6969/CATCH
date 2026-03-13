@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import type { WeatherSnapshot } from '../../types/catch.types';
+import { theme } from '../../theme/theme';
 
 interface Props {
   weather: WeatherSnapshot;
@@ -44,15 +45,15 @@ export function WeatherBadge({ weather, loading }: Props) {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    backgroundColor: 'rgba(255,255,255,0.06)',
+    backgroundColor: 'theme.colors.surfaceHigh',
     borderRadius: 10,
     padding: 12,
     alignItems: 'center',
     justifyContent: 'space-between',
   },
   item: { alignItems: 'center', flex: 1 },
-  label: { fontFamily: 'DMSans-Regular', fontSize: 11, color: 'rgba(255,255,255,0.5)', marginBottom: 2 },
-  value: { fontFamily: 'JetBrainsMono-Regular', fontSize: 13, color: '#FFFFFF' },
-  divider: { width: 1, height: 32, backgroundColor: 'rgba(255,255,255,0.1)' },
-  loadingText: { fontFamily: 'DMSans-Regular', fontSize: 14, color: 'rgba(255,255,255,0.5)' },
+  label: { fontFamily: 'DMSans-Regular', fontSize: 11, color: 'theme.colors.textMuted', marginBottom: 2 },
+  value: { fontFamily: 'JetBrainsMono-Regular', fontSize: 13, color: theme.colors.textPrimary },
+  divider: { width: 1, height: 32, backgroundColor: 'theme.colors.divider' },
+  loadingText: { fontFamily: 'DMSans-Regular', fontSize: 14, color: 'theme.colors.textMuted' },
 });

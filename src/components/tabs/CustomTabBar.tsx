@@ -1,34 +1,30 @@
 import React from 'react';
-import { View, Pressable, StyleSheet, type ViewStyle } from 'react-native';
+import { View, Pressable, StyleSheet } from 'react-native';
 import type { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import { TabIcon } from './TabIcon';
 import { theme } from '@/theme/theme';
 
 const TAB_CONFIG: Array<{
   name: string;
-  href: string;
-  iconName: keyof typeof Ionicons.glyphMap;
-  label: string;
+  icon: keyof typeof Ionicons.glyphMap;
+  iconFocused: keyof typeof Ionicons.glyphMap;
 }> = [
-  { name: 'feed', href: '/(tabs)/feed', iconName: 'home-outline', label: 'Feed' },
-  { name: 'podmienky', href: '/(tabs)/podmienky', iconName: 'cloud-outline', label: 'Podmienky' },
-  { name: 'dennik', href: '/(tabs)/dennik', iconName: 'book-outline', label: 'Dennik' },
-  { name: 'bazar', href: '/(tabs)/bazar', iconName: 'storefront-outline', label: 'Bazar' },
+  { name: 'feed', icon: 'home-outline', iconFocused: 'home' },
+  { name: 'podmienky', icon: 'search-outline', iconFocused: 'search' },
+  { name: 'dennik', icon: 'book-outline', iconFocused: 'book' },
+  { name: 'bazar', icon: 'storefront-outline', iconFocused: 'storefront' },
 ];
 
 export function CustomTabBar({ state, navigation }: BottomTabBarProps) {
   const router = useRouter();
   const insets = useSafeAreaInsets();
 
-  const tabs = TAB_CONFIG;
-
   return (
-    <View style={[styles.tabList, { paddingBottom: insets.bottom + 8 }]}>
-      {/* Feed + Podmienky (lava strana) */}
-      {tabs.slice(0, 2).map((tab) => {
+    <View style={[styles.bar, { paddingBottom: insets.bottom || 8 }]}>
+      {/* Left tabs: Feed, Search */}
+      {TAB_CONFIG.slice(0, 2).map((tab) => {
         const routeIndex = state.routes.findIndex((r) => r.name === tab.name);
         const isFocused = state.index === routeIndex;
         return (
@@ -38,25 +34,27 @@ export function CustomTabBar({ state, navigation }: BottomTabBarProps) {
             onPress={() => navigation.navigate(tab.name)}
             accessibilityRole="button"
           >
-            <TabIcon name={tab.iconName} label={tab.label} focused={isFocused} />
+            <Ionicons
+              name={isFocused ? tab.iconFocused : tab.icon}
+              size={26}
+              color={isFocused ? theme.colors.tabActive : theme.colors.tabInactive}
+            />
           </Pressable>
         );
       })}
 
-      {/* Center FAB — golden dawn gradient */}
-      <View style={styles.fabContainer}>
-        <Pressable
-          style={({ pressed }) => [styles.fab, pressed && styles.fabPressed]}
-          onPress={() => router.push('/(tabs)/pridat')}
-          accessibilityLabel="Pridat ulovok"
-          accessibilityRole="button"
-        >
-          <Ionicons name="add" size={32} color={theme.colors.bg} />
-        </Pressable>
-      </View>
+      {/* Center + button */}
+      <Pressable
+        style={({ pressed }) => [styles.addBtn, pressed && styles.addBtnPressed]}
+        onPress={() => router.push('/(tabs)/pridat')}
+        accessibilityLabel="Pridať úlovok"
+        accessibilityRole="button"
+      >
+        <Ionicons name="add" size={28} color="#000000" />
+      </Pressable>
 
-      {/* Dennik + Bazar (prava strana) */}
-      {tabs.slice(2).map((tab) => {
+      {/* Right tabs: Denník, Bazár */}
+      {TAB_CONFIG.slice(2).map((tab) => {
         const routeIndex = state.routes.findIndex((r) => r.name === tab.name);
         const isFocused = state.index === routeIndex;
         return (
@@ -66,7 +64,11 @@ export function CustomTabBar({ state, navigation }: BottomTabBarProps) {
             onPress={() => navigation.navigate(tab.name)}
             accessibilityRole="button"
           >
-            <TabIcon name={tab.iconName} label={tab.label} focused={isFocused} />
+            <Ionicons
+              name={isFocused ? tab.iconFocused : tab.icon}
+              size={26}
+              color={isFocused ? theme.colors.tabActive : theme.colors.tabInactive}
+            />
           </Pressable>
         );
       })}
@@ -75,38 +77,31 @@ export function CustomTabBar({ state, navigation }: BottomTabBarProps) {
 }
 
 const styles = StyleSheet.create({
-  tabList: {
+  bar: {
     flexDirection: 'row',
     backgroundColor: theme.colors.tabBar,
-    paddingTop: theme.spacing.sm,
-    borderTopWidth: 1,
+    paddingTop: 10,
+    borderTopWidth: 0.5,
     borderTopColor: theme.colors.tabBorder,
+    alignItems: 'center',
   },
   tab: {
     flex: 1,
     alignItems: 'center',
-    paddingVertical: theme.spacing.xs,
+    justifyContent: 'center',
+    height: 44,
   },
-  fabContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    marginTop: -24,
-  },
-  fab: {
-    width: 58,
-    height: 58,
-    borderRadius: 29,
-    backgroundColor: theme.colors.accent,
+  addBtn: {
+    width: 44,
+    height: 44,
+    borderRadius: 12,
+    backgroundColor: theme.colors.primary,
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: theme.colors.accent,
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.5,
-    shadowRadius: 20,
-    elevation: 12,
-    borderWidth: 3,
-    borderColor: theme.colors.bg,
+    marginHorizontal: 4,
   },
-  fabPressed: { opacity: 0.88, transform: [{ scale: 0.94 }] },
+  addBtnPressed: {
+    opacity: 0.8,
+    transform: [{ scale: 0.95 }],
+  },
 });

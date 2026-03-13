@@ -125,11 +125,11 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.surface,
   },
   catPillActive: {
-    borderColor: theme.colors.primaryMid,
+    borderColor: theme.colors.primary,
     backgroundColor: 'rgba(82,183,136,0.12)',
   },
   catText: { ...(theme.typography.bodySmMedium as object), color: theme.colors.textMuted },
-  catTextActive: { color: theme.colors.primaryMid },
+  catTextActive: { color: theme.colors.primary },
 
   // Listing grid (2 columns)
   listingGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: theme.spacing.sm },

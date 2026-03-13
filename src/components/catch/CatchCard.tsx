@@ -23,8 +23,8 @@ export function CatchCard({ catch: item }: Props) {
 
   return (
     <View style={styles.card}>
-      {/* Header */}
-      <TouchableOpacity style={styles.header} onPress={goToProfile} activeOpacity={0.8}>
+      {/* Header — IG style */}
+      <TouchableOpacity style={styles.header} onPress={goToProfile} activeOpacity={0.7}>
         <View style={styles.avatarRing}>
           <Image
             source={{ uri: item.userAvatar || undefined }}
@@ -36,24 +36,20 @@ export function CatchCard({ catch: item }: Props) {
         <View style={styles.headerText}>
           <Text style={styles.userName}>{item.userDisplayName}</Text>
           {item.locationName && (
-            <View style={styles.locationRow}>
-              <Ionicons name="location-outline" size={11} color={theme.colors.primaryMid} />
-              <Text style={styles.location}>{item.locationName}</Text>
-            </View>
+            <Text style={styles.location}>{item.locationName}</Text>
           )}
         </View>
-        <View style={styles.headerRight}>
-          <Text style={styles.timeAgo}>{formatTimeAgo(item.createdAt?.toDate?.())}</Text>
-          <Ionicons name="ellipsis-horizontal" size={18} color={theme.colors.textMuted} />
-        </View>
+        <Pressable hitSlop={12}>
+          <Ionicons name="ellipsis-horizontal" size={20} color={theme.colors.textPrimary} />
+        </Pressable>
       </TouchableOpacity>
 
-      {/* Foto */}
-      <TouchableOpacity onPress={goToDetail} activeOpacity={0.97}>
+      {/* Full-width photo */}
+      <TouchableOpacity onPress={goToDetail} activeOpacity={0.98}>
         <CatchCarousel photos={item.photos} />
       </TouchableOpacity>
 
-      {/* Action bar */}
+      {/* Action bar — IG layout */}
       <View style={styles.actionBar}>
         <View style={styles.leftActions}>
           <Pressable
@@ -64,11 +60,8 @@ export function CatchCard({ catch: item }: Props) {
             <Ionicons
               name={isLiked ? 'heart' : 'heart-outline'}
               size={26}
-              color={isLiked ? '#FF3B5C' : theme.colors.textPrimary}
+              color={isLiked ? theme.colors.likeRed : theme.colors.textPrimary}
             />
-            {(item.likes + (isLiked ? 1 : 0)) > 0 && (
-              <Text style={styles.actionCount}>{item.likes + (isLiked ? 1 : 0)}</Text>
-            )}
           </Pressable>
 
           <Pressable style={styles.actionBtn} onPress={goToDetail} hitSlop={8}>
@@ -84,12 +77,19 @@ export function CatchCard({ catch: item }: Props) {
           <Ionicons
             name={isBookmarked ? 'bookmark' : 'bookmark-outline'}
             size={24}
-            color={isBookmarked ? theme.colors.accent : theme.colors.textPrimary}
+            color={theme.colors.textPrimary}
           />
         </Pressable>
       </View>
 
-      {/* Obsah */}
+      {/* Like count */}
+      {(item.likes + (isLiked ? 1 : 0)) > 0 && (
+        <Text style={styles.likeCount}>
+          {item.likes + (isLiked ? 1 : 0)} páči sa
+        </Text>
+      )}
+
+      {/* Content */}
       <View style={styles.content}>
         <FishBadge species={item.species} weightG={item.weightG} lengthCm={item.lengthCm} />
         {item.caption && (
@@ -98,6 +98,7 @@ export function CatchCard({ catch: item }: Props) {
             {item.caption}
           </Text>
         )}
+        <Text style={styles.timeAgo}>{formatTimeAgo(item.createdAt?.toDate?.())}</Text>
       </View>
     </View>
   );
@@ -108,18 +109,18 @@ function formatTimeAgo(date?: Date): string {
   const diffMs = Date.now() - date.getTime();
   const diffMin = Math.floor(diffMs / 60000);
   if (diffMin < 1) return 'práve teraz';
-  if (diffMin < 60) return `${diffMin}m`;
+  if (diffMin < 60) return `pred ${diffMin} min`;
   const diffH = Math.floor(diffMin / 60);
-  if (diffH < 24) return `${diffH}h`;
-  return `${Math.floor(diffH / 24)}d`;
+  if (diffH < 24) return `pred ${diffH} h`;
+  const diffD = Math.floor(diffH / 24);
+  if (diffD < 7) return `pred ${diffD} d`;
+  return `pred ${Math.floor(diffD / 7)} týž`;
 }
 
 const styles = StyleSheet.create({
   card: {
     backgroundColor: theme.colors.bg,
-    marginBottom: 2,
-    borderBottomWidth: 1,
-    borderBottomColor: theme.colors.divider,
+    marginBottom: 4,
   },
   header: {
     flexDirection: 'row',
@@ -129,41 +130,62 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   avatarRing: {
-    width: 42,
-    height: 42,
-    borderRadius: 21,
-    borderWidth: 2,
-    borderColor: theme.colors.primaryMid,
-    padding: 2,
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    borderWidth: 1.5,
+    borderColor: theme.colors.primary,
+    padding: 1.5,
   },
-  avatar: { width: 34, height: 34, borderRadius: 17 },
+  avatar: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 15,
+  },
   headerText: { flex: 1 },
-  userName: { fontFamily: 'DMSans-SemiBold', fontSize: 14, color: theme.colors.textPrimary },
-  locationRow: { flexDirection: 'row', alignItems: 'center', gap: 3, marginTop: 1 },
-  location: { fontFamily: 'DMSans-Regular', fontSize: 11, color: theme.colors.primaryMid },
-  headerRight: { flexDirection: 'row', alignItems: 'center', gap: 10 },
-  timeAgo: { fontFamily: 'DMSans-Regular', fontSize: 11, color: theme.colors.textMuted },
+  userName: {
+    fontFamily: 'DMSans-SemiBold',
+    fontSize: 13,
+    color: theme.colors.textPrimary,
+  },
+  location: {
+    fontFamily: 'DMSans-Regular',
+    fontSize: 11,
+    color: theme.colors.textSecondary,
+    marginTop: 1,
+  },
   actionBar: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 14,
     paddingTop: 10,
-    paddingBottom: 6,
+    paddingBottom: 4,
   },
-  leftActions: { flexDirection: 'row', alignItems: 'center', gap: 18 },
-  actionBtn: { flexDirection: 'row', alignItems: 'center', gap: 5 },
-  actionCount: {
-    fontFamily: 'DMSans-Medium',
+  leftActions: { flexDirection: 'row', alignItems: 'center', gap: 16 },
+  actionBtn: { padding: 2 },
+  likeCount: {
+    fontFamily: 'DMSans-SemiBold',
     fontSize: 13,
     color: theme.colors.textPrimary,
+    paddingHorizontal: 14,
+    marginTop: 4,
   },
-  content: { paddingHorizontal: 14, paddingBottom: 14, gap: 6 },
+  content: { paddingHorizontal: 14, paddingBottom: 12, gap: 4, marginTop: 4 },
   caption: {
     fontFamily: 'DMSans-Regular',
-    fontSize: 14,
+    fontSize: 13,
     color: theme.colors.textSecondary,
-    lineHeight: 20,
+    lineHeight: 18,
   },
-  captionUser: { fontFamily: 'DMSans-SemiBold', color: theme.colors.textPrimary },
+  captionUser: {
+    fontFamily: 'DMSans-SemiBold',
+    color: theme.colors.textPrimary,
+  },
+  timeAgo: {
+    fontFamily: 'DMSans-Regular',
+    fontSize: 11,
+    color: theme.colors.textMuted,
+    marginTop: 4,
+  },
 });

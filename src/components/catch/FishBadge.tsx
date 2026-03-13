@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
+import { theme } from '../../theme/theme';
 interface Props {
   species: string;
   weightG: number;
@@ -23,6 +24,6 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: 'DMSans-Medium',
     fontSize: 14,
-    color: 'rgba(255,255,255,0.75)',
+    color: 'theme.colors.textSecondary',
   },
 });

@@ -135,7 +135,7 @@ export default function DennikScreen() {
   if (isLoading) {
     return (
       <View style={[styles.container, styles.centered]}>
-        <ActivityIndicator size="large" color="#40916C" />
+        <ActivityIndicator size="large" color={theme.colors.primary} />
       </View>
     );
   }
@@ -152,7 +152,7 @@ export default function DennikScreen() {
           <RefreshControl
             refreshing={isRefetching}
             onRefresh={refetch}
-            tintColor="#40916C"
+            tintColor={theme.colors.primary}
           />
         }
       />
@@ -184,7 +184,7 @@ export default function DennikScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#0A1628' },
+  container: { flex: 1, backgroundColor: theme.colors.bg },
   centered: { justifyContent: 'center', alignItems: 'center' },
   header: {
     flexDirection: 'row',
@@ -192,38 +192,38 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingBottom: 12,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(255,255,255,0.06)',
+    borderBottomColor: 'theme.colors.surfaceHigh',
   },
   headerAvatar: { width: 34, height: 34, borderRadius: 17 },
-  headerTitle: { flex: 1, fontFamily: 'Syne-Bold', fontSize: 22, color: '#FFFFFF', marginLeft: 12 },
-  catchCount: { fontFamily: 'JetBrainsMono-Regular', fontSize: 12, color: 'rgba(255,255,255,0.5)' },
+  headerTitle: { flex: 1, fontFamily: 'Syne-Bold', fontSize: 22, color: theme.colors.textPrimary, marginLeft: 12 },
+  catchCount: { fontFamily: 'JetBrainsMono-Regular', fontSize: 12, color: 'theme.colors.textMuted' },
   filterRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, paddingHorizontal: 16, paddingVertical: 10 },
-  filterBtn: { borderWidth: 1, borderColor: 'rgba(255,255,255,0.2)', borderRadius: 20, paddingHorizontal: 14, paddingVertical: 6 },
-  filterBtnText: { fontFamily: 'DMSans-Medium', fontSize: 13, color: '#FFFFFF' },
+  filterBtn: { borderWidth: 1, borderColor: 'theme.colors.divider', borderRadius: 20, paddingHorizontal: 14, paddingVertical: 6 },
+  filterBtnText: { fontFamily: 'DMSans-Medium', fontSize: 13, color: theme.colors.textPrimary },
   clearFilterBtn: { paddingHorizontal: 14, paddingVertical: 6 },
   clearFilterText: { fontFamily: 'DMSans-Regular', fontSize: 13, color: '#E9A84C' },
   activeChip: { backgroundColor: 'rgba(64,145,108,0.2)', borderRadius: 20, paddingHorizontal: 12, paddingVertical: 4 },
-  activeChipText: { fontFamily: 'DMSans-Regular', fontSize: 12, color: '#40916C' },
+  activeChipText: { fontFamily: 'DMSans-Regular', fontSize: 12, color: theme.colors.primary },
   card: {
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 16,
     paddingVertical: 12,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(255,255,255,0.06)',
+    borderBottomColor: 'theme.colors.surfaceHigh',
     gap: 12,
   },
   cardThumb: { width: 64, height: 64, borderRadius: 8 },
   cardContent: { flex: 1, gap: 2 },
-  cardSpecies: { fontFamily: 'DMSans-Medium', fontSize: 15, color: '#FFFFFF' },
-  cardWeight: { fontFamily: 'JetBrainsMono-Regular', fontSize: 13, color: '#40916C' },
-  cardLocation: { fontFamily: 'DMSans-Regular', fontSize: 12, color: 'rgba(255,255,255,0.5)' },
-  cardDate: { fontFamily: 'DMSans-Regular', fontSize: 11, color: 'rgba(255,255,255,0.3)' },
-  cardArrow: { fontFamily: 'DMSans-Regular', fontSize: 20, color: 'rgba(255,255,255,0.3)' },
+  cardSpecies: { fontFamily: 'DMSans-Medium', fontSize: 15, color: theme.colors.textPrimary },
+  cardWeight: { fontFamily: 'JetBrainsMono-Regular', fontSize: 13, color: theme.colors.primary },
+  cardLocation: { fontFamily: 'DMSans-Regular', fontSize: 12, color: 'theme.colors.textMuted' },
+  cardDate: { fontFamily: 'DMSans-Regular', fontSize: 11, color: 'theme.colors.textMuted' },
+  cardArrow: { fontFamily: 'DMSans-Regular', fontSize: 20, color: 'theme.colors.textMuted' },
   emptyState: { flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 80, paddingHorizontal: 40 },
   emptyEmoji: { fontSize: 64, marginBottom: 16 },
-  emptyTitle: { fontFamily: 'Syne-Bold', fontSize: 22, color: '#FFFFFF', marginBottom: 8 },
-  emptyText: { fontFamily: 'DMSans-Regular', fontSize: 15, color: 'rgba(255,255,255,0.5)', textAlign: 'center', lineHeight: 22 },
+  emptyTitle: { fontFamily: 'Syne-Bold', fontSize: 22, color: theme.colors.textPrimary, marginBottom: 8 },
+  emptyText: { fontFamily: 'DMSans-Regular', fontSize: 15, color: 'theme.colors.textMuted', textAlign: 'center', lineHeight: 22 },
   filterSheet: {
     position: 'absolute',
     bottom: 0,
@@ -235,12 +235,12 @@ const styles = StyleSheet.create({
     padding: 24,
     paddingBottom: 40,
   },
-  filterSheetTitle: { fontFamily: 'Syne-Bold', fontSize: 20, color: '#FFFFFF', marginBottom: 20 },
-  filterLabel: { fontFamily: 'DMSans-Regular', fontSize: 12, color: 'rgba(255,255,255,0.5)', marginBottom: 8, textTransform: 'uppercase', letterSpacing: 0.5 },
+  filterSheetTitle: { fontFamily: 'Syne-Bold', fontSize: 20, color: theme.colors.textPrimary, marginBottom: 20 },
+  filterLabel: { fontFamily: 'DMSans-Regular', fontSize: 12, color: 'theme.colors.textMuted', marginBottom: 8, textTransform: 'uppercase', letterSpacing: 0.5 },
   filterOption: { paddingVertical: 12, paddingHorizontal: 14, borderRadius: 8, marginBottom: 4 },
   filterOptionActive: { backgroundColor: 'rgba(64,145,108,0.2)' },
-  filterOptionText: { fontFamily: 'DMSans-Regular', fontSize: 15, color: 'rgba(255,255,255,0.7)' },
-  filterOptionTextActive: { color: '#40916C' },
-  filterCloseBtn: { marginTop: 16, backgroundColor: '#40916C', paddingVertical: 14, borderRadius: 12, alignItems: 'center' },
-  filterCloseBtnText: { fontFamily: 'DMSans-Medium', fontSize: 16, color: '#FFFFFF' },
+  filterOptionText: { fontFamily: 'DMSans-Regular', fontSize: 15, color: 'theme.colors.textSecondary' },
+  filterOptionTextActive: { color: theme.colors.primary },
+  filterCloseBtn: { marginTop: 16, backgroundColor: theme.colors.primary, paddingVertical: 14, borderRadius: 12, alignItems: 'center' },
+  filterCloseBtnText: { fontFamily: 'DMSans-Medium', fontSize: 16, color: theme.colors.textPrimary },
 });

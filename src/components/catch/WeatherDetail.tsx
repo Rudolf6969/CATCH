@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import type { WeatherSnapshot } from '../../types/catch.types';
+import { theme } from '../../theme/theme';
 
 interface Props {
   weather: WeatherSnapshot;
@@ -43,16 +44,16 @@ function WeatherItem({ label, value, emoji }: { label: string; value: string; em
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'rgba(255,255,255,0.04)',
+    backgroundColor: 'theme.colors.surfaceHigh',
     borderRadius: 14,
     padding: 16,
     marginTop: 16,
   },
-  title: { fontFamily: 'DMSans-Medium', fontSize: 13, color: 'rgba(255,255,255,0.5)', marginBottom: 4, textTransform: 'uppercase', letterSpacing: 0.5 },
-  time: { fontFamily: 'DMSans-Regular', fontSize: 13, color: 'rgba(255,255,255,0.4)', marginBottom: 12 },
+  title: { fontFamily: 'DMSans-Medium', fontSize: 13, color: 'theme.colors.textMuted', marginBottom: 4, textTransform: 'uppercase', letterSpacing: 0.5 },
+  time: { fontFamily: 'DMSans-Regular', fontSize: 13, color: 'theme.colors.textMuted', marginBottom: 12 },
   grid: { flexDirection: 'row', flexWrap: 'wrap', gap: 12 },
   item: { width: '30%', alignItems: 'center', gap: 2 },
   emoji: { fontSize: 22 },
-  itemValue: { fontFamily: 'JetBrainsMono-Regular', fontSize: 13, color: '#FFFFFF' },
-  itemLabel: { fontFamily: 'DMSans-Regular', fontSize: 11, color: 'rgba(255,255,255,0.5)' },
+  itemValue: { fontFamily: 'JetBrainsMono-Regular', fontSize: 13, color: theme.colors.textPrimary },
+  itemLabel: { fontFamily: 'DMSans-Regular', fontSize: 11, color: 'theme.colors.textMuted' },
 });
