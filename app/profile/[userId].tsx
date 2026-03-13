@@ -60,6 +60,6 @@ export default function ProfileScreen() {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#0A1628' },
   centered: { justifyContent: 'center', alignItems: 'center' },
-  notFound: { fontFamily: 'DMSans-Regular', fontSize: 16, color: 'rgba(255,255,255,0.5)' },
+  notFound: { fontFamily: 'PlusJakartaSans-Regular', fontSize: 16, color: 'rgba(255,255,255,0.5)' },
   gridLoading: { paddingVertical: 40, alignItems: 'center' },
 });

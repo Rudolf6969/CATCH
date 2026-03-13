@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     borderRadius: theme.radius.full,
     marginBottom: 4,
   },
-  editBtnText: { fontFamily: 'DMSans-Medium', fontSize: 13, color: theme.colors.textPrimary },
+  editBtnText: { fontFamily: 'PlusJakartaSans-Medium', fontSize: 13, color: theme.colors.textPrimary },
   followActions: { flexDirection: 'row', gap: 10, marginBottom: 4, alignItems: 'center' },
   followBtn: {
     backgroundColor: theme.colors.primary,
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     borderRadius: theme.radius.full,
   },
-  followBtnText: { fontFamily: 'DMSans-SemiBold', fontSize: 14, color: theme.colors.bg },
+  followBtnText: { fontFamily: 'PlusJakartaSans-SemiBold', fontSize: 14, color: theme.colors.bg },
   msgBtn: {
     borderWidth: 1,
     borderColor: theme.colors.cardBorderActive,
@@ -159,9 +159,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   info: { paddingHorizontal: 16, marginBottom: 12 },
-  displayName: { fontFamily: 'Syne-Bold', fontSize: 22, color: theme.colors.textPrimary, marginBottom: 2 },
-  username: { fontFamily: 'DMSans-Regular', fontSize: 14, color: theme.colors.textSecondary, marginBottom: 8 },
-  bio: { fontFamily: 'DMSans-Regular', fontSize: 14, color: theme.colors.textSecondary, lineHeight: 20 },
+  displayName: { fontFamily: 'Outfit-Bold', fontSize: 22, color: theme.colors.textPrimary, marginBottom: 2 },
+  username: { fontFamily: 'PlusJakartaSans-Regular', fontSize: 14, color: theme.colors.textSecondary, marginBottom: 8 },
+  bio: { fontFamily: 'PlusJakartaSans-Regular', fontSize: 14, color: theme.colors.textSecondary, lineHeight: 20 },
   karmaRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, paddingHorizontal: 16, marginBottom: 12 },
   karmaBadge: {
     flexDirection: 'row',
@@ -172,14 +172,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 4,
   },
-  karmaText: { fontFamily: 'DMSans-Medium', fontSize: 12, color: theme.colors.accent },
+  karmaText: { fontFamily: 'PlusJakartaSans-Medium', fontSize: 12, color: theme.colors.accent },
   badge: {
     backgroundColor: 'rgba(0,184,118,0.08)',
     borderRadius: theme.radius.full,
     paddingHorizontal: 10,
     paddingVertical: 4,
   },
-  badgeText: { fontFamily: 'DMSans-Medium', fontSize: 12, color: theme.colors.primary },
+  badgeText: { fontFamily: 'PlusJakartaSans-Medium', fontSize: 12, color: theme.colors.primary },
   statsRow: {
     flexDirection: 'row',
     paddingVertical: 14,
@@ -191,6 +191,6 @@ const styles = StyleSheet.create({
   },
   statItem: { alignItems: 'center' },
   statValue: { fontFamily: 'JetBrainsMono-Regular', fontSize: 20, color: theme.colors.textPrimary },
-  statLabel: { fontFamily: 'DMSans-Regular', fontSize: 11, color: theme.colors.textSecondary, marginTop: 2 },
+  statLabel: { fontFamily: 'PlusJakartaSans-Regular', fontSize: 11, color: theme.colors.textSecondary, marginTop: 2 },
   statDivider: { width: 1, backgroundColor: theme.colors.divider },
 });

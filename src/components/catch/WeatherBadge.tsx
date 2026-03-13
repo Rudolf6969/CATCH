@@ -52,8 +52,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   item: { alignItems: 'center', flex: 1 },
-  label: { fontFamily: 'DMSans-Regular', fontSize: 11, color: theme.colors.textMuted, marginBottom: 2 },
+  label: { fontFamily: 'PlusJakartaSans-Regular', fontSize: 11, color: theme.colors.textMuted, marginBottom: 2 },
   value: { fontFamily: 'JetBrainsMono-Regular', fontSize: 13, color: theme.colors.textPrimary },
   divider: { width: 1, height: 32, backgroundColor: theme.colors.divider },
-  loadingText: { fontFamily: 'DMSans-Regular', fontSize: 14, color: theme.colors.textMuted },
+  loadingText: { fontFamily: 'PlusJakartaSans-Regular', fontSize: 14, color: theme.colors.textMuted },
 });

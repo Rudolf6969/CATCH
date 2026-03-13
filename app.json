@@ -6,7 +6,7 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "scheme": "catchapp",
-    "userInterfaceStyle": "dark",
+    "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": false,
@@ -17,7 +17,7 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
-        "backgroundColor": "#0A1628"
+        "backgroundColor": "#FFFFFF"
       },
       "package": "sk.catchapp.app",
       "googleServicesFile": "./google-services.json"
@@ -37,18 +37,22 @@
         {
           "fonts": [
             "./assets/fonts/Outfit-Regular.ttf",
+            "./assets/fonts/Outfit-Medium.ttf",
             "./assets/fonts/Outfit-SemiBold.ttf",
             "./assets/fonts/Outfit-Bold.ttf",
-            "./assets/fonts/Inter-Regular.ttf",
-            "./assets/fonts/Inter-Medium.ttf",
-            "./assets/fonts/JetBrainsMono-Regular.ttf"
+            "./assets/fonts/PlusJakartaSans-Regular.ttf",
+            "./assets/fonts/PlusJakartaSans-Medium.ttf",
+            "./assets/fonts/PlusJakartaSans-SemiBold.ttf",
+            "./assets/fonts/PlusJakartaSans-Bold.ttf",
+            "./assets/fonts/JetBrainsMono-Regular.ttf",
+            "./assets/fonts/JetBrainsMono-Medium.ttf"
           ]
         }
       ],
       "expo-router",
       "expo-image",
-      ["expo-image-picker", { "photosPermission": "OnlyFish potrebuje prístup k fotogalérii pre nahratie fotiek úlovkov." }],
-      ["expo-location", { "locationAlwaysAndWhenInUsePermission": "OnlyFish potrebuje prístup k polohe pre automatické doplnenie počasia." }]
+      ["expo-image-picker", { "photosPermission": "OnlyFish potrebuje pristup k fotogalerii pre nahratie fotiek ulovkov." }],
+      ["expo-location", { "locationAlwaysAndWhenInUsePermission": "OnlyFish potrebuje pristup k polohe pre automaticke doplnenie pocasia." }]
     ]
   }
 }

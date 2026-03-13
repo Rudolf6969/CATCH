@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
     borderRadius: SIZE / 2,
   },
   name: {
-    fontFamily: 'DMSans-Regular',
+    fontFamily: 'PlusJakartaSans-Regular',
     fontSize: 11,
     color: theme.colors.textMuted,
     textAlign: 'center',

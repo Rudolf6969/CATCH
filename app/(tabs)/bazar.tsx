@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
   listingTitle: { ...(theme.typography.bodySmMedium as object), color: theme.colors.textPrimary },
   listingPrice: { fontFamily: 'JetBrainsMono-Regular', fontSize: 16, color: theme.colors.primary },
   conditionBadge: { alignSelf: 'flex-start', backgroundColor: theme.colors.surfaceHigh, borderRadius: 6, paddingHorizontal: 6, paddingVertical: 2 },
-  conditionText: { fontFamily: 'DMSans-Regular', fontSize: 10, color: theme.colors.textSecondary },
+  conditionText: { fontFamily: 'PlusJakartaSans-Regular', fontSize: 10, color: theme.colors.textSecondary },
   listingSellerRow: { flexDirection: 'row', alignItems: 'center', gap: 3, marginTop: 2 },
   listingSellerText: { ...(theme.typography.caption as object), color: theme.colors.textSecondary, fontSize: 10 },
   listingDot: { color: theme.colors.textMuted, fontSize: 8 },

@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
     paddingBottom: 8,
   },
   logo: {
-    fontFamily: 'Syne-Bold',
+    fontFamily: 'Outfit-Bold',
     fontSize: 26,
     color: theme.colors.textPrimary,
     letterSpacing: -0.5,

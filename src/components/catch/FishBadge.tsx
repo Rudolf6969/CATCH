@@ -22,7 +22,7 @@ export function FishBadge({ species, weightG, lengthCm }: Props) {
 const styles = StyleSheet.create({
   container: { flexDirection: 'row', alignItems: 'center' },
   text: {
-    fontFamily: 'DMSans-Medium',
+    fontFamily: 'PlusJakartaSans-Medium',
     fontSize: 14,
     color: 'theme.colors.textSecondary',
   },

@@ -144,12 +144,12 @@ const styles = StyleSheet.create({
   },
   headerText: { flex: 1 },
   userName: {
-    fontFamily: 'DMSans-SemiBold',
+    fontFamily: 'PlusJakartaSans-SemiBold',
     fontSize: 13,
     color: theme.colors.textPrimary,
   },
   location: {
-    fontFamily: 'DMSans-Regular',
+    fontFamily: 'PlusJakartaSans-Regular',
     fontSize: 11,
     color: theme.colors.textSecondary,
     marginTop: 1,
@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
   leftActions: { flexDirection: 'row', alignItems: 'center', gap: 16 },
   actionBtn: { padding: 2 },
   likeCount: {
-    fontFamily: 'DMSans-SemiBold',
+    fontFamily: 'PlusJakartaSans-SemiBold',
     fontSize: 13,
     color: theme.colors.textPrimary,
     paddingHorizontal: 14,
@@ -173,17 +173,17 @@ const styles = StyleSheet.create({
   },
   content: { paddingHorizontal: 14, paddingBottom: 12, gap: 4, marginTop: 4 },
   caption: {
-    fontFamily: 'DMSans-Regular',
+    fontFamily: 'PlusJakartaSans-Regular',
     fontSize: 13,
     color: theme.colors.textSecondary,
     lineHeight: 18,
   },
   captionUser: {
-    fontFamily: 'DMSans-SemiBold',
+    fontFamily: 'PlusJakartaSans-SemiBold',
     color: theme.colors.textPrimary,
   },
   timeAgo: {
-    fontFamily: 'DMSans-Regular',
+    fontFamily: 'PlusJakartaSans-Regular',
     fontSize: 11,
     color: theme.colors.textMuted,
     marginTop: 4,

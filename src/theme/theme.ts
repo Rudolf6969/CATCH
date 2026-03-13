@@ -55,18 +55,18 @@ export const theme = {
   },
 
   typography: {
-    // Headings — Syne (brand identity)
-    heading: { fontFamily: 'Syne-Bold', fontSize: 24, lineHeight: 30 },
-    headingLg: { fontFamily: 'Syne-Bold', fontSize: 28, lineHeight: 36 },
-    headingSemi: { fontFamily: 'Syne-SemiBold', fontSize: 20, lineHeight: 26 },
-    headingSm: { fontFamily: 'Syne-SemiBold', fontSize: 16, lineHeight: 22 },
+    // Headings — Outfit (rounded, friendly)
+    heading: { fontFamily: 'Outfit-Bold', fontSize: 24, lineHeight: 30 },
+    headingLg: { fontFamily: 'Outfit-Bold', fontSize: 28, lineHeight: 36 },
+    headingSemi: { fontFamily: 'Outfit-SemiBold', fontSize: 20, lineHeight: 26 },
+    headingSm: { fontFamily: 'Outfit-SemiBold', fontSize: 16, lineHeight: 22 },
 
     // Body — DM Sans
-    body: { fontFamily: 'DMSans-Regular', fontSize: 15, lineHeight: 22 },
-    bodyMedium: { fontFamily: 'DMSans-Medium', fontSize: 15, lineHeight: 22 },
-    bodySm: { fontFamily: 'DMSans-Regular', fontSize: 13, lineHeight: 18 },
-    bodySmMedium: { fontFamily: 'DMSans-Medium', fontSize: 13, lineHeight: 18 },
-    caption: { fontFamily: 'DMSans-Regular', fontSize: 11, lineHeight: 16 },
+    body: { fontFamily: 'PlusJakartaSans-Regular', fontSize: 15, lineHeight: 22 },
+    bodyMedium: { fontFamily: 'PlusJakartaSans-Medium', fontSize: 15, lineHeight: 22 },
+    bodySm: { fontFamily: 'PlusJakartaSans-Regular', fontSize: 13, lineHeight: 18 },
+    bodySmMedium: { fontFamily: 'PlusJakartaSans-Medium', fontSize: 13, lineHeight: 18 },
+    caption: { fontFamily: 'PlusJakartaSans-Regular', fontSize: 11, lineHeight: 16 },
 
     // Mono — JetBrains Mono (stats)
     mono: { fontFamily: 'JetBrainsMono-Regular', fontSize: 14, lineHeight: 20 },
