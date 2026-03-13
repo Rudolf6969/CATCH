@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "CATCH",
+    "name": "OnlyFish",
     "slug": "catch-app",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -47,8 +47,8 @@
       ],
       "expo-router",
       "expo-image",
-      ["expo-image-picker", { "photosPermission": "Catch potrebuje prístup k fotogalérii pre nahratie fotiek úlovkov." }],
-      ["expo-location", { "locationAlwaysAndWhenInUsePermission": "Catch potrebuje prístup k polohe pre automatické doplnenie počasia." }]
+      ["expo-image-picker", { "photosPermission": "OnlyFish potrebuje prístup k fotogalérii pre nahratie fotiek úlovkov." }],
+      ["expo-location", { "locationAlwaysAndWhenInUsePermission": "OnlyFish potrebuje prístup k polohe pre automatické doplnenie počasia." }]
     ]
   }
 }

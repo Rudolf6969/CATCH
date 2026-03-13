@@ -83,8 +83,8 @@ export default function LoginScreen() {
 
       {/* Top branding */}
       <View style={styles.branding}>
-        <Text style={styles.brandEmoji}>🎣</Text>
-        <Text style={styles.brandName}>CATCH</Text>
+        <Ionicons name="fish" size={48} color={theme.colors.primaryMid} />
+        <Text style={styles.brandName}>OnlyFish</Text>
         <Text style={styles.brandTagline}>Sociálna sieť pre rybárov</Text>
       </View>
 

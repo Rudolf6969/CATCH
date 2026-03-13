@@ -41,7 +41,7 @@ export default function FeedScreen() {
   const ListHeader = useCallback(() => (
     <View>
       <View style={[styles.header, { paddingTop: insets.top + 6 }]}>
-        <Text style={styles.headerTitle}>CATCH</Text>
+        <Text style={styles.headerTitle}>OnlyFish</Text>
         <View style={styles.headerActions}>
           <TouchableOpacity style={styles.iconBtn} hitSlop={8}>
             <Ionicons name="heart-outline" size={26} color={theme.colors.textPrimary} />
