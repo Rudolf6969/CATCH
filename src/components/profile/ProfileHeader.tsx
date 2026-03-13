@@ -108,11 +108,11 @@ const styles = StyleSheet.create({
   },
   bannerBg: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: '#0D1A12',
+    backgroundColor: theme.colors.bg,
   },
   bannerOverlay: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0,212,126,0.05)',
+    backgroundColor: 'rgba(0,184,118,0.03)',
   },
   avatarRow: {
     flexDirection: 'row',
@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
   },
   karmaText: { fontFamily: 'DMSans-Medium', fontSize: 12, color: theme.colors.accent },
   badge: {
-    backgroundColor: 'rgba(0,212,126,0.12)',
+    backgroundColor: 'rgba(0,184,118,0.08)',
     borderRadius: theme.radius.full,
     paddingHorizontal: 10,
     paddingVertical: 4,

@@ -45,15 +45,15 @@ export function WeatherBadge({ weather, loading }: Props) {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    backgroundColor: 'theme.colors.surfaceHigh',
+    backgroundColor: theme.colors.surfaceHigh,
     borderRadius: 10,
     padding: 12,
     alignItems: 'center',
     justifyContent: 'space-between',
   },
   item: { alignItems: 'center', flex: 1 },
-  label: { fontFamily: 'DMSans-Regular', fontSize: 11, color: 'theme.colors.textMuted', marginBottom: 2 },
+  label: { fontFamily: 'DMSans-Regular', fontSize: 11, color: theme.colors.textMuted, marginBottom: 2 },
   value: { fontFamily: 'JetBrainsMono-Regular', fontSize: 13, color: theme.colors.textPrimary },
-  divider: { width: 1, height: 32, backgroundColor: 'theme.colors.divider' },
-  loadingText: { fontFamily: 'DMSans-Regular', fontSize: 14, color: 'theme.colors.textMuted' },
+  divider: { width: 1, height: 32, backgroundColor: theme.colors.divider },
+  loadingText: { fontFamily: 'DMSans-Regular', fontSize: 14, color: theme.colors.textMuted },
 });

@@ -1,57 +1,57 @@
 export const theme = {
   colors: {
-    // Backgrounds — pure dark like Instagram
-    bg: '#000000',
-    surface: '#000000',
-    surfaceHigh: '#1A1A1A',
+    // Backgrounds — clean white like Instagram
+    bg: '#FFFFFF',
+    surface: '#FFFFFF',
+    surfaceHigh: '#FAFAFA',
 
     // Brand — vibrant green (OnlyFish identity)
-    primary: '#00D47E',
-    primaryMid: '#00D47E',
+    primary: '#00B876',
+    primaryMid: '#00B876',
 
-    // Accent — warm gold for premium/special
-    accent: '#FFD700',
-    accentWarm: '#FFEB80',
+    // Accent — warm orange/gold for premium/special
+    accent: '#FF9500',
+    accentWarm: '#FFB84D',
 
-    // Text — clean whites like IG
-    textPrimary: '#FAFAFA',
-    textSecondary: '#A8A8A8',
-    textMuted: '#737373',
+    // Text — dark on white like IG
+    textPrimary: '#262626',
+    textSecondary: '#8E8E8E',
+    textMuted: '#C7C7C7',
 
     // Semantic
     error: '#ED4956',
-    errorSurface: 'rgba(237,73,86,0.1)',
-    success: '#00D47E',
+    errorSurface: 'rgba(237,73,86,0.08)',
+    success: '#00B876',
     warning: '#FFBB33',
 
     // Tab bar
-    tabActive: '#FAFAFA',
-    tabInactive: '#737373',
-    tabBar: '#000000',
-    tabBorder: '#262626',
+    tabActive: '#262626',
+    tabInactive: '#C7C7C7',
+    tabBar: '#FFFFFF',
+    tabBorder: '#EFEFEF',
 
     // Dividers
-    divider: '#262626',
-    overlay: 'rgba(0,0,0,0.85)',
+    divider: '#EFEFEF',
+    overlay: 'rgba(0,0,0,0.4)',
 
     // Borders
-    cardBorder: '#262626',
-    cardBorderActive: '#363636',
-    inputBorderFocus: 'rgba(0,212,126,0.5)',
+    cardBorder: '#EFEFEF',
+    cardBorderActive: '#DBDBDB',
+    inputBorderFocus: 'rgba(0,184,118,0.5)',
 
     // Like
     likeRed: '#FF3040',
 
     // Story ring gradient colors
-    storyGradientStart: '#00D47E',
+    storyGradientStart: '#00B876',
     storyGradientEnd: '#00A8FF',
   },
 
   gradients: {
-    card: ['rgba(255,255,255,0.02)', 'rgba(255,255,255,0)'],
-    fab: ['#00D47E', '#00B86B'],
-    primaryButton: ['#00D47E', '#00B86B'],
-    heroCard: ['rgba(0,212,126,0.06)', 'rgba(0,168,255,0.03)', 'transparent'],
+    card: ['rgba(0,0,0,0.01)', 'rgba(0,0,0,0)'],
+    fab: ['#00B876', '#009960'],
+    primaryButton: ['#00B876', '#009960'],
+    heroCard: ['rgba(0,184,118,0.04)', 'rgba(0,168,255,0.02)', 'transparent'],
   },
 
   typography: {
@@ -97,30 +97,30 @@ export const theme = {
     sm: {
       shadowColor: '#000',
       shadowOffset: { width: 0, height: 1 },
-      shadowOpacity: 0.3,
-      shadowRadius: 4,
-      elevation: 2,
+      shadowOpacity: 0.06,
+      shadowRadius: 3,
+      elevation: 1,
     },
     md: {
       shadowColor: '#000',
-      shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.4,
-      shadowRadius: 12,
-      elevation: 6,
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.08,
+      shadowRadius: 8,
+      elevation: 3,
     },
     accent: {
-      shadowColor: '#00D47E',
+      shadowColor: '#00B876',
       shadowOffset: { width: 0, height: 4 },
-      shadowOpacity: 0.3,
-      shadowRadius: 16,
-      elevation: 8,
-    },
-    glow: {
-      shadowColor: '#00D47E',
-      shadowOffset: { width: 0, height: 0 },
       shadowOpacity: 0.15,
       shadowRadius: 12,
       elevation: 4,
+    },
+    glow: {
+      shadowColor: '#00B876',
+      shadowOffset: { width: 0, height: 0 },
+      shadowOpacity: 0.08,
+      shadowRadius: 8,
+      elevation: 2,
     },
   },
 } as const;

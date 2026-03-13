@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, ViewProps } from 'react-native';
-import { theme } from '@/theme/theme';
+import { theme } from '../../theme/theme';
 
 interface CardProps extends ViewProps {
   elevated?: boolean;
@@ -26,25 +26,16 @@ export function Card({ elevated = false, glowing = false, style, children, ...pr
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#0D0D0D',
-    borderRadius: theme.radius.lg,
+    backgroundColor: theme.colors.surface,
+    borderRadius: 14,
     padding: theme.spacing.md,
-    borderWidth: 0.5,
-    borderColor: theme.colors.divider,
+    borderWidth: 0,
+    ...theme.shadow.sm,
   },
   elevated: {
-    shadowColor: theme.shadow.md.shadowColor,
-    shadowOffset: theme.shadow.md.shadowOffset,
-    shadowOpacity: theme.shadow.md.shadowOpacity,
-    shadowRadius: theme.shadow.md.shadowRadius,
-    elevation: theme.shadow.md.elevation,
+    ...theme.shadow.md,
   },
   glowing: {
-    borderColor: theme.colors.cardBorderActive,
-    shadowColor: theme.colors.primary,
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.15,
-    shadowRadius: 16,
-    elevation: 4,
+    ...theme.shadow.glow,
   },
 });

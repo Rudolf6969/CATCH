@@ -44,16 +44,16 @@ function WeatherItem({ label, value, emoji }: { label: string; value: string; em
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'theme.colors.surfaceHigh',
+    backgroundColor: theme.colors.surfaceHigh,
     borderRadius: 14,
     padding: 16,
     marginTop: 16,
   },
-  title: { fontFamily: 'DMSans-Medium', fontSize: 13, color: 'theme.colors.textMuted', marginBottom: 4, textTransform: 'uppercase', letterSpacing: 0.5 },
-  time: { fontFamily: 'DMSans-Regular', fontSize: 13, color: 'theme.colors.textMuted', marginBottom: 12 },
+  title: { fontFamily: 'DMSans-Medium', fontSize: 13, color: theme.colors.textMuted, marginBottom: 4, textTransform: 'uppercase', letterSpacing: 0.5 },
+  time: { fontFamily: 'DMSans-Regular', fontSize: 13, color: theme.colors.textMuted, marginBottom: 12 },
   grid: { flexDirection: 'row', flexWrap: 'wrap', gap: 12 },
   item: { width: '30%', alignItems: 'center', gap: 2 },
   emoji: { fontSize: 22 },
   itemValue: { fontFamily: 'JetBrainsMono-Regular', fontSize: 13, color: theme.colors.textPrimary },
-  itemLabel: { fontFamily: 'DMSans-Regular', fontSize: 11, color: 'theme.colors.textMuted' },
+  itemLabel: { fontFamily: 'DMSans-Regular', fontSize: 11, color: theme.colors.textMuted },
 });

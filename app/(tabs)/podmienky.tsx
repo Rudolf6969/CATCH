@@ -220,7 +220,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 4,
     borderRadius: 2,
-    backgroundColor: 'theme.colors.divider',
+    backgroundColor: theme.colors.divider,
   },
   heroBarFill: {
     width: '70%',
@@ -231,7 +231,7 @@ const styles = StyleSheet.create({
   heroTip: {
     fontFamily: 'DMSans-Regular',
     fontSize: 12,
-    color: 'theme.colors.textPrimary',
+    color: theme.colors.textPrimary,
     lineHeight: 16,
   },
 
@@ -337,6 +337,6 @@ const styles = StyleSheet.create({
   locationDistance: {
     fontFamily: 'DMSans-Regular',
     fontSize: 12,
-    color: 'theme.colors.textSecondary',
+    color: theme.colors.textSecondary,
   },
 });

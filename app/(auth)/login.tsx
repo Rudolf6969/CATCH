@@ -214,7 +214,7 @@ const styles = StyleSheet.create({
   brandTagline: {
     fontFamily: 'DMSans-Regular',
     fontSize: 14,
-    color: 'theme.colors.textSecondary',
+    color: theme.colors.textSecondary,
     marginTop: 4,
   },
 
